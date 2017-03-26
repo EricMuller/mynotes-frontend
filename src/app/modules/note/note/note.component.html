@@ -1,0 +1,46 @@
+<!--  Tool bar -->
+
+<md-menu #appMenuApp="mdMenu">
+  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['/favorites/search']">Favorites</a>
+  <!--<a md-menu-item [routerLinkActive]="['active']" [routerLink]="['/upload']">Upload</a>-->
+</md-menu>
+
+<md-menu #appMenu="mdMenu">
+  <!--<button md-menu-item> Settings </button>-->
+  <button md-menu-item *ngIf="isAuthentified()" (click)="logout()"> Log Out </button>
+</md-menu>
+
+<md-toolbar color="primary">
+  <span>
+      <button md-icon-button [mdMenuTriggerFor]="appMenuApp">
+      <md-icon>apps</md-icon>
+      </button>
+    </span>
+
+  <span>01Notes!</span>
+  <span class="fill-remaining-space"><app-simple-dnd></app-simple-dnd></span>
+  <span>
+    <button md-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites/detail/0']" placeholder="New Note">
+        <md-icon>add_box</md-icon>
+    </button>
+    <!--<button md-icon-button (click)="showSearch($event)"> <md-icon>search</md-icon></button>-->
+    
+  </span>
+  <span>
+    <button md-icon-button [mdMenuTriggerFor]="appMenu">
+    <md-icon>more_vert</md-icon>
+    </button>
+  </span>
+</md-toolbar>
+<!-- / Tool bar -->
+<nav md-tab-nav-bar>
+  <a md-tab-link  [routerLink]="['search']"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"><md-icon>filter_list</md-icon></a>
+  <a md-tab-link  [routerLink]="['list']"  routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive"> <md-icon>view_list</md-icon></a>
+  <a md-tab-link  [routerLink]="['backup']"  routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive"> <md-icon>backup</md-icon></a>
+ <!-- <a md-tab-link  [routerLink]="['folder']"  routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive"> <md-icon>folder</md-icon></a>-->
+</nav>  
+
+<router-outlet></router-outlet>
+
+

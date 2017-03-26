@@ -1,0 +1,11 @@
+
+
+
+<!--<div id="div1" class="container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+<img id="drag1" src="http://www.w3schools.com/html/img_w3slogo.gif" draggable="true"
+  (dragstart)="drag($event)" width="336" height="69">
+</div>-->
+
+<div class="dndzone" (drop)="drop($event)" (dragover)="allowDrop($event)" draggable="true">
+      <ng-content></ng-content>
+</div>

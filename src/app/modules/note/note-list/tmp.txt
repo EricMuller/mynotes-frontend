@@ -1,0 +1,5 @@
+  <!--<md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let tag of tags" [value]="option">
+                {{ tag.name }}
+              </md-option>
+            </md-autocomplete>-->

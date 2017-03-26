@@ -1,0 +1,85 @@
+<!--header 
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="containers">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <a class="navbar-brand" [routerLink]="['/']" tooltip="Search Notes"><span class="fa fa-home"></span> 01NOTES!</a>
+     </div>
+   
+    <ul class="nav navbar-nav "  >
+      <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./favorites']">Favorites</a></li>
+      <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./favorites']">Notes</a></li>
+      <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./tags']">Tags</a></li>
+      <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./favorites']">Paramétrage</a></li>
+    </ul>
+     
+    <nav *ngIf="isAuthentified()" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right profile">
+        <li class="dropdown top_nav">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">user <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                <li><a class="nav-link" (click)="logout()"><i class="fa fa-sign-out pull-right"></i>Log Out</a>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav"></ul>
+    </nav>
+
+  </div>
+  
+ 
+</div>-->
+
+
+<md-menu #appMenuApp="mdMenu">
+    <a md-menu-item  [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+    <a md-menu-item  [routerLinkActive]="['active']" [routerLink]="['/favorites']">Favorites</a>
+    <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['/tags']">Tags</a>
+</md-menu>
+
+<md-menu #appMenu="mdMenu">
+  <button md-menu-item> Settings </button>
+  <button md-menu-item *ngIf="isAuthentified()"> Log Out </button>
+</md-menu>
+
+<md-toolbar color="primary">
+ <span>
+    <button md-icon-button [mdMenuTriggerFor]="appMenuApp">
+    <md-icon>apps</md-icon>
+    </button>
+  </span>
+  <span>{{title}}</span>
+  <!--<a md-button [routerLinkActive]="['active']" [routerLink]="['//']"><span class="fa fa-home"></span><span>01NOTES!</span></a>
+  <a md-button [routerLinkActive]="['active']" [routerLink]="['./favorites']">Notes</a>
+  <a md-button [routerLinkActive]="['active']" [routerLink]="['./tags']">Tags</a>-->
+  <!-- This fills the remaining space of the current row -->
+ 
+  <span class="example-fill-remaining-space"></span>
+
+  <span>
+    <button md-icon-button [mdMenuTriggerFor]="appMenu">
+    <md-icon>more_vert</md-icon>
+    </button>
+  </span>
+</md-toolbar>
+
+<!--<md-toolbar>
+<span>
+  <nav md-tab-nav-bar>
+    <a md-tab-link   [routerLink]="['./favorites']"   routerLinkActive #rla1="routerLinkActive" [active]="rlaSafe && rla1.isActive">   Favorites  </a>
+    <a md-tab-link   [routerLink]="['./favorites']"   routerLinkActive #rla2="routerLinkActive" [active]="rlaSafe && rla2.isActive">  Notes  </a>
+    <a md-tab-link   [routerLink]="['./tags']" routerLinkActive #rla3="routerLinkActive" [active]="rlaSafe && rla3.isActive">   Tags  </a>
+  
+  </nav>
+</span>
+
+
+</md-toolbar>-->
+
+
+
+<!--/header -->

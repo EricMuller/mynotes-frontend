@@ -1,0 +1,16 @@
+
+
+.dndzone{
+    /*border: 1px solid red;*/
+     height: 50px;
+  }
+  
+  .dndzone:hover{
+     border: 1px dashed red;
+     /*width:  100px;*/
+     height: 50px;
+  }
+
+  .is-dragging * {
+  pointer-events: none;
+}

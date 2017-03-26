@@ -1,0 +1,102 @@
+<!--
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="containers">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <a class="navbar-brand" [routerLink]="['/']" tooltip="Search Notes"><span class="fa fa-home"></span> 01NOTES!</a>
+      -->
+<!--<a class="navbar-brand" [routerLink]="['notes']" tooltip="Search Notes"><span class="fa fa-home"></span> Notes</a>-->
+
+<!--    </div>
+
+
+  </div>
+  
+</div>-->
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+      <div class="containers">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" tooltip="Search Notes"><span class="fa fa-home"></span> 01NOTES!</a>
+        </div>
+        <nav class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right profile">
+                <li class="dropdown top_nav">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">util <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="{% url 'account_login' %}"><i class="fa fa-sign-out pull-right"></i>s</a></li>
+                  </ul>
+                </li>
+          </ul>
+          
+        </nav>
+      </div><!--/.nav-collapse -->
+    </div>
+
+
+<div class="container" id="home-container">
+  <div class="row">
+    <div class="col-xs-12 col-centered">
+<!-- <app-tag-cloud></app-tag-cloud>-->
+      <div>
+        <button type="button" class="btn btn-warning btn-lg" (click)="dashboard($event)">Enter!</button>
+      </div>
+
+    </div>
+
+   <!-- <div class="col-xs-1">&nbsp; </div>
+    
+    <div class="col-xs-6">
+        <a [routerLink]="['/notes']" ><img class="img-responsive" src="/assets/theme/flatty/img/ipad-hand.png" alt=""></a>
+      </div>
+      -->
+    <!-- /col-lg-6 -->
+  </div>
+  <!-- /row -->
+</div>
+<!-- /container -->
+
+<div class="container">
+
+  <div class="row mt centered">
+    <div class="col-lg-4">
+      <img src="/assets/theme/flatty/img/ser01.png" width="180" alt="">
+      <h4>1 - Browser Compatibility</h4>
+      <p></p>
+    </div>
+    <!--/col-lg-4 -->
+
+    <div class="col-lg-4">
+      <a href="{% url 'mynotes:note_list' %}">
+        <img src="/assets/theme/flatty/img/ser03.png" width="180" alt=""></a>
+      <h4>2 - Gather Your Favorites</h4>
+      <p></p>
+
+    </div>
+    <!--/col-lg-4 -->
+
+    <div class="col-lg-4">
+      <img src="/assets/theme/flatty/img/ser02.png" width="180" alt="">
+      <h4>3 - Share by Email</h4>
+      <p></p>
+
+    </div>
+    <!--/col-lg-4 -->
+
+  </div>
+  <!-- /row -->
+</div>
+<!-- /container -->
+
+
+<!-- /container -->

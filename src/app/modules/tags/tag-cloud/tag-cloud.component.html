@@ -1,0 +1,6 @@
+
+<div *ngFor="let tag of tags" class='tag-cloud size-{{tag.size}} {{tag.itemclass}} white-text' id="{{tag.id}}" (click)="selectItem(tag)">
+  {{tag.name}} 
+  </div>
+
+<div *ngIf="_nextLink" class='tag-cloud' (click)="next()">...</div>

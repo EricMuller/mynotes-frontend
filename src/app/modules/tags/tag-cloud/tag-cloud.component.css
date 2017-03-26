@@ -1,0 +1,36 @@
+
+div.tag-cloud{
+  /*background-color:#3498db;*/
+  /*arrondir les coins en haut à gauche et en bas à droite*/
+  border: 1px solid #ddd ;
+  -moz-border-radius:8px 8px;
+  -webkit-border-radius:8px 8px;
+  border-radius:8px 8px;
+  
+  padding-left: 5px;
+  padding-right: 5px;
+
+  display: inline;
+  margin: 1px;
+  
+  /*line-height: 25px;*/  
+}
+
+
+
+div.tag-cloud.selected {
+  background-color:   #ddd;
+  /*arrondir les coins en haut à gauche et en bas à droite*/
+  /*line-height: 25px;*/  
+}
+
+.size-1 { font-size: 1.1em }
+.size-2 { font-size: 1.2em }
+.size-3 { font-size: 1.3em }
+.size-4 { font-size: 1.4em }
+.size-5 { font-size: 1.5em }
+.size-6 { font-size: 1.6em }
+.size-7 { font-size: 1.7em }
+.size-8 { font-size: 1.8em }
+.size-9 { font-size: 1.9em }
+.size-10 { font-size: 2em }

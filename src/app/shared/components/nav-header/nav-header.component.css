@@ -1,0 +1,22 @@
+
+.relative {
+        position: relative;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    }
+
+.top {
+    position: fixed;
+    top: 50;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.example-fill-remaining-space {
+  
+  flex: 1 1 auto;
+}

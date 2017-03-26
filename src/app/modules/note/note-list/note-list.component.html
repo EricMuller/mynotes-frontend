@@ -1,0 +1,43 @@
+
+<!--  body -->
+<div class="container">
+  
+  <div class="row">
+          <!--- content note -->
+          <md-nav-list>
+            <md-list-item *ngFor="let note of notes">
+
+              <a *ngIf="note.url && note.id" md-list-icon md-icon target="_blank" href="{{note.url}}">
+                <md-icon color="primary">open_in_new</md-icon>
+              </a>
+
+              <md-icon md-list-icon *ngIf="!note.url" color="primary">note</md-icon>
+
+              <a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', note.id ]">
+                            {{ note.title }}
+              </a>
+
+              <button *ngFor="let key of note.rate | toArray" md-icon-button color="primary" class="hide-sm"><md-icon>star_rate</md-icon></button>
+              <div *ngFor="let tag of note.tags" class="hide-sm tag-cloud-list"> {{tag.name}}</div>
+
+              <button *ngIf="note.status!='T' " md-icon-button (click)="trash(note)" placeholder="Send to Trash Note" color="primary">
+                  <md-icon>delete</md-icon>
+              </button>
+
+              <button *ngIf="note.status=='T'" md-icon-button (click)="delete(note)" placeholder="Send to Trash Note" color="primary">
+                  <md-icon>delete_forever</md-icon>
+              </button>
+              <button *ngIf="note.id && !note.archive_id" md-icon-button (click)="crawl(note)" color="primary"><md-icon>archive</md-icon></button>
+              <button *ngIf="note.id && note.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>
+
+              <!--<app-rating [(rate)]="note.rate"></app-rating>-->
+
+            </md-list-item>
+            <md-divider></md-divider>
+            <md-list-item *ngIf="_next" (click)="next()">
+              <md-icon>keyboard_arrow_down</md-icon>
+            </md-list-item>
+          </md-nav-list>
+
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<md-menu #appMenuAppNew="mdMenu">
+  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</md-menu>
+
+<md-menu #appMenu="mdMenu"> 
+  <button md-button (click)="crawl(note)" color="primary"><md-icon>archive</md-icon></button>
+  <button md-menu-item *ngIf="isAuthentified()" (click)="logout()"> Log Out </button>
+
+</md-menu>
+
+<md-toolbar color="primary">
+  <span>
+    <button md-icon-button (click)="back()"><md-icon>keyboard_backspace</md-icon> </button>
+  </span>
+  <span *ngIf="note.id">{{note.title}}</span>
+  <span *ngIf="!note.id">Create a Favorite</span>
+  <span class="fill-remaining-space"></span>
+
+  <span>
+    <button *ngIf="note.title" md-icon-button (click)="save(note)" placeholder="Save">
+        <md-icon>save</md-icon>
+    </button>
+    <a *ngIf="note.url && note.id" md-icon-button target="_blank" href="{{note.url}}"><md-icon>open_in_browser</md-icon></a>
+  </span>
+  <span>
+    <button md-icon-button [mdMenuTriggerFor]="appMenu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </span>
+</md-toolbar>
+
+<!--  Tool bar -->
+<div class="app-note-detail-content">
+
+<div class="row">  
+  <md-card class="type">
+    <md-card-content>
+      <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="note.type">
+        <md-button-toggle value="LINK">
+          <md-icon>link</md-icon>Link
+        </md-button-toggle>
+        <md-button-toggle value="NOTE">
+          <md-icon>note</md-icon>Note
+        </md-button-toggle>
+        <md-button-toggle value="TODO">
+          <md-icon>schedule</md-icon>Todo
+        </md-button-toggle>
+      </md-button-toggle-group>
+    </md-card-content>
+  </md-card>
+</div>
+
+<div class="row">
+  <md-tab-group (selectedIndexChange)="selectedIndexChange($event)">
+    <md-tab>
+      <template md-tab-label>
+        General
+      </template>
+     
+
+        <md-card>
+          <md-card-header>
+            <md-card-title><strong>Title</strong></md-card-title>
+          </md-card-header>
+          <md-card-content>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="Title" [(ngModel)]="note.title">
+            </md-input-container>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="URL" [(ngModel)]="note.url">
+            </md-input-container>
+           <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
+          </md-card-content>
+          <md-card-actions>
+            <!--<button md-button (click)="loadTitle(note.url)" color="primary" placeholder="load Title"><md-icon>system_update</md-icon></button>-->
+            <button md-button (click)="loadTitle(note.url)" placeholder="load Title">Load Title from url</button>
+            <!--<button *ngIf="note.id" md-button (click)="crawl(note)" color="primary"><md-icon>archive</md-icon>archiver</button>-->
+          </md-card-actions>
+        </md-card>
+        
+        <md-card class="rating">
+            <app-rating [(rate)]="note.rate" (rate-change)="onRate($event)"></app-rating>
+        </md-card>
+
+        <app-tag-select-card [(tagSelected)]="note.tags"  ></app-tag-select-card>
+        <!--<md-card>
+          (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
+      <md-card-header>
+        <md-card-title><span *ngFor="let tag of note.tags" class="inline"> <div class="tag-cloud-list">{{tag.name}}</div>  
+          <button md-icon-button color="primary" (click)="delete(tag)"><md-icon>delete</md-icon></button>
+      </span></md-card-title>
+      </md-card-header>
+      <md-card-content>
+         
+        <form>
+          <md-input-container>
+            <input type="text" placeholder="Tag" mdInput [formControl]="myControl" [mdAutocomplete]="auto" ngModel>
+
+          </md-input-container>
+          <button *ngIf="(filteredOptions | async)?.length==0" md-button (click)="createTag($event)">Create...</button>
+          <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+            <md-option *ngFor="let tag of filteredOptions | async" [value]="tag">
+              {{ tag.name }}
+            </md-option>
+          </md-autocomplete>
+
+        </form>
+      </md-card-content>
+    </md-card>
+    -->
+  
+    </md-tab>
+
+    <md-tab>
+        <template md-tab-label>
+        Editor
+      </template>
+             
+    </md-tab>
+    
+    <md-tab >
+     <template md-tab-label>
+        Tracking
+     </template>
+      <md-card class="date">
+          <md-card-header>
+            <md-card-title><strong>Date</strong></md-card-title>
+          </md-card-header>
+            <md-card-content>
+          Date Creation:{{note.created_dt | date:'medium'}}
+          <!--<input type='text' #myDate [(ngModel)]='note.created_dt'/><br>-->
+            </md-card-content>
+      </md-card>
+      
+    </md-tab>
+
+
+  </md-tab-group>
+  
+</div> 
+ <div *ngIf="showEditor" class="editor">
+    <app-tinymce [(ngModel)]='note.description'></app-tinymce>
+ </div>
+  <!-- <button (click)="save()" md-mini-fab class="mini-fab"><md-icon>save</md-icon></button>-->
+</div>
