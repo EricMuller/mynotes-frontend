@@ -15,6 +15,7 @@ export class Note {
   status: string;
   created_dt: Date;
   schedule_dt:Date;
+  archive_id: number;
 };
 
 

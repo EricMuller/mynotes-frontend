@@ -119,14 +119,16 @@ export class NoteService {
     return this.apiService.getById(this.apiService.config.notes, id.toString());
   }
 
-  public crawlUrl(note:Note): Observable<any> {
+  public archiveNote(note:Note): Observable<any> {
     //crawl
-    return this.apiService.getByIdWithParams(this.apiService.config.notes, note.id.toString(),'crawl', 50000);
+    return this.apiService.getByIdWithParams(this.apiService.config.notes, note.id.toString(),'archive', 50000);
     //return this.apiService.getById(this.apiService.config.crawler, btoa(url), 50000);
   }
 
   public loadTitle(url: string): Observable<any> {
-    return this.apiService.getById(this.apiService.config.crawler, btoa(url) + "/title", 50000);
+    return this.apiService.getById(this.apiService.config.notes, btoa(url) + "/title", 50000);
   }
+
+  
 
 }

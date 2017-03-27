@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs/Rx';
 import { ObservableService } from 'app/shared/modules/observable/observable.service'
 import { NEW } from 'app/shared/modules/observable/observable.service'
 import { MdSnackBar } from '@angular/material';
+import { ApiService } from 'app/shared/modules/api/api.service';
 
 export const routerConfig = [{
   path: '',
@@ -49,7 +50,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
   private filter:Filter;
 
   constructor(private noteService: NoteService, private searchService: FilterService
-  , private notifier: NotifierService, private snackBar: MdSnackBar) {
+  , private notifier: NotifierService, private snackBar: MdSnackBar,private apiService:ApiService) {
  
       this.filter = this.searchService.get();
 
@@ -178,12 +179,17 @@ export class NoteListComponent implements OnInit, OnDestroy {
     return true;
 
   }
-
-   public crawl(note) {
+  
+  public urlHtml(note:Note) {
+    return this.apiService.config.archive+note.id+".html"
+    
+  }
+   public archive(note:Note) {
     if(note){
-
-        this.noteService.crawlUrl(note).subscribe(x => {
+        this.noteService.archiveNote(note).subscribe(archive => {
           //this.note.description = x.html;
+          console.log(archive)
+          note.archive_id = archive.note
           this.snackBar.open('Archived with Succes', 'Ok', { duration: 3000 });
         });
     }

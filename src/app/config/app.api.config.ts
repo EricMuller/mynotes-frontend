@@ -8,7 +8,7 @@ export class ApiConfig {
     public tags: string;
     public tagsCloud: string;
     public upload: string;
-    public crawler: string;
+    public archive: string;
 }
 
 export const API_CONFIG: ApiConfig = {
@@ -18,7 +18,8 @@ export const API_CONFIG: ApiConfig = {
   tags: '/mynotes/api/v1/tags/',
   tagsCloud: '/mynotes/api/v1/tags-cloud/',
   upload: '/mynotes/api/v1/upload/',
-  crawler:  '/mynotes/api/v1/crawler/',
+  archive:  '/mynotes/api/v1/archive/',
+  
 };
 
 
