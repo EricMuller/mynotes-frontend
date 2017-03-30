@@ -8,9 +8,7 @@ import { NotifierService } from 'app/shared/modules/notifications/notifier.servi
 import { PaginatedResult } from 'app/shared/services/paginated-result'
 import { TagService } from 'app/modules/tags/services/tag.service'
 import { TagCloud } from 'app/modules/tags/model/tag-cloud'
-
 import { Subscription } from 'rxjs/Rx';
-
 import { ObservableService } from 'app/shared/modules/observable/observable.service'
 import { NEW } from 'app/shared/modules/observable/observable.service'
 import { MdSnackBar } from '@angular/material';
@@ -175,16 +173,16 @@ export class NoteListComponent implements OnInit, OnDestroy {
       });
   }
 
-  isAuthentified(): boolean {
+  public isAuthentified(): boolean {
     return true;
 
   }
   
   public urlHtml(note:Note) {
-    return this.apiService.config.archive+note.id+".html"
+    return this.apiService.config.archive+note.archive_id+".html"
     
   }
-   public archive(note:Note) {
+   public archive(evt,note:Note) {
     if(note){
         this.noteService.archiveNote(note).subscribe(archive => {
           //this.note.description = x.html;
@@ -194,6 +192,5 @@ export class NoteListComponent implements OnInit, OnDestroy {
         });
     }
   }
-
 
 }
