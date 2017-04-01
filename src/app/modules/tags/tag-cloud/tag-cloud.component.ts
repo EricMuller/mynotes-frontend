@@ -10,48 +10,44 @@ import { ObservableService } from 'app/shared/modules/observable/observable.serv
   templateUrl: './tag-cloud.component.html',
   styleUrls: ['./tag-cloud.component.css']
 })
-export class TagCloudComponent  {
+export class TagCloudComponent {
 
   private selected: false;
-  //private maxCount: number;
-  protected tags: Array<TagCloud>;
-  
-  protected _nextLink: string;
 
-  constructor(private apiservice: ApiService,private notifier :ObservableService) {
-    
+  public tags: Array<TagCloud>;
+  public nextLink: string;
+
+  constructor(private apiservice: ApiService, private notifier: ObservableService) {
   }
 
   ngOnInit() {
     this.getTagsCloud();
   }
 
-  
   public next(event) {
-      this.getNextTagsCloud();
+    this.getNextTagsCloud();
   }
 
- protected getTagsCloud() {
-    this.apiservice.getPaginatedResults(this.apiservice.config.tagsCloud+"?page_size=500").subscribe(
+  protected getTagsCloud() {
+    this.apiservice.getPaginatedResults(this.apiservice.config.tagsCloud + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
-        this._nextLink = result.links.next;
+        this.nextLink = result.links.next;
         this.updateSize(result.aggregate_data.max_count)
       },
       err => {
         console.error(err);
       });
-
   }
 
   protected getNextTagsCloud() {
-    if (this._nextLink != null) {
-      this.apiservice.getPaginatedResults(this._nextLink).subscribe(
+    if (this.nextLink != null) {
+      this.apiservice.getPaginatedResults(this.nextLink).subscribe(
         result => {
           for (let i = 0; i < result.data.length; i++) {
             this.tags.push(result.data[i]);
           }
-          this._nextLink = result.links.next;
+          this.nextLink = result.links.next;
           this.updateSize(result.aggregate_data.max_count)
         },
         err => {
@@ -59,7 +55,6 @@ export class TagCloudComponent  {
         });
     }
   }
-
 
   private updateSize(maxCount: number) {
     if (maxCount > 0) {
@@ -69,7 +64,6 @@ export class TagCloudComponent  {
     }
   }
 
-
   public selectItem(tag: TagCloud) {
     if ("current" == tag.color) {
       tag.color = "";
@@ -78,6 +72,5 @@ export class TagCloudComponent  {
       tag.color = "current";
       this.notifier.add(tag);
     }
-    console.log(tag);
   }
 }

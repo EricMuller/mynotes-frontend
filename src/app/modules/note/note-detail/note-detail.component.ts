@@ -20,9 +20,9 @@ import { AuthgardService } from 'app/shared/modules/authentification/authgard.se
 })
 export class NoteDetailComponent implements OnInit {
 
-  private note: Note = new Note();
+  public note: Note = new Note();
 
-  private showEditor:boolean =false;
+  public  showEditor:boolean =false;
 
   constructor( private router: Router,private location: Location,private noteService: NoteService, private route: ActivatedRoute
   , private notifier: NotifierService, private snackBar: MdSnackBar,private filterService: FilterService,
@@ -128,6 +128,12 @@ export class NoteDetailComponent implements OnInit {
         this.note.tags.splice(i, 1);
       }
     }
+  }
+
+  public keyupHandlerFunction(event){
+      
+      this.note.description = event;
+      
   }
 
 }

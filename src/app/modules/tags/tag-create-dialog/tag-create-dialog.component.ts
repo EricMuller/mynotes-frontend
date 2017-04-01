@@ -10,14 +10,14 @@ import { Tag } from 'app/modules/tags/model/tag';
 })
 export class TagCreateDialogComponent implements OnInit {
 
-  private name: string;
+  public  name: string;
 
   constructor(public dialogRef: MdDialogRef<TagCreateDialogComponent>, private tagService: TagService, private snackBar: MdSnackBar) { }
 
   ngOnInit() {
   }
 
-  private create() {
+  public create() {
     if (this.name != "") {
 
       let tag: Tag = Tag.create(this.name);
@@ -31,7 +31,7 @@ export class TagCreateDialogComponent implements OnInit {
 
   }
 
-  private close() {
+  public close() {
     this.dialogRef.close('cancel');
   }
 

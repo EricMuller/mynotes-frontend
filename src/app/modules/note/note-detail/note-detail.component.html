@@ -3,9 +3,7 @@
 </md-menu>
 
 <md-menu #appMenu="mdMenu"> 
-  <button md-button (click)="crawl(note)" color="primary"><md-icon>archive</md-icon></button>
   <button md-menu-item *ngIf="isAuthentified()" (click)="logout()"> Log Out </button>
-
 </md-menu>
 
 <md-toolbar color="primary">
@@ -72,9 +70,7 @@
            <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
           </md-card-content>
           <md-card-actions>
-            <!--<button md-button (click)="loadTitle(note.url)" color="primary" placeholder="load Title"><md-icon>system_update</md-icon></button>-->
             <button md-button (click)="loadTitle(note.url)" placeholder="load Title">Load Title from url</button>
-            <!--<button *ngIf="note.id" md-button (click)="crawl(note)" color="primary"><md-icon>archive</md-icon>archiver</button>-->
           </md-card-actions>
         </md-card>
         
@@ -139,7 +135,8 @@
   
 </div> 
  <div *ngIf="showEditor" class="editor">
-    <app-tinymce [(ngModel)]='note.description'></app-tinymce>
+     <!--<app-tiny-editor [(ngModel)]='note.description' ></app-tiny-editor> -->
+     <app-tiny-editor  [elementId]="my-editor-id" [content]='note.description' (onEditorKeyup)="keyupHandlerFunction($event)" ></app-tiny-editor> 
  </div>
   <!-- <button (click)="save()" md-mini-fab class="mini-fab"><md-icon>save</md-icon></button>-->
 </div>

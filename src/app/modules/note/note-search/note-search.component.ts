@@ -12,14 +12,12 @@ import { TYPE_LINK, TYPE_NOTE, TYPE_TODO } from './../model/note';
 })
 export class NoteFilterComponent implements OnInit {
 
-  private filter: Filter ;
+  public filter: Filter;
+  public TYPE_LINK: String = TYPE_LINK;
+  public TYPE_NOTE: String = TYPE_NOTE;
+  public TYPE_TODO: String = TYPE_TODO;
 
-  private TYPE_LINK: String = TYPE_LINK;
-  private TYPE_NOTE: String = TYPE_NOTE;
-  private TYPE_TODO: String = TYPE_TODO;
-
-  constructor(private filterService: FilterService, private snackBar: MdSnackBar, public dialog: MdDialog) { 
-    
+  constructor(private filterService: FilterService, private snackBar: MdSnackBar, public dialog: MdDialog) {
   }
 
   ngOnInit() {

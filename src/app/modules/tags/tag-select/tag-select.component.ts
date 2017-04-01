@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, AfterViewInit ,OnChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, AfterViewInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms'
 import { TagAbstractComponent } from '../tag-abstract/tag-abstract.component'
 import { ApiService } from 'app/shared/modules/api/api.service';
@@ -15,11 +15,7 @@ import { TagCreateDialogComponent } from 'app/modules/tags/tag-create-dialog/tag
   templateUrl: './tag-select.component.html',
   styleUrls: ['./tag-select.component.css']
 })
-export class TagSelectComponent implements OnInit , OnChanges {
-
-  protected tags: Array<TagCloud>;
-
-  protected _nextLink: string;
+export class TagSelectComponent implements OnInit, OnChanges {
 
   @Input('tagSelected')
   private tagSelected: Array<any>;
@@ -28,6 +24,9 @@ export class TagSelectComponent implements OnInit , OnChanges {
   @Output('tagRemoved')
   private removeTag = new EventEmitter<TagCloud>();
 
+  public tags: Array<TagCloud>;
+  public nextLink: string;
+
   constructor(private apiService: ApiService, private snackBar: MdSnackBar, public dialog: MdDialog) {
   }
 
@@ -35,12 +34,12 @@ export class TagSelectComponent implements OnInit , OnChanges {
 
   }
 
-  ngOnChanges(){
-      this.getTags();
+  ngOnChanges() {
+    this.getTags();
   }
 
   ngAfterViewInit() {
-    
+
   }
 
   update(val) {
@@ -53,10 +52,10 @@ export class TagSelectComponent implements OnInit , OnChanges {
     this.apiService.getPaginatedResults(this.apiService.config.tagsCloud + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
-        this._nextLink = result.links.next;
+        this.nextLink = result.links.next;
         //this.updateSize(result.aggregate_data.max_count)
         //this.selectTag();
-        this.selectTag(); 
+        this.selectTag();
       },
       err => {
         console.error(err);

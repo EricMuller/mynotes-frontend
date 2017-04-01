@@ -55,11 +55,11 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component'
 
 import { MaterialModule } from '@angular/material';
 import { TinyEditorComponent } from './shared/components/tiny-editor/tiny-editor.component'
-import { TinymceModule } from 'angular2-tinymce';
 import { RatingComponent } from './shared/components/rating/rating.component'
 import { SimpleDndComponent } from './shared/components/simple-dnd/simple-dnd.component'
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { BackupListComponent } from './modules/backup/backup-list/backup-list.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import * as Drive from "gapi.drive.realtime";
 
 /*export const ROUTE_CONFIG = [{
@@ -103,11 +103,7 @@ import { BackupListComponent } from './modules/backup/backup-list/backup-list.co
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES_CONFIG),
     DatepickerModule,
-    TinymceModule.withConfig({
-      plugins: ['link', 'table'],
-      skin_url: '/assets/skins/lightgray',
-      height: 500
-    })
+    BrowserAnimationsModule
   ],
   providers: [NoteService, FilterService, ApiService, AuthentificationService,
     { provide: 'api.config', useValue: API_CONFIG },

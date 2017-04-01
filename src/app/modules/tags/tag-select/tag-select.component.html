@@ -7,7 +7,7 @@
         <md-chip-list >
                 <!--<div *ngFor="let tag of  tags " class='tag-cloud size-{{tag.size}} {{tag.itemclass}}' id="{{tag.id}}">{{tag.name}}</div>-->
                 <md-chip  *ngFor="let tag of  tags"   [color]="tag.color" selected="true" (click)="selectItem(tag)" class="background-primary-color white-text">{{tag.name}}</md-chip>
-                <md-chip  *ngIf="_nextLink" class='tag-cloud' (click)="next()">...</md-chip>
+                <md-chip  *ngIf="nextLink" class='tag-cloud' (click)="next()">...</md-chip>
         </md-chip-list>
       </md-card-content>
       <md-card-actions>

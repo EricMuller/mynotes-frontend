@@ -14,9 +14,11 @@ declare var tinymce: any;
 })
 export class TinyEditorComponent implements AfterViewInit, OnDestroy {
 
+  @Input() content: String;
+
   @Input() elementId: String;
 
-  @Output() onEditorContentChange = new EventEmitter();
+  @Output() onEditorKeyup = new EventEmitter<any>();
 
   editor;
   ngOnInit(){
@@ -48,21 +50,20 @@ export class TinyEditorComponent implements AfterViewInit, OnDestroy {
           selector: 'div.editable',
           inline: true,
           //selector: '#' + this.elementId,
-          //plugins: ['link', 'table'],
-          //skin_url: '/assets/skins/lightgray',
+          plugins: ['link', 'table'],
+          skin_url: '/assets/skins/lightgray',
           //themes: "modern",
-          theme: 'inlite',
+          //theme: 'inlite',
           setup: editor => {
             this.editor = editor;
             editor.on('keyup change', () => {
               const content = editor.getContent();
-              this.onEditorContentChange.emit(content);
+              this.onEditorKeyup.emit(content);
             });
           }
         });
-
+        tinymce.activeEditor.setContent(this.content);
   } 
-    
 
   ngOnDestroy() {
     tinymce.remove(this.editor);

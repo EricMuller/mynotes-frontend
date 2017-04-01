@@ -45,7 +45,7 @@ import { MdSnackBar } from '@angular/material';
     
     <div class="notification_container">
         <div (click)="hide(notification)" class="{{ notification.type }} notification" 
-                *ngFor="let notification of _notifications">
+                *ngFor="let notification of notifications">
                         {{ notification.message }}
               <span class="notification_closebtn" (click)="hide(notification)">&times;</span> 
         </div>
@@ -53,11 +53,11 @@ import { MdSnackBar } from '@angular/material';
     `
 })
 export class NotificationsComponent {
-    private _notifications: Notification[];
+    public notifications: Notification[];
 
     constructor(private notifierService: NotifierService,private mdSnackBar: MdSnackBar) {
         
-        this._notifications = new Array<Notification>();
+        this.notifications = new Array<Notification>();
 
         notifierService.observable.subscribe(notification => {
            /* this._notifications.push(notification);
@@ -73,9 +73,9 @@ export class NotificationsComponent {
     }
 
     private hide(notification) {
-        let index = this._notifications.indexOf(notification);
+        let index = this.notifications.indexOf(notification);
         if (index >= 0) {
-            this._notifications.splice(index, 1);
+            this.notifications.splice(index, 1);
         }
     }
 }

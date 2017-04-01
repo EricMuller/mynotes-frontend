@@ -5,7 +5,7 @@
   <div class="row">
           <!--- content note -->
           <md-nav-list>
-            <md-list-item *ngFor="let note of notes" ngmodel>
+            <md-list-item *ngFor="let note of result.data" ngmodel>
 
               <a *ngIf="note.url && note.id" md-list-icon md-icon target="_blank" href="{{note.url}}">
                 <md-icon color="primary">open_in_new</md-icon>
@@ -29,7 +29,7 @@
               </button>
               <button *ngIf="note.id && !note.archive_id" md-icon-button (click)="archive($event.target,note)" color="primary"><md-icon>archive</md-icon></button>
               <!--<button *ngIf="note.id && note.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
-              <a *ngIf="note.id && note.archive_id" md-icon-button  target="_blank" href="{{urlHtml(note)}}">
+              <a *ngIf="note.id && note.archive_id" md-icon-button  target="_blank" href="{{urlDownload(note)}}">
                 <md-icon color="primary">attach_file</md-icon>
               </a>
 
@@ -37,7 +37,7 @@
 
             </md-list-item>
             <md-divider></md-divider>
-            <md-list-item *ngIf="_next" (click)="next()">
+            <md-list-item *ngIf="result.links.next" (click)="next()">
               <md-icon>keyboard_arrow_down</md-icon>
             </md-list-item>
           </md-nav-list>

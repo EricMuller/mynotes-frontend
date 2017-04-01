@@ -29,11 +29,7 @@ export const routerConfig = [{
 })
 export class NoteListComponent implements OnInit, OnDestroy {
 
-  private notes: Array<Note>;
-
-  private _next: number;
-  private _count: number;
-  private _nextLink: string;
+  public result: PaginatedResult = new PaginatedResult();
 
   private subscription: Subscription;
 
@@ -45,25 +41,19 @@ export class NoteListComponent implements OnInit, OnDestroy {
         console.log('subscribe');
       });    
 */
-  private filter:Filter;
+  private filter: Filter;
 
   constructor(private noteService: NoteService, private searchService: FilterService
-  , private notifier: NotifierService, private snackBar: MdSnackBar,private apiService:ApiService) {
- 
-      this.filter = this.searchService.get();
-
-   }
+    , private notifier: NotifierService, private snackBar: MdSnackBar, private apiService: ApiService) {
+    this.filter = this.searchService.get();
+  }
 
   ngOnInit() {
 
     this.noteService.search(this.filter)
       .subscribe(
       result => {
-        console.log(result.data);
-        this.notes = result.data;
-        this._next = result.next;
-        this._count = result.count;
-        this._nextLink = result.links.next;
+        this.result = result;
       },
       err => {
         console.error(err);
@@ -96,7 +86,6 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
       }
     });*/
-
   }
 
   ngOnDestroy() {
@@ -109,15 +98,13 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
   public clear() {
-    this.notes = [];
-    this._next = null;
-    this._nextLink = null;
+    this.result = new PaginatedResult();
   }
 
   private removeNote(note: Note) {
-    for (var i = 0; this.notes.length > i; i++) {
-      if (this.notes[i].id == note.id) {
-        this.notes.splice(i, 1);
+    for (var i = 0; this.result.data.length > i; i++) {
+      if (this.result.data[i].id == note.id) {
+        this.result.data.splice(i, 1);
       }
     }
   }
@@ -157,15 +144,12 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
   public next(event) {
 
-    this.noteService.getPaginatedResults(this._nextLink,this.filter)
+    this.noteService.getPaginatedResults(this.result.links.next, this.filter)
       .subscribe(
       result => {
-        console.log(result.data);
-        this._next = result.next;
-        this._count = result.count;
-        this._nextLink = result.links.next;
+        this.result.links.next = result.links.next;
         for (var i = 0; result.data.length > i; i++) {
-          this.notes.push(result.data[i]);
+          this.result.data.push(result.data[i]);
         }
       },
       err => {
@@ -177,19 +161,21 @@ export class NoteListComponent implements OnInit, OnDestroy {
     return true;
 
   }
-  
-  public urlHtml(note:Note) {
-    return this.apiService.config.archive+note.archive_id+".html"
-    
+
+  public urlHtml(note: Note) {
+    return this.apiService.config.archive + note.archive_id + ".html"
   }
-   public archive(evt,note:Note) {
-    if(note){
-        this.noteService.archiveNote(note).subscribe(archive => {
-          //this.note.description = x.html;
-          console.log(archive)
-          note.archive_id = archive.note
-          this.snackBar.open('Archived with Succes', 'Ok', { duration: 3000 });
-        });
+  public urlDownload(note: Note) {
+    return this.apiService.config.archive + note.archive_id + "/download/"
+  }
+  public archive(evt, note: Note) {
+    if (note) {
+      this.noteService.archiveNote(note).subscribe(archive => {
+        //this.note.description = x.html;
+        console.log(archive)
+        note.archive_id = archive.id
+        this.snackBar.open('Archived with Succes', 'Ok', { duration: 3000 });
+      });
     }
   }
 

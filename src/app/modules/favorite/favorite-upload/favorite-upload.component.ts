@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Rx';
 import { TagService } from 'app/modules/tags/services/tag.service'
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 //import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
-
 import { CustomHttp } from 'app/shared/modules/http/custom.http';
 
 @Component({
@@ -14,10 +13,9 @@ import { CustomHttp } from 'app/shared/modules/http/custom.http';
 })
 export class FavoriteUploadComponent implements OnInit {
 
- // private  uploader: FileUploader = new FileUploader({ url: 'http://localhost:3001/upload' });
+  // private  uploader: FileUploader = new FileUploader({ url: 'http://localhost:3001/upload' });
 
   constructor(protected apiservice: ApiService, private notifier: NotifierService, private http :CustomHttp) {
-
     
   }
 

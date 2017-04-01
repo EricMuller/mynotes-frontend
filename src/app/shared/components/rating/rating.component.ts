@@ -7,7 +7,7 @@ import { Component, OnInit ,Input, Output, EventEmitter} from '@angular/core';
 })
 export class RatingComponent implements OnInit {
   
-  private range:Array<number> = [1,2,3,4,5];
+  public range:Array<number> = [1,2,3,4,5];
   @Input('rate')
   private rate:number ;
   @Output('rateChange')
