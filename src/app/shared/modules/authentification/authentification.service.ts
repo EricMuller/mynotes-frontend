@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http'
 import { Observable } from "rxjs/Observable"; // <- add this import
 import { RequestOptions } from '@angular/http';
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 import { CustomHttp } from 'app/shared/modules/http/custom.http'
+import { AuthentificationEndPoint } from 'app/config/app.api.config'
+import { Registration } from 'app/shared/modules/authentification/model/registration.model'
+
 
 @Injectable()
 export class AuthentificationService {
 
-  constructor(private http: CustomHttp, private notifier: NotifierService) { }
+  constructor(private http: CustomHttp, private notifier: NotifierService,
+    @Inject('authentification.endpoint') public endpoints: AuthentificationEndPoint) { }
 
   public login(username: string, password: string): Observable<any> {
 
@@ -21,11 +25,9 @@ export class AuthentificationService {
         let user = response.json();
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-         // localStorage.setItem('currentUser', JSON.stringify(user));
-           localStorage.setItem('currentUser', JSON.stringify(user));
-          
-          
-          this.notifier.notifySuccess('Successful connected',2000);
+          // localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('currentUser', JSON.stringify(user));
+
         }
       });
   }
@@ -33,6 +35,22 @@ export class AuthentificationService {
   public logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+  }
+
+  public register(email: string, userName: string, password1: string, password2: string): Observable<any> {
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    let registration = new Registration(email, userName, password1, password2);
+
+    return this.http.post(this.endpoints.registration, registration, options)
+      .map((response: Response) => {
+        response.json();
+      }
+      );
+    ;
+
   }
 
 }

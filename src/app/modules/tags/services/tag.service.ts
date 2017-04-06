@@ -32,16 +32,16 @@ export class TagService {
   }
 
  public getTagsCloud(): Observable<PaginatedResult> {
-    return this.apiService.getPaginatedResults(this.apiService.config.tagsCloud);
+    return this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.tagsCloud);
  }
 
  public getUserTags(): Observable<PaginatedResult> {
-    return this.apiService.getPaginatedResults(this.apiService.config.tags+"?page_size=500");
+    return this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.tags+"?page_size=500");
  }
 
 
  public saveTag(tag: Tag): Observable<any> {
-      return this.apiService.post(this.apiService.config.tags, tag);
+      return this.apiService.post(this.apiService.myNotesEndPoint.tags, tag);
   }
 
 }

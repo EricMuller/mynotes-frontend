@@ -4,7 +4,7 @@
     <button md-menu-item> Settings</button>
 </md-menu>
 
-<md-toolbar color="primary">
+<!--<md-toolbar color="primary" style="min-height: 30px">
     <span>
       <button md-icon-button>
       <md-icon>apps</md-icon>
@@ -12,40 +12,55 @@
     </span>
 
     <span>01Notes! </span>
-    <span class="fill-remaining-space"></span>
-    <span>
-    <!--<button md-icon-button [mdMenuTriggerFor]="appMenu">
-    <md-icon>more_vert</md-icon>
-    </button>-->
-  </span>
+
+
 </md-toolbar>
 <!-- / Tool bar -->
 
 <div class="app-login-content">
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 ">
+
             <md-card>
-                <md-card-header>
-                    <md-card-title>
-                        Login to 01Notes!
-                    </md-card-title>
-                </md-card-header>
+                <md-toolbar color="primary">
+                    <div class="md-toolbar-tools">
+                        <h2><span>Login to 01Notes!</span></h2>
+                    </div>
+                </md-toolbar>
+
                 <md-card-content>
-                    <md-input-container class="full-width">
-                        <input mdInput placeholder="Username" [(ngModel)]="model.username">
-                    </md-input-container>
-                    <md-input-container class="full-width">
-                        <input mdInput placeholder="Username" [(ngModel)]="model.password">
-                    </md-input-container>
-                    <md-card-actions>
-                        <button md-button (click)="login()">Connexion</button>
-                        <a md-button [routerLink]="['/register']">Register</a>
-                    </md-card-actions>
+
+                    <form role="form" [formGroup]="loginForm" novalidate>
+                        <md-input-container class="full-width">
+                            <md-icon>perm_identity</md-icon>    
+                            <input mdInput placeholder="Username" formControlName="username" required>
+                            <md-hint *ngIf="loginForm.controls.username.errors && (loginForm.controls.username.dirty || loginForm.controls.username.touched)"
+                                [ngStyle]="{'color': 'red'}">username is required </md-hint>
+                        </md-input-container>
+                        
+                        <md-input-container class="full-width">
+                            <md-icon>lock</md-icon>    
+                            <input mdInput placeholder="Password" type = "password" formControlName="password" #elm required>
+                            <md-hint *ngIf="loginForm.controls.password.errors && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"
+                                [ngStyle]="{'color': 'red'}">password is required </md-hint>
+                            <!--<app-input-validation [control]="password" [elm]="elm" ></app-input-validation>-->
+                        </md-input-container>
+                        <md-card-actions align="center">
+                        
+                            <button md-raised-button color="primary" (click)="login()" [disabled]="!loginForm.valid">SIGN IN</button>
+                        </md-card-actions>
+
+                        <md-card-actions >
+                                <a [routerLink]="['/register']">Register a new account?</a>
+                        </md-card-actions>
+                    </form>
+
                 </md-card-content>
-                <!--<input type='text' #myDate [(ngModel)]='note.created_dt'/><br>-->
+
             </md-card>
         </div>
     </div>
+
 </div>
 
 <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="

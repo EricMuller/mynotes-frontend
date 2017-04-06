@@ -62,7 +62,10 @@ export class TinyEditorComponent implements AfterViewInit, OnDestroy {
             });
           }
         });
-        tinymce.activeEditor.setContent(this.content);
+        
+        if(this.content){
+          tinymce.activeEditor.setContent(this.content);
+        }
   } 
 
   ngOnDestroy() {

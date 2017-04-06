@@ -29,7 +29,7 @@ export class TagCloudComponent {
   }
 
   protected getTagsCloud() {
-    this.apiservice.getPaginatedResults(this.apiservice.config.tagsCloud + "?page_size=500").subscribe(
+    this.apiservice.getPaginatedResults(this.apiservice.myNotesEndPoint.tagsCloud + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;

@@ -4,7 +4,6 @@ import { NotifierService } from 'app/shared/modules/notifications/notifier.servi
 import { Http, Request, RequestOptionsArgs, Response, XHRBackend, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
 
 
-
 /*export let httpFactory = (backend: XHRBackend, defaultOptions: RequestOptions, notifier:NotifierService) => {
   return new CustomHttp(backend, defaultOptions, notifier);
 };*/

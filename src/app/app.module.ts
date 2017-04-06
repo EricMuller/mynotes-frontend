@@ -18,7 +18,8 @@ import { NotifierService } from 'app/shared/modules/notifications/notifier.servi
 /** api */
 
 import { ApiService } from 'app/shared/modules/api/api.service';
-import { API_CONFIG } from 'app/config/app.api.config';
+import { MYNOTES_ENPOINT } from 'app/config/app.api.config';
+import { AUTHENTIFICATION_ENDPOINT } from 'app/config/app.api.config'
 /* utils */
 import { EscapeHtmlPipe } from 'app/shared/pipes/escape-html.pipe';
 import { ToArrayPipe } from 'app/shared/pipes/to-array.pipe';
@@ -41,7 +42,7 @@ import { TagService } from './modules/tags/services/tag.service';
 import { TagSelectComponent } from './modules/tags/tag-select/tag-select.component';
 import { TagAbstractComponent } from './modules/tags/tag-abstract/tag-abstract.component';
 
-import { TagCreateDialogComponent }  from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
+import { TagCreateDialogComponent } from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
 
 import { TagListComponent } from './modules/tags/tag-list/tag-list.component';
 import { ObservableService } from 'app/shared/modules/observable/observable.service';
@@ -60,6 +61,8 @@ import { SimpleDndComponent } from './shared/components/simple-dnd/simple-dnd.co
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { BackupListComponent } from './modules/backup/backup-list/backup-list.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationComponent } from './shared/modules/authentification/registration/registration.component';
+import { InputValidationComponent } from './shared/components/input-validation/input-validation.component';
 //import * as Drive from "gapi.drive.realtime";
 
 /*export const ROUTE_CONFIG = [{
@@ -87,12 +90,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FavoriteListComponent,
     FavoriteDetailComponent,
     DashboardComponent,
-   // FileSelectDirective,
+    // FileSelectDirective,
     TinyEditorComponent,
     RatingComponent,
     SimpleDndComponent,
     TagCreateDialogComponent,
-    BackupListComponent
+    BackupListComponent,
+    RegistrationComponent,
+    InputValidationComponent
   ],
   imports: [
     MaterialModule,
@@ -106,7 +111,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [NoteService, FilterService, ApiService, AuthentificationService,
-    { provide: 'api.config', useValue: API_CONFIG },
+    { provide: 'mynotes.endpoint', useValue: MYNOTES_ENPOINT },
+    { provide: 'authentification.endpoint', useValue: AUTHENTIFICATION_ENDPOINT },
     NotifierService, HTTP_PROVIDER, AuthgardService, ResponseService, TagService, ObservableService],
   bootstrap: [AppComponent]
 })

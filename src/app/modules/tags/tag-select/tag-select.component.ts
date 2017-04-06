@@ -49,7 +49,7 @@ export class TagSelectComponent implements OnInit, OnChanges {
   protected getTags() {
     console.log(this.tagSelected);
 
-    this.apiService.getPaginatedResults(this.apiService.config.tagsCloud + "?page_size=500").subscribe(
+    this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.tagsCloud + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;

@@ -1,0 +1,68 @@
+<md-menu #appMenuAppNew="mdMenu">
+  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</md-menu>
+
+
+<md-toolbar color="primary">
+  <span>
+    <button md-icon-button><md-icon>apps</md-icon> </button>
+  </span>
+  <span>01Notes!</span>
+  <span class="fill-remaining-space"></span>
+</md-toolbar>
+<!-- Signup form -->
+<div class="app-login-content">
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 ">
+      <md-card>
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Register a new account</span></h2>
+          </div>
+        </md-toolbar>
+
+        <form role="form" [formGroup]="registrationForm" novalidate>
+          <md-card-content>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="Email" type="email" formControlName="email" required>
+              <md-hint *ngIf="registrationForm.controls.email.errors && (registrationForm.controls.email.dirty || registrationForm.controls.email.touched)"
+                [ngStyle]="{'color': 'red'}">email is required </md-hint>
+            </md-input-container>
+          </md-card-content>
+
+          <md-card-content>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="Username" formControlName="userName" required>
+              <md-hint *ngIf="registrationForm.controls.userName.errors && (registrationForm.controls.userName.dirty || registrationForm.controls.userName.touched)"
+                [ngStyle]="{'color': 'red'}">username is required </md-hint>
+            </md-input-container>
+          </md-card-content>
+
+          <md-card-content>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="Password" type="password"  formControlName="password1" required>
+              <md-hint *ngIf="registrationForm.controls.password1.errors && (registrationForm.controls.password1.dirty || registrationForm.controls.password1.touched)"
+                [ngStyle]="{'color': 'red'}">password is required </md-hint>
+            </md-input-container>
+          </md-card-content>
+          
+          <md-card-content>
+            <md-input-container class="full-width" >
+              <input mdInput  type="password" formControlName="password2" required color="primary">
+              <md-placeholder >Repeat password</md-placeholder>
+             <!-- <md-hint *ngIf="registrationForm.controls.password2.errors && (registrationForm.controls.password2.dirty || registrationForm.controls.password2.touched)"
+                [ngStyle]="{'color': 'red'}">repeat password is required </md-hint>-->
+                
+            </md-input-container>
+          </md-card-content>
+
+
+          <md-card-actions align="center">
+            <button md-raised-button color="primary" (click)="register()" placeholder="Sign up" [disabled]="!registrationForm.valid">SIGN UP</button>
+            <a [routerLink]="['/login']">cancel</a>
+          </md-card-actions>
+        </form>
+      </md-card>
+    </div>
+  </div>
+</div>

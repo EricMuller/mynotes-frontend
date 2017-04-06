@@ -1,7 +1,7 @@
 
 
 import { Injectable, Inject } from '@angular/core';
-import { ApiConfig } from 'app/config/app.api.config';
+import { MyNotesEndPoint } from 'app/config/app.api.config';
 import { Http, Response, Headers } from '@angular/http';
 import { CustomHttp } from 'app/shared/modules/http/custom.http'
 import { Observable } from 'rxjs/Rx';
@@ -63,7 +63,7 @@ export class ApiService {
 
     constructor(private http: CustomHttp, 
                 private response: ResponseService,
-                @Inject('api.config') public config: ApiConfig) {
+                @Inject('mynotes.endpoint') public myNotesEndPoint: MyNotesEndPoint) {
         console.log('NoteService constructor');
     }
 

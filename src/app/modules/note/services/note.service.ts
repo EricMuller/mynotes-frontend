@@ -38,13 +38,13 @@ export class NoteService {
     let note: Note = new Note();
     note.url = url;
     note.title = url;
-    return this.apiService.post(this.apiService.config.notes, note);
+    return this.apiService.post(this.apiService.myNotesEndPoint.notes, note);
 
   }
 
   public deleteNote(note: Note): Observable<any> {
     if (note.id > 0) {
-      return this.apiService.deleteById(this.apiService.config.notes, note.id.toString());
+      return this.apiService.deleteById(this.apiService.myNotesEndPoint.notes, note.id.toString());
     }
 
   }
@@ -57,9 +57,9 @@ export class NoteService {
 
   public saveNote(note: Note): Observable<any> {
     if (note.id > 0) {
-      return this.apiService.put(this.apiService.config.notes + note.id + "/", note);
+      return this.apiService.put(this.apiService.myNotesEndPoint.notes + note.id + "/", note);
     } else {
-      return this.apiService.post(this.apiService.config.notes, note);
+      return this.apiService.post(this.apiService.myNotesEndPoint.notes, note);
     }
   }
 
@@ -88,7 +88,7 @@ export class NoteService {
     //console.log(tags);
     //?tags=4&tags=1
     let filter = this.createDjangoFilter(filterSearch,"?");
-    this.observable = this.apiService.getPaginatedResults(this.apiService.config.notes + filter);
+    this.observable = this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.notes + filter);
     return this.observable;
   }
 
@@ -116,17 +116,17 @@ export class NoteService {
   }
 
   public findById(id: number): Observable<Note> {
-    return this.apiService.getById(this.apiService.config.notes, id.toString());
+    return this.apiService.getById(this.apiService.myNotesEndPoint.notes, id.toString());
   }
 
   public archiveNote(note:Note): Observable<any> {
     //crawl
-    return this.apiService.getByIdWithParams(this.apiService.config.notes, note.id.toString(),'archive', 50000);
+    return this.apiService.getByIdWithParams(this.apiService.myNotesEndPoint.notes, note.id.toString(),'archive', 50000);
     //return this.apiService.getById(this.apiService.config.crawler, btoa(url), 50000);
   }
 
   public loadTitle(url: string): Observable<any> {
-    return this.apiService.getById(this.apiService.config.notes, btoa(url) + "/title", 50000);
+    return this.apiService.getById(this.apiService.myNotesEndPoint.notes, btoa(url) + "/title", 50000);
   }
 
   

@@ -163,10 +163,10 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
   public urlHtml(note: Note) {
-    return this.apiService.config.archive + note.archive_id + ".html"
+    return this.apiService.myNotesEndPoint.archive + note.archive_id + ".html"
   }
   public urlDownload(note: Note) {
-    return this.apiService.config.archive + note.archive_id + "/download/"
+    return this.apiService.myNotesEndPoint.archive + note.archive_id + "/download/"
   }
   public archive(evt, note: Note) {
     if (note) {

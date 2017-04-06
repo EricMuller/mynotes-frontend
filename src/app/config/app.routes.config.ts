@@ -22,6 +22,8 @@ import { TagCreateDialogComponent }  from 'app/modules/tags/tag-create-dialog/ta
 
 import { BackupListComponent} from 'app/modules/backup/backup-list/backup-list.component'
 
+import { RegistrationComponent } from 'app/shared/modules/authentification/registration/registration.component'
+
 export const ROUTES_CONFIG = [
   { path: '', redirectTo: 'favorites/search', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
@@ -66,7 +68,7 @@ export const ROUTES_CONFIG = [
   {
     path: 'tags', component: TagListComponent
   },
-
+  { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

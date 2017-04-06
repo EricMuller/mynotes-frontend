@@ -55,20 +55,21 @@ import { MdSnackBar } from '@angular/material';
 export class NotificationsComponent {
     public notifications: Notification[];
 
-    constructor(private notifierService: NotifierService,private mdSnackBar: MdSnackBar) {
-        
+    constructor(private notifierService: NotifierService, private mdSnackBar: MdSnackBar) {
+
         this.notifications = new Array<Notification>();
 
         notifierService.observable.subscribe(notification => {
-           /* this._notifications.push(notification);
-            if (notification.timeout >  0 ){
-                setTimeout(() => { this.hide.bind(this)(notification) }, notification.timeout);
-            }*/ 
+            /* this._notifications.push(notification);
              if (notification.timeout >  0 ){
-                this.mdSnackBar.open(notification.message , 'Ok',{ duration: notification.timeout });
-             }else{
-                this.mdSnackBar.open(notification.message , 'Ok');
-             }
+                 setTimeout(() => { this.hide.bind(this)(notification) }, notification.timeout);
+             }*/
+           
+            if (notification.timeout > 0) {
+                this.mdSnackBar.open(notification.message, 'Ok', { duration: notification.timeout });
+            } else {
+                this.mdSnackBar.open(notification.message, 'Ok');
+            }
         });
     }
 
