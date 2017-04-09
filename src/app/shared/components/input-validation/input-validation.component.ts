@@ -10,7 +10,7 @@ import {  FormGroup, FormBuilder, FormControl, Validators  } from '@angular/form
 export class InputValidationComponent implements OnInit {
 
   @Input('control')
-  private control:FormControl ;
+  public control:FormControl ;
   @Input() elm;
 
   constructor() { }
