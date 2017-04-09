@@ -16,16 +16,12 @@
             <md-icon>schedule</md-icon>Todo
           </md-button-toggle>
         </md-button-toggle-group>
+      
+         
       </md-card-content>
     </md-card>
-  </div>
-
-  <div class="row">
-
+    
     <md-card>
-      <md-card-header>
-        <md-card-title><strong>Criteres</strong></md-card-title>
-      </md-card-header>
       <md-input-container class="full-width">
         <input mdInput placeholder="Title contains">
       </md-input-container>
@@ -34,6 +30,5 @@
 
   <div class="row">
     <app-tag-select-card [(tagSelected)]="filter.tags" (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"></app-tag-select-card>
-
   </div>
 </div>

@@ -30,25 +30,33 @@
 <!--  Tool bar -->
 <div class="app-note-detail-content">
 
-<div class="row">  
-  <md-card class="type">
-    <md-card-content>
-      <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="note.type">
-        <md-button-toggle value="LINK">
-          <md-icon>link</md-icon>Link
-        </md-button-toggle>
-        <md-button-toggle value="NOTE">
-          <md-icon>note</md-icon>Note
-        </md-button-toggle>
-        <md-button-toggle value="TODO">
-          <md-icon>schedule</md-icon>Todo
-        </md-button-toggle>
-      </md-button-toggle-group>
-    </md-card-content>
-  </md-card>
-</div>
 
-<div class="row">
+ 
+      <div style="display: flex;flex-wrap: wrap; margin: 5px">
+        <div>  
+        <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="note.type">
+          <md-button-toggle value="LINK">
+            <md-icon>link</md-icon>Link
+          </md-button-toggle>
+          <md-button-toggle value="NOTE">
+            <md-icon>note</md-icon>Note
+          </md-button-toggle>
+          <md-button-toggle value="TODO">
+            <md-icon>schedule</md-icon>Todo
+          </md-button-toggle>
+        </md-button-toggle-group>
+        </div>
+        <div  class="fill-remaining-space" ></div>
+        <div style="display: flex;align-items: center;">
+          <app-rating [(rate)]="note.rate" (rate-change)="onRate($event)" ></app-rating>
+          <md-checkbox color="primary" [(ngModel)]="note.favorite" class="hidden">Fav</md-checkbox>
+          <md-icon *ngIf="note.favorite" color="accent" (click)="note.favorite=false;"> favorite</md-icon>
+          <md-icon *ngIf="!note.favorite" color="accent" (click)="note.favorite=true;">favorite_border</md-icon>
+        </div>
+    </div>
+
+
+
   <md-tab-group (selectedIndexChange)="selectedIndexChange($event)">
     <md-tab>
       <template md-tab-label>
@@ -57,26 +65,29 @@
      
 
         <md-card>
-          <md-card-header>
-            <md-card-title><strong>Title</strong></md-card-title>
-          </md-card-header>
           <md-card-content>
             <md-input-container class="full-width">
               <input mdInput placeholder="Title" [(ngModel)]="note.title">
             </md-input-container>
             <md-input-container class="full-width">
               <input mdInput placeholder="URL" [(ngModel)]="note.url">
+               
             </md-input-container>
+           <button md-raised-button color="primary" (click)="loadTitle(note.url)" placeholder="load Title">Load Title from url</button>
            <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
+          
+          
+           
+           
           </md-card-content>
           <md-card-actions>
-            <button md-button (click)="loadTitle(note.url)" placeholder="load Title">Load Title from url</button>
+            
           </md-card-actions>
         </md-card>
         
-        <md-card class="rating">
-            <app-rating [(rate)]="note.rate" (rate-change)="onRate($event)"></app-rating>
-        </md-card>
+        
+        
+        
 
         <app-tag-select-card [(tagSelected)]="note.tags"  ></app-tag-select-card>
         <!--<md-card>
@@ -133,7 +144,7 @@
 
   </md-tab-group>
   
-</div> 
+
  <div *ngIf="showEditor" class="editor">
      <!--<app-tiny-editor [(ngModel)]='note.description' ></app-tiny-editor> -->
      <app-tiny-editor  [elementId]="my-editor-id" [content]='note.description' (onEditorKeyup)="keyupHandlerFunction($event)" ></app-tiny-editor> 

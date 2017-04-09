@@ -24,12 +24,12 @@ export class AuthgardService implements CanActivate {
     }
 
 
-    private getCurrentUser(): string {
-        return localStorage.getItem('currentUser')
+    public getCurrentUser(): any {
+        let currentUser = localStorage.getItem('currentUser')
+        return currentUser ? JSON.parse(currentUser) : null;
     }
 
     public  isAuthentified(): boolean {
             return this.getCurrentUser() != null ;
     }
-
 }

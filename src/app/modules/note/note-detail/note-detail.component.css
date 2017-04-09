@@ -20,8 +20,11 @@
 .app-note-detail-content md-card {
  /* margin-left: 20px;
   margin-right: 20px;*/
-  margin-top: 1px;
-} 
+  margin-top: 0px;
+  margin-bottom: 0px;
+ } 
+
+
 
 /*.app-note-detail-content div.row.note {
   margin: 20px;
@@ -44,6 +47,7 @@
   margin-right: 1px !important;
 }*/
 
+/*
 md-card.md-card.mat-card{
    margin-left: 1px ;
 }
@@ -58,3 +62,8 @@ md-card.rating.mat-card{
 md-card.date.mat-card{
   margin: 10px ;
 }
+*/
+
+md-card.mat-card{
+  box-shadow: none;
+  }

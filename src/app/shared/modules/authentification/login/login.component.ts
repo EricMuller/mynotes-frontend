@@ -7,6 +7,9 @@ import { AuthentificationService } from '../authentification.service'
 import {  FormGroup, FormBuilder, FormControl, Validators  } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 
+import { RestHelper } from 'app/modules/helpers/RestHelper';
+import { FormHelper } from 'app/modules/helpers/FormHelper';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -19,7 +22,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
 
-    public loginForm: FormGroup;
+    public form: FormGroup;
 
     constructor(
         private route: ActivatedRoute,
@@ -28,9 +31,10 @@ export class LoginComponent implements OnInit {
         private notifierService: NotifierService,
         private _fb: FormBuilder) {
 
-        this.loginForm = this._fb.group({
+        this.form = this._fb.group({
             username: ['webdev', Validators.required],
-            password: ['webdev', Validators.required]
+            password: ['webdev', Validators.required],
+            non_field_errors: ['']
         });
     }
 
@@ -47,14 +51,18 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        this.authenticationService.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value)
+        this.authenticationService.login(this.form.controls['username'].value, this.form.controls['password'].value)
             .subscribe(
             data => {
                 this.notifierService.notifySuccess('Successful connected', 2000);
                 this.router.navigate([this.returnUrl]);
             },
             error => {
-                this.notifierService.notifyError(error);
+                debugger
+                let restResponse = RestHelper.extractErrors(error);
+                if (!FormHelper.updateValidationMessageToForm(restResponse, this.form)) {
+                    this.notifierService.notifyError(restResponse.exception);
+                  }
                 this.loading = false;
             });
     }

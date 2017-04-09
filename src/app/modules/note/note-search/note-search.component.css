@@ -1,4 +1,4 @@
-div.row {
+div.row1 {
   margin: 20px;
 } 
 
@@ -10,3 +10,9 @@ div.row {
   bottom: 20px;
   right: 20px;
 }
+
+
+md-card.mat-card{
+  box-shadow: none;
+  padding: 15px;
+  }

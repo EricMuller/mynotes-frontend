@@ -16,6 +16,7 @@ export class Note {
   created_dt: Date;
   schedule_dt:Date;
   archive_id: number;
+  favorite: boolean;
 };
 
 

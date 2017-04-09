@@ -1,0 +1,11 @@
+.header-toolbar {
+position: fixed;
+z-index: 3;
+width: 100%;
+opacity: 1 !important;
+}
+
+button.md-tool-fab.mat-mini-fab{
+    height: 35px;
+    width: 35px;
+}

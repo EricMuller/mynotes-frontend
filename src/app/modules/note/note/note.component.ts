@@ -24,6 +24,24 @@ export class NoteComponent implements OnInit {
     this.authgardService.logout();
   }
 
+  public username1(){
+ 
+    let currentUser = this.authgardService.getCurrentUser();
+    
+    if(currentUser != null){
+      return currentUser.username.slice(0,1).toUpperCase();
+    }
+  }
+
+  public username(){
+ 
+    let currentUser = this.authgardService.getCurrentUser();
+    
+    if(currentUser != null){
+      return currentUser.username;
+    }
+  }
+
 }
 
 

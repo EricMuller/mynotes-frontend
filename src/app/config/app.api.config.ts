@@ -25,6 +25,7 @@ export const MYNOTES_ENPOINT: MyNotesEndPoint = {
 
 export class AuthentificationEndPoint {
     public title: string;
+    public token :string;
     public registration :string;
     public account_confirm_email: string;
 
@@ -33,7 +34,8 @@ export class AuthentificationEndPoint {
 
 export const AUTHENTIFICATION_ENDPOINT: AuthentificationEndPoint = {
   title: 'django rest authent',
-  registration: '/rest-auth/registration/',
-  account_confirm_email: '/rest-auth/registration/account-confirm-email/',
+  token: '/authentication/rest-auth/token/',
+  registration: '/authentication/rest-auth/registration/',
+  account_confirm_email: '/authentication/rest-auth/registration/account-confirm-email/',
     
 };

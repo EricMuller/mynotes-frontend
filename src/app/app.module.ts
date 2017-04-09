@@ -63,6 +63,8 @@ import { BackupListComponent } from './modules/backup/backup-list/backup-list.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './shared/modules/authentification/registration/registration.component';
 import { InputValidationComponent } from './shared/components/input-validation/input-validation.component';
+import { FilterPipe } from './shared/pipes/filter.pipe';
+import { KeysPipe } from './shared/pipes/keys.pipe';
 //import * as Drive from "gapi.drive.realtime";
 
 /*export const ROUTE_CONFIG = [{
@@ -97,7 +99,9 @@ import { InputValidationComponent } from './shared/components/input-validation/i
     TagCreateDialogComponent,
     BackupListComponent,
     RegistrationComponent,
-    InputValidationComponent
+    InputValidationComponent,
+    FilterPipe,
+    KeysPipe
   ],
   imports: [
     MaterialModule,

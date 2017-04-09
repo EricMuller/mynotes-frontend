@@ -4,7 +4,9 @@ import { NotifierService } from 'app/shared/modules/notifications/notifier.servi
 import { Registration } from 'app/shared/modules/authentification/model/registration.model'
 import { Router, ActivatedRoute } from '@angular/router';
 import { RestHelper } from 'app/modules/helpers/RestHelper';
-import {  FormGroup, FormBuilder, FormControl, Validators  } from '@angular/forms';
+import { FormHelper } from 'app/modules/helpers/FormHelper';
+
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -14,42 +16,45 @@ import {  FormGroup, FormBuilder, FormControl, Validators  } from '@angular/form
 })
 export class RegistrationComponent implements OnInit {
 
-
-  public registrationForm: FormGroup;
-
+  public form: FormGroup;
 
   constructor(private authentificationService: AuthentificationService,
     private notifierService: NotifierService,
     private router: Router,
-    private _fb: FormBuilder) { 
+    private _fb: FormBuilder) {
 
-      this.registrationForm = this._fb.group({
-            email: ['t@free.fr', Validators.required],
-            userName: ['t', Validators.required],
-            password1: ['ttttttt', Validators.required],
-            password2: ['tttttt', Validators.required]
-        });
-    }
+    this.form = this._fb.group({
+      email: ['t@free.fr', Validators.required],
+      username: ['t', Validators.required],
+      password1: ['ttttttt', Validators.required],
+      password2: ['ttttttt', Validators.required],
+      non_field_errors: [''],
+      
+    });
 
-  ngOnInit() {
   }
 
+  ngOnInit() { }
+
+
+  
   public register() {
 
-    let email = this.registrationForm.controls['email'].value;
-    let userName = this.registrationForm.controls['userName'].value;
-    let password1 = this.registrationForm.controls['password1'].value;
-    let password2 = this.registrationForm.controls['password2'].value;
-
-    this.authentificationService.register(email, userName, password1, password2).subscribe(
+    let email = this.form.controls['email'].value;
+    let username = this.form.controls['username'].value;
+    let password1 = this.form.controls['password1'].value;
+    let password2 = this.form.controls['password2'].value;
+    this.form.controls['non_field_errors'].setValue('');
+    this.authentificationService.register(email, username, password1, password2).subscribe(
       data => {
         this.notifierService.notifySuccess('Successful Registration', 2000);
         this.router.navigate(['/login']);
       },
       error => {
-          let  message = RestHelper.extractErrors(error);
-          debugger
-          this.notifierService.notifyError(message.exception);
+        let restResponse = RestHelper.extractErrors(error);
+        if (!FormHelper.updateValidationMessageToForm(restResponse, this.form)) {
+          this.notifierService.notifyError(String(restResponse.exception));
+        }
       });
   }
 

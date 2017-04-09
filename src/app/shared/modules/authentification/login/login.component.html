@@ -30,29 +30,32 @@
 
                 <md-card-content>
 
-                    <form role="form" [formGroup]="loginForm" novalidate>
+                    <form role="form" [formGroup]="form" novalidate>
                         <md-input-container class="full-width">
-                            <md-icon>perm_identity</md-icon>    
+                            <md-icon md-prefix >perm_identity</md-icon>    
                             <input mdInput placeholder="Username" formControlName="username" required>
-                            <md-hint *ngIf="loginForm.controls.username.errors && (loginForm.controls.username.dirty || loginForm.controls.username.touched)"
-                                [ngStyle]="{'color': 'red'}">username is required </md-hint>
+                             <md-hint *ngIf="form.controls.password.errors && (form.controls.username.dirty || form.controls.username.touched)" [ngStyle]="{'color': 'red'}">
+                            {{form.controls.username.errors.message}}</md-hint>
                         </md-input-container>
                         
                         <md-input-container class="full-width">
-                            <md-icon>lock</md-icon>    
+                            <md-icon  md-prefix >lock</md-icon>    
                             <input mdInput placeholder="Password" type = "password" formControlName="password" #elm required>
-                            <md-hint *ngIf="loginForm.controls.password.errors && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"
-                                [ngStyle]="{'color': 'red'}">password is required </md-hint>
-                            <!--<app-input-validation [control]="password" [elm]="elm" ></app-input-validation>-->
+                             <md-hint *ngIf="form.controls.password.errors && (form.controls.password.dirty || form.controls.password.touched)" [ngStyle]="{'color': 'red'}">
+                            {{form.controls.password.errors.message}}</md-hint>
+                         
                         </md-input-container>
+                        <md-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+                            {{form.controls.non_field_errors.value}}</md-hint>
                         <md-card-actions align="center">
                         
-                            <button md-raised-button color="primary" (click)="login()" [disabled]="!loginForm.valid">SIGN IN</button>
+                            <button md-raised-button color="primary" (click)="login()" [disabled]="!form.valid">SIGN IN</button>
                         </md-card-actions>
 
                         <md-card-actions >
                                 <a [routerLink]="['/register']">Register a new account?</a>
                         </md-card-actions>
+                         
                     </form>
 
                 </md-card-content>

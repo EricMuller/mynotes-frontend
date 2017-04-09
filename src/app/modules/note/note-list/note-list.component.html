@@ -5,35 +5,45 @@
   <div class="row">
           <!--- content note -->
           <md-nav-list>
+            <h3 md-subheader >Resultats ({{result.data.length}}) 
+                <!-- <div  *ngFor="let tag of tags |  async" class="tag-cloud-list" > {{tag.name}}</div>-->
+            </h3>
+            {{tags}}
             <md-list-item *ngFor="let note of result.data" ngmodel>
+              
+              <div style="margin-right: 10px">
+                <a *ngIf="note.url && note.id" md-list-icon md-icon target="_blank" href="{{note.url}}" mdTooltip="Open in Browser">
+                  <md-icon color="primary">open_in_new</md-icon>
+                </a>
+                <md-icon md-list-icon *ngIf="!note.url" color="primary">note</md-icon>
+              </div>
+              <!--<a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', note.id ]" style="max-height: 100px">
+                          {{ note.title }}
+              </a>-->
+              <span> 
+                  <div><a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', note.id ]" style="max-width: 600px;overflow: hidden" mdTooltip="{{note.title}}"> {{ note.title }} </a></div>
+                  <div *ngFor="let tag of note.tags" class="tag-cloud-list"> {{tag.name}}</div>
+              </span>
 
-              <a *ngIf="note.url && note.id" md-list-icon md-icon target="_blank" href="{{note.url}}">
-                <md-icon color="primary">open_in_new</md-icon>
-              </a>
-             
-              <md-icon md-list-icon *ngIf="!note.url" color="primary">note</md-icon>
+              <span  class="fill-remaining-space" ></span>
+              <div style="display: flex;justify-content: center;align-items: center;" class="hide-sm">
+                <button *ngFor="let key of note.rate | toArray" md-icon-button color="primary" ><md-icon>star_rate</md-icon></button>
+                 <md-icon *ngIf="note.favorite" color="accent"> favorite</md-icon>
+                <md-icon *ngIf="!note.favorite" color="primary">favorite_border</md-icon>
+                <button *ngIf="note.status!='T' " md-icon-button (click)="trash(note)" placeholder="Send to Trash Note" color="primary" >
+                    <md-icon>delete</md-icon>
+                </button>
 
-              <a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', note.id ]">
-                            {{ note.title }}
-              </a>
-
-              <button *ngFor="let key of note.rate | toArray" md-icon-button color="primary" class="hide-sm"><md-icon>star_rate</md-icon></button>
-              <div *ngFor="let tag of note.tags" class="hide-sm tag-cloud-list"> {{tag.name}}</div>
-
-              <button *ngIf="note.status!='T' " md-icon-button (click)="trash(note)" placeholder="Send to Trash Note" color="primary">
-                  <md-icon>delete</md-icon>
-              </button>
-
-              <button *ngIf="note.status=='T'" md-icon-button (click)="delete(note)" placeholder="Send to Trash Note" color="primary">
-                  <md-icon>delete_forever</md-icon>
-              </button>
-              <button *ngIf="note.id && !note.archive_id" md-icon-button (click)="archive($event.target,note)" color="primary"><md-icon>archive</md-icon></button>
-              <!--<button *ngIf="note.id && note.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
-              <a *ngIf="note.id && note.archive_id" md-icon-button  target="_blank" href="{{urlDownload(note)}}">
-                <md-icon color="primary">attach_file</md-icon>
-              </a>
-
-              <!--<app-rating [(rate)]="note.rate"></app-rating>-->
+                <button *ngIf="note.status=='T'" md-icon-button (click)="delete(note)" placeholder="Send to Trash Note" color="primary" >
+                    <md-icon>delete_forever</md-icon>
+                </button>
+                <button *ngIf="note.id && !note.archive_id" md-icon-button (click)="archive($event.target,note)" color="primary"  ><md-icon>archive</md-icon></button>
+                <!--<button *ngIf="note.id && note.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
+                <a *ngIf="note.id && note.archive_id" md-icon-button  target="_blank" href="{{urlDownload(note)}}"  >
+                  <md-icon color="primary" class="hide-sm">attach_file</md-icon>
+                </a>
+              </div>
+                <!--<app-rating [(rate)]="note.rate"></app-rating>-->
 
             </md-list-item>
             <md-divider></md-divider>

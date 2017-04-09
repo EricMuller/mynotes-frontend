@@ -1,16 +1,16 @@
 {
   "/mynotes": {
-    "target": "http://127.0.0.1:8000/",
+    "target": "http://192.168.0.100:8000/",
     "secure": false,
     "pathRewrite_save": {"^/rets" : ""}
   },
   "/api-token-auth": {
-    "target": "http://127.0.0.1:8000/",
+    "target": "http://192.168.0.100:8000/",
     "secure": false,
     "pathRewrite_save": {"^/authentification" : ""}
   },
-  "/rest-auth": {
-    "target": "http://127.0.0.1:8000/",
+  "/authentication": {
+    "target": "http://192.168.0.100:8000/",
     "secure": false
     }
 }

@@ -58,6 +58,7 @@ export class CustomHttp extends Http {
     console.log(body);
     return super.post(url, body, this.jwt(options))
       .catch((response) => {
+      
         if (response.status === 400 || response.status === 422 || response.status === 404) {
           return Observable.throw(response);
         } else {
@@ -66,7 +67,7 @@ export class CustomHttp extends Http {
             let json = response.json();
             this.notifierService.notifyError(json.exception);
           } else {
-            this.notifierService.notifyError(response.body);
+            this.notifierService.notifyError(response._body);
           }
           return Observable.empty();
         }
@@ -74,6 +75,31 @@ export class CustomHttp extends Http {
       )
       .finally(() => {
         console.log('After the post request...');
+      });
+  }
+
+  delete(url: string, options?: RequestOptionsArgs): Observable<any> {
+    console.log('Before the delete request...');
+    console.log(url);
+    return super.delete(url,  this.jwt(options))
+      .catch((response) => {
+      
+        if (response.status === 400 || response.status === 422 || response.status === 404) {
+          return Observable.throw(response);
+        } else {
+          let contentType = response.headers.get('Content-Type');
+          if ('application/json' == contentType) {
+            let json = response.json();
+            this.notifierService.notifyError(json.exception);
+          } else {
+            this.notifierService.notifyError(response._body);
+          }
+          return Observable.empty();
+        }
+      }
+      )
+      .finally(() => {
+        console.log('After the delete request...');
       });
   }
 
