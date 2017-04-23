@@ -42,5 +42,9 @@ export class NoteFilterComponent implements OnInit {
     this.filterService.update(this.filter);
   }
 
+  public search(){
+
+  }
+
 }
 

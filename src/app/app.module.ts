@@ -65,6 +65,10 @@ import { RegistrationComponent } from './shared/modules/authentification/registr
 import { InputValidationComponent } from './shared/components/input-validation/input-validation.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { KeysPipe } from './shared/pipes/keys.pipe';
+
+import {WsClientService} from './shared/modules/ws/ws-client.service';
+import {WebsocketService} from './shared/modules/ws/websocket.service';
+
 //import * as Drive from "gapi.drive.realtime";
 
 /*export const ROUTE_CONFIG = [{
@@ -117,7 +121,10 @@ import { KeysPipe } from './shared/pipes/keys.pipe';
   providers: [NoteService, FilterService, ApiService, AuthentificationService,
     { provide: 'mynotes.endpoint', useValue: MYNOTES_ENPOINT },
     { provide: 'authentification.endpoint', useValue: AUTHENTIFICATION_ENDPOINT },
-    NotifierService, HTTP_PROVIDER, AuthgardService, ResponseService, TagService, ObservableService],
+    NotifierService, HTTP_PROVIDER, AuthgardService, ResponseService, TagService, ObservableService,
+    WsClientService,WebsocketService
+    ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

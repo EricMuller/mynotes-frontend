@@ -17,3 +17,12 @@
 md-card.mat-card{
   box-shadow: none;
   }
+
+
+#conteneur
+{
+    display: flex;
+    flex-wrap: wrap;
+   /* justify-content: space-around;*/
+}
+

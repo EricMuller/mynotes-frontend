@@ -45,6 +45,8 @@ md-chip.mat-chip.mat-chip-selected.mat-current{
   background-color: #FF4081!important;
 }
 
+
+
 .vertical-align {
   display: flex;
   flex-direction: row;
@@ -124,7 +126,10 @@ div.inline {
     display: none;
   }
   div.hide-sm{
-      display: none;
+    display: none;
+  }
+  md-icon.hide-sm{
+    display: none;
   }
   .hide-sm{
       display: none;

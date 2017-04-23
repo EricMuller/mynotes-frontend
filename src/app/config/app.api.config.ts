@@ -28,8 +28,6 @@ export class AuthentificationEndPoint {
     public token :string;
     public registration :string;
     public account_confirm_email: string;
-
-    
 }
 
 export const AUTHENTIFICATION_ENDPOINT: AuthentificationEndPoint = {

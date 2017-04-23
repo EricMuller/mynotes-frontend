@@ -18,42 +18,47 @@ import { DashboardComponent } from 'app/modules/dashboard/dashboard.component'
 import { FavoriteListComponent } from 'app/modules/favorite/favorite-list/favorite-list.component'
 import { FavoriteUploadComponent } from 'app/modules/favorite/favorite-upload/favorite-upload.component'
 
-import { TagCreateDialogComponent }  from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
+import { TagCreateDialogComponent } from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
 
-import { BackupListComponent} from 'app/modules/backup/backup-list/backup-list.component'
+import { BackupListComponent } from 'app/modules/backup/backup-list/backup-list.component'
 
 import { RegistrationComponent } from 'app/shared/modules/authentification/registration/registration.component'
 
 export const ROUTES_CONFIG = [
-  { path: '', redirectTo: 'favorites/search', pathMatch: 'full' },
+  {
+    path: '', redirectTo: 'favorites/search', pathMatch: 'full'    
+  },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'upload', component: FavoriteUploadComponent },
- 
+
   { path: 'tag/create', component: TagCreateDialogComponent },
-  { path: 'favorites', component: NoteComponent, canActivate: [AuthgardService] ,  
-      children: [
-            {
-              path: 'search',
-              component: NoteFilterComponent
-              , canActivate: [AuthgardService] 
-            },
-            {
-              path: 'list',
-              component: NoteListComponent
-              , canActivate: [AuthgardService] 
-            },
-            {
-              path: 'folder',
-              component: NoteListComponent
-            },
-            { path: 'backup',
-              component: BackupListComponent 
-            },
-          ]
+  {
+    path: 'favorites', component: NoteComponent, canActivate: [AuthgardService],
+    children: [
+      {
+        path: 'search',
+        component: NoteFilterComponent
+        , canActivate: [AuthgardService]
+      },
+      {
+        path: 'list',
+        component: NoteListComponent
+        , canActivate: [AuthgardService]
+      },
+      {
+        path: 'folder',
+        component: NoteListComponent
+      },
+      {
+        path: 'backup',
+        component: BackupListComponent
+      },
+    ]
   },
 
-  { path: 'favorites/detail/:id', component: NoteDetailComponent, canActivate: [AuthgardService]  },
-  { path: 'favorites/list2', component: NoteListComponent, canActivate: [AuthgardService],
+  { path: 'favorites/detail/:id', component: NoteDetailComponent, canActivate: [AuthgardService] },
+  {
+    path: 'favorites/list2', component: NoteListComponent, canActivate: [AuthgardService],
     children: [
       {
         path: 'upload',

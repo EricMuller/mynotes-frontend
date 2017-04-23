@@ -3,7 +3,8 @@
 
 
   <div class="row">
-    <md-card>
+   <div id="conteneur">
+    <md-card >
       <md-card-content>
         <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="filter.type">
           <md-button-toggle value="{{TYPE_LINK}}">
@@ -16,10 +17,12 @@
             <md-icon>schedule</md-icon>Todo
           </md-button-toggle>
         </md-button-toggle-group>
-      
-         
       </md-card-content>
     </md-card>
+     <md-card >
+      <button md-raised-button color="primary" [routerLink]="['../list']"  placeholder="Search">Show Result(s)</button>
+    </md-card>
+   </div>
     
     <md-card>
       <md-input-container class="full-width">

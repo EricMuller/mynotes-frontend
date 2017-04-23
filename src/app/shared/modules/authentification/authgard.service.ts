@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthentificationService } from 'app/shared/modules/authentification/authentification.service'
+import { WsClientService } from 'app/shared/modules/ws/ws-client.service';
 
 @Injectable()
 export class AuthgardService implements CanActivate {
@@ -18,7 +19,7 @@ export class AuthgardService implements CanActivate {
         return false;
     }
 
-    logout(){
+    public logout(){
       this.authentificationService.logout();
       this.router.navigate(['/login']);
     }
@@ -30,6 +31,6 @@ export class AuthgardService implements CanActivate {
     }
 
     public  isAuthentified(): boolean {
-            return this.getCurrentUser() != null ;
+          return this.getCurrentUser() != null ;
     }
 }

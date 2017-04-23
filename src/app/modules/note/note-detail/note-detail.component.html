@@ -29,8 +29,6 @@
 
 <!--  Tool bar -->
 <div class="app-note-detail-content">
-
-
  
       <div style="display: flex;flex-wrap: wrap; margin: 5px">
         <div>  
@@ -46,16 +44,14 @@
           </md-button-toggle>
         </md-button-toggle-group>
         </div>
+        <div><app-rating [(rate)]="note.rate" (rate-change)="onRate($event)" ></app-rating></div>
         <div  class="fill-remaining-space" ></div>
-        <div style="display: flex;align-items: center;">
-          <app-rating [(rate)]="note.rate" (rate-change)="onRate($event)" ></app-rating>
-          <md-checkbox color="primary" [(ngModel)]="note.favorite" class="hidden">Fav</md-checkbox>
-          <md-icon *ngIf="note.favorite" color="accent" (click)="note.favorite=false;"> favorite</md-icon>
+        <div style="display: flex;align-items: center;margin-right:10px; ">
+          <md-icon *ngIf="note.favorite"  color="accent" (click)="note.favorite=false;">favorite</md-icon>
           <md-icon *ngIf="!note.favorite" color="accent" (click)="note.favorite=true;">favorite_border</md-icon>
+          <md-checkbox color="primary" [(ngModel)]="note.favorite" class="hidden">Fav</md-checkbox>
         </div>
     </div>
-
-
 
   <md-tab-group (selectedIndexChange)="selectedIndexChange($event)">
     <md-tab>
@@ -75,19 +71,12 @@
             </md-input-container>
            <button md-raised-button color="primary" (click)="loadTitle(note.url)" placeholder="load Title">Load Title from url</button>
            <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
-          
-          
-           
            
           </md-card-content>
           <md-card-actions>
             
           </md-card-actions>
         </md-card>
-        
-        
-        
-        
 
         <app-tag-select-card [(tagSelected)]="note.tags"  ></app-tag-select-card>
         <!--<md-card>
