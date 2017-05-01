@@ -1,5 +1,5 @@
 #!/bin/sh
 
- ng build  --prod  --base-href /mynotes/
+ ng build  --prod  --base-href /mywebmarks/
 
  
