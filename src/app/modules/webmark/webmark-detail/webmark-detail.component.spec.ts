@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { NoteFilterComponent } from './note-search.component';
+import { WebmarkDetailComponent } from './webmark-detail.component';
 
-describe('NoteSearchComponent', () => {
-  let component: NoteFilterComponent;
-  let fixture: ComponentFixture<NoteFilterComponent>;
+describe('NoteDetailComponent', () => {
+  let component: WebmarkDetailComponent;
+  let fixture: ComponentFixture<WebmarkDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoteFilterComponent ]
+      declarations: [ WebmarkDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NoteFilterComponent);
+    fixture = TestBed.createComponent(WebmarkDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

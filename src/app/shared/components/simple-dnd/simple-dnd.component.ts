@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NoteService } from 'app/modules/note/services/note.service';
+import { WebmarkService } from 'app/modules/webmark/services/webmark.service';
 import { MdSnackBar } from '@angular/material';
 
 @Component({
@@ -9,7 +9,7 @@ import { MdSnackBar } from '@angular/material';
 })
 export class SimpleDndComponent implements OnInit {
 
-  constructor(private noteService: NoteService,private snackBar: MdSnackBar) { }
+  constructor(private noteService: WebmarkService,private snackBar: MdSnackBar) { }
 
   ngOnInit() {
   }

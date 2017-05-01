@@ -18,7 +18,7 @@ import { NotifierService } from 'app/shared/modules/notifications/notifier.servi
 /** api */
 
 import { ApiService } from 'app/shared/modules/api/api.service';
-import { MYNOTES_ENPOINT } from 'app/config/app.api.config';
+import { MYWEBMARK_ENPOINT } from 'app/config/app.api.config';
 import { AUTHENTIFICATION_ENDPOINT } from 'app/config/app.api.config'
 /* utils */
 import { EscapeHtmlPipe } from 'app/shared/pipes/escape-html.pipe';
@@ -27,9 +27,9 @@ import { ToArrayPipe } from 'app/shared/pipes/to-array.pipe';
 import { AppComponent } from './app.component';
 import { NavHeaderComponent } from 'app/shared/components/nav-header/nav-header.component';
 // note
-import { NoteComponents } from 'app/modules/note/components';
-import { NoteService } from 'app/modules/note/services/note.service';
-import { FilterService } from 'app/modules/note/services/search.service';
+import { NoteComponents } from 'app/modules/webmark/components';
+import { WebmarkService } from 'app/modules/webmark/services/webmark.service';
+import { FilterService } from 'app/modules/webmark/services/search.service';
 import { ResponseService } from 'app/shared/services/response.service';
 
 import { NotificationsComponent } from 'app/shared/modules/notifications/notifications.component';
@@ -118,8 +118,8 @@ import {WebsocketService} from './shared/modules/ws/websocket.service';
     DatepickerModule,
     BrowserAnimationsModule
   ],
-  providers: [NoteService, FilterService, ApiService, AuthentificationService,
-    { provide: 'mynotes.endpoint', useValue: MYNOTES_ENPOINT },
+  providers: [WebmarkService, FilterService, ApiService, AuthentificationService,
+    { provide: 'mynotes.endpoint', useValue: MYWEBMARK_ENPOINT },
     { provide: 'authentification.endpoint', useValue: AUTHENTIFICATION_ENDPOINT },
     NotifierService, HTTP_PROVIDER, AuthgardService, ResponseService, TagService, ObservableService,
     WsClientService,WebsocketService

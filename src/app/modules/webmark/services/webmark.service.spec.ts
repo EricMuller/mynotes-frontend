@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { NoteService } from './note.service';
+import { WebmarkService } from './webmark.service';
 
 describe('NoteService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NoteService]
+      providers: [WebmarkService]
     });
   });
 
-  it('should ...', inject([NoteService], (service: NoteService) => {
+  it('should ...', inject([WebmarkService], (service: WebmarkService) => {
     expect(service).toBeTruthy();
   }));
 });

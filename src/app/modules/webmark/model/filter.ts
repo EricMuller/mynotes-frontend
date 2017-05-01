@@ -1,16 +1,16 @@
 
 import { TagCloud } from 'app/modules/tags/model/tag-cloud';
-import { TYPE_LINK, TYPE_NOTE, TYPE_TODO } from './note';
+import { KIND_LINK, KIND_NOTE, KIND_TODO } from './webmark';
 
 export class Filter {
   type: string;
-  title: string;
+  kind: string;
   tags: Array<TagCloud>=[];
   trash: boolean;
 
-  public static create(type: string): Filter {
+  public static create(kind: string): Filter {
     let filter = new Filter();
-    filter.type = type;
+    filter.kind = kind;
     return filter;
   }
 

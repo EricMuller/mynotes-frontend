@@ -1,4 +1,4 @@
-import { Note } from '../model/note';
+import { Webmark } from '../model/webmark';
 
 
 /*export const NOTES: Note[] = [

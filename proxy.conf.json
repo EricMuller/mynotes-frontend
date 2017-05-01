@@ -1,5 +1,5 @@
 {
-  "/mynotes": {
+  "/mywebmarks": {
     "target": "http://192.168.0.100:8000/",
     "secure": false,
     "pathRewrite_save": {"^/rets" : ""}
@@ -13,13 +13,11 @@
     "target": "http://192.168.0.100:8000/",
     "secure": false
     },
-    "/ws": {
+  "/ws": {
     "target": "http://192.168.0.100:8000/",
     "changeOrigin": true,
     "ws": true,
     "logLevel": "debug"
   }
+
 }
-
-
-

@@ -1,15 +1,16 @@
 import { Tag } from 'app/modules/tags/model/tag';
 
-export const TYPE_LINK:string = 'LINK';
-export const TYPE_NOTE:string = 'NOTE';
-export const TYPE_TODO:string = 'TODO';
+export const KIND_LINK:string = 'LINK';
+export const KIND_NOTE:string = 'NOTE';
+export const KIND_TODO:string = 'TODO';
 
-export class Note {
+
+export class Webmark {
   id: number;
+  kind: string;
   title: string;
   rate: number;
   url: string;
-  type: string;
   description: string;
   tags :Tag[] = [];
   status: string;

@@ -32,16 +32,11 @@
  
       <div style="display: flex;flex-wrap: wrap; margin: 5px">
         <div>  
-        <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="note.type">
-          <md-button-toggle value="LINK">
-            <md-icon>link</md-icon>Link
-          </md-button-toggle>
-          <md-button-toggle value="NOTE">
-            <md-icon>note</md-icon>Note
-          </md-button-toggle>
-          <md-button-toggle value="TODO">
-            <md-icon>schedule</md-icon>Todo
-          </md-button-toggle>
+        <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="note.kind">
+          
+          <md-button-toggle *ngFor="let type of KINDS " value="{{type.kind}}" ><md-icon>{{type.icon}}</md-icon>{{type.kind}}</md-button-toggle>
+
+
         </md-button-toggle-group>
         </div>
         <div><app-rating [(rate)]="note.rate" (rate-change)="onRate($event)" ></app-rating></div>
@@ -63,10 +58,10 @@
         <md-card>
           <md-card-content>
             <md-input-container class="full-width">
-              <input mdInput placeholder="Title" [(ngModel)]="note.title">
+              <input mdInput placeholder="Title" [(ngModel)]="note.title" required>
             </md-input-container>
             <md-input-container class="full-width">
-              <input mdInput placeholder="URL" [(ngModel)]="note.url">
+              <input mdInput placeholder="URL" [(ngModel)]="note.url" >
                
             </md-input-container>
            <button md-raised-button color="primary" (click)="loadTitle(note.url)" placeholder="load Title">Load Title from url</button>

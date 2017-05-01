@@ -1,24 +1,24 @@
 
 
 
-export class MyNotesEndPoint {
+export class MyWebmarkEndPoint {
     public title: string;
     public pageSize:number;
-    public notes: string;
+    public medias: string;
     public tags: string;
     public tagsCloud: string;
     public upload: string;
     public archive: string;
 }
 
-export const MYNOTES_ENPOINT: MyNotesEndPoint = {
-  title: 'django api',
+export const MYWEBMARK_ENPOINT: MyWebmarkEndPoint = {
+  title: 'django rest api',
   pageSize: 20,
-  notes: '/mynotes/api/v1/notes/',
-  tags: '/mynotes/api/v1/tags/',
-  tagsCloud: '/mynotes/api/v1/tags-cloud/',
-  upload: '/mynotes/api/v1/upload/',
-  archive:  '/mynotes/api/v1/archive/',
+  medias: '/mywebmarks/api/v1/medias/',
+  tags: '/mywebmarks/api/v1/tags/',
+  tagsCloud: '/mywebmarks/api/v1/tags-cloud/',
+  upload: '/mywebmarks/api/v1/upload/',
+  archive:  '/mywebmarks/api/v1/archive/',
  
 };
 

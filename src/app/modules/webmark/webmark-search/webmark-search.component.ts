@@ -3,19 +3,19 @@ import { Filter } from '../model/filter';
 import { FilterService } from '../services/search.service';
 import { MdDialog } from '@angular/material';
 import { MdSnackBar } from '@angular/material';
-import { TYPE_LINK, TYPE_NOTE, TYPE_TODO } from './../model/note';
+import { KIND_LINK, KIND_NOTE, KIND_TODO } from './../model/webmark';
 
 @Component({
-  selector: 'app-note-search',
-  templateUrl: './note-search.component.html',
-  styleUrls: ['./note-search.component.css']
+  selector: 'app-webmark-search',
+  templateUrl: './webmark-search.component.html',
+  styleUrls: ['./webmark-search.component.css']
 })
-export class NoteFilterComponent implements OnInit {
+export class WebmarkFilterComponent implements OnInit {
 
   public filter: Filter;
-  public TYPE_LINK: String = TYPE_LINK;
-  public TYPE_NOTE: String = TYPE_NOTE;
-  public TYPE_TODO: String = TYPE_TODO;
+  public KIND_LINK: String = KIND_LINK;
+  public KIND_NOTE: String = KIND_NOTE;
+  public KIND_TODO: String = KIND_TODO;
 
   constructor(private filterService: FilterService, private snackBar: MdSnackBar, public dialog: MdDialog) {
   }

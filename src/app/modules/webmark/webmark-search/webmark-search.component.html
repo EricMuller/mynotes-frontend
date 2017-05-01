@@ -6,14 +6,14 @@
    <div id="conteneur">
     <md-card >
       <md-card-content>
-        <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="filter.type">
-          <md-button-toggle value="{{TYPE_LINK}}">
+        <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="filter.kind">
+          <md-button-toggle value="{{KIND_LINK}}">
             <md-icon>link</md-icon>Link
           </md-button-toggle>
-          <md-button-toggle value="{{TYPE_NOTE}}">
+          <md-button-toggle value="{{KIND_NOTE}}">
             <md-icon>note</md-icon>Note
           </md-button-toggle>
-          <md-button-toggle value="{{TYPE_TODO}}">
+          <md-button-toggle value="{{KIND_TODO}}">
             <md-icon>schedule</md-icon>Todo
           </md-button-toggle>
         </md-button-toggle-group>

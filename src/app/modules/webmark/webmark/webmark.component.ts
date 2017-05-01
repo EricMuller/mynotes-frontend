@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { AuthgardService } from 'app/shared/modules/authentification/authgard.service'
 
 @Component({
-  selector: 'app-note',
-  templateUrl: './note.component.html',
-  styleUrls: ['./note.component.css']
+  selector: 'app-webmark',
+  templateUrl: './webmark.component.html',
+  styleUrls: ['./webmark.component.css']
 })
-export class NoteComponent implements OnInit {
+export class WebmarkComponent implements OnInit {
 
   constructor(private router: Router, private authgardService: AuthgardService) {
   }

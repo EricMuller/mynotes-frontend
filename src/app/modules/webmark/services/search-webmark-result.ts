@@ -1,5 +1,5 @@
 
-import { Note } from '../model/note';
+import { Webmark } from '../model/webmark';
 
 export class SearchNoteResult {
 

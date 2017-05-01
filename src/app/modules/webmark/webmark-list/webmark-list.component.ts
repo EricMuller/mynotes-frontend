@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NoteService } from '../services/note.service';
+import { WebmarkService } from '../services/webmark.service';
 import { FilterService } from '../services/search.service';
-import { Note } from '../model/note';
+import { Webmark } from '../model/webmark';
 import { Filter } from '../model/filter';
 import { RouterModule } from '@angular/router';
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
@@ -23,7 +23,7 @@ import {Subject} from "rxjs/Subject";
 
 export const routerConfig = [{
   path: '',
-  component: NoteListComponent
+  component: WebmarkListComponent
 }];
 
 /*export function asObservable(subject: Subject) {
@@ -31,12 +31,12 @@ export const routerConfig = [{
 }*/
 
 @Component({
-  selector: 'app-note-list',
-  templateUrl: './note-list.component.html',
-  styleUrls: ['./note-list.component.css'],
+  selector: 'app-webmark-list',
+  templateUrl: './webmark-list.component.html',
+  styleUrls: ['./webmark-list.component.css'],
   //providers: [NotificationsService],
 })
-export class NoteListComponent implements OnInit, OnDestroy {
+export class WebmarkListComponent implements OnInit, OnDestroy {
 
   public result: PaginatedResult = new PaginatedResult();
 
@@ -48,7 +48,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
   public tags: Observable<List<Tag>>;
 
-  private _notes: BehaviorSubject<List<Note>> = new BehaviorSubject(List([]));
+  private _notes: BehaviorSubject<List<Webmark>> = new BehaviorSubject(List([]));
 
   /*this.selectedTags = this.source.asObservable();
 
@@ -59,7 +59,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
 */
   private filter: Filter;
 
-  constructor(private noteService: NoteService, private searchService: FilterService
+  constructor(private noteService: WebmarkService, private searchService: FilterService
     , private notifier: NotifierService, private snackBar: MdSnackBar, private apiService: ApiService) {
     this.filter = this.searchService.get();
   }
@@ -124,7 +124,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
     this.result = new PaginatedResult();
   }
 
-  private removeNote(note: Note) {
+  private removeNote(note: Webmark) {
     for (var i = 0; this.result.data.length > i; i++) {
       if (this.result.data[i].id == note.id) {
         this.result.data.splice(i, 1);
@@ -137,7 +137,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
 
-  public trash(note: Note) {
+  public trash(note: Webmark) {
 
     this.noteService.trash(note).subscribe(result => {
       this.snackBar.open('Note Send to trash with Succes', 'Ok', { duration: 3000 });
@@ -150,7 +150,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
 
-  public delete(note: Note) {
+  public delete(note: Webmark) {
     this.noteService.deleteNote(note)
       .subscribe(
       result => {
@@ -184,7 +184,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
     this.result.links.next = result.links.next;
 
     for (var i = 0; result.data.length > i; i++) {
-          let note:Note = result.data[i];
+          let note:Webmark = result.data[i];
           this.result.data.push(note);
     }
     
@@ -195,7 +195,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
     debugger
     let map = new Map();
     for (var i = 0; this.result.data.length > i; i++) {
-      let note: Note = this.result.data[i];
+      let note: Webmark = this.result.data[i];
       for (let t of note.tags) {
         map.set(t.id, t);
       }
@@ -211,13 +211,13 @@ export class NoteListComponent implements OnInit, OnDestroy {
 
   }
 
-  public urlHtml(note: Note) {
+  public urlHtml(note: Webmark) {
     return this.apiService.myNotesEndPoint.archive + note.archive_id + ".html"
   }
-  public urlDownload(note: Note) {
+  public urlDownload(note: Webmark) {
     return this.apiService.myNotesEndPoint.archive + note.archive_id + "/download/"
   }
-  public archive(evt, note: Note) {
+  public archive(evt, note: Webmark) {
     if (note) {
       this.noteService.archiveNote(note).subscribe(archive => {
         //this.note.description = x.html;

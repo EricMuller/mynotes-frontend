@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Filter } from '../model/filter';
-import { TYPE_LINK, TYPE_NOTE, TYPE_TODO } from '../model/note';
+import { KIND_LINK, KIND_NOTE, KIND_TODO } from '../model/webmark';
 
 @Injectable()
 export class FilterService {
@@ -8,7 +8,7 @@ export class FilterService {
   private search:Filter;
 
   constructor() { 
-      this.search = Filter.create(TYPE_LINK);
+      this.search = Filter.create(KIND_LINK);
   }
 
   public update(filter: Filter) {

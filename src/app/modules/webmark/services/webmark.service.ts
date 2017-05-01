@@ -4,7 +4,7 @@ import { CustomHttp } from 'app/shared/modules/http/custom.http'
 
 //https://scotch.io/tutorials/angular-2-http-requests-with-observables
 import { Observable } from 'rxjs/Rx';
-import { Note } from '../model/note';
+import { Webmark } from '../model/webmark';
 import { Filter } from '../model/filter';
 // import { NOTES } from './mock-notes';
 
@@ -13,16 +13,16 @@ import { ResponseService } from 'app/shared/services/response.service'
 import { PaginatedResult } from 'app/shared/services/paginated-result'
 
 @Injectable()
-export class NoteService {
+export class WebmarkService {
 
   private observable: Observable<PaginatedResult>;
 
   private dataStore: {
-    todos: Note[]
+    todos: Webmark[]
   };
 
   constructor(private apiService: ApiService) {
-    console.log('NoteService constructor');
+    console.log('WebmarkService constructor');
   }
 
   public getNotes(): Observable<PaginatedResult> {
@@ -35,31 +35,31 @@ export class NoteService {
   }
 
   public createNote(url: string): Observable<any> {
-    let note: Note = new Note();
+    let note: Webmark = new Webmark();
     note.url = url;
     note.title = url;
-    return this.apiService.post(this.apiService.myNotesEndPoint.notes, note);
+    return this.apiService.post(this.apiService.myNotesEndPoint.medias, note);
 
   }
 
-  public deleteNote(note: Note): Observable<any> {
+  public deleteNote(note: Webmark): Observable<any> {
     if (note.id > 0) {
-      return this.apiService.deleteById(this.apiService.myNotesEndPoint.notes, note.id.toString());
+      return this.apiService.deleteById(this.apiService.myNotesEndPoint.medias, note.id.toString());
     }
 
   }
 
-  public trash(note: Note): Observable<any> {
+  public trash(note: Webmark): Observable<any> {
     note.status = 'T';
     return this.saveNote(note);
 
   }
 
-  public saveNote(note: Note): Observable<any> {
+  public saveNote(note: Webmark): Observable<any> {
     if (note.id > 0) {
-      return this.apiService.put(this.apiService.myNotesEndPoint.notes + note.id + "/", note);
+      return this.apiService.put(this.apiService.myNotesEndPoint.medias + note.id + "/", note);
     } else {
-      return this.apiService.post(this.apiService.myNotesEndPoint.notes, note);
+      return this.apiService.post(this.apiService.myNotesEndPoint.medias, note);
     }
   }
 
@@ -76,7 +76,7 @@ export class NoteService {
       }
 
       if (filterSearch.type != "") {
-          filter = filter + '&type='+filterSearch.type;
+          filter = filter + '&kind='+filterSearch.kind;
       }
     }
    
@@ -88,7 +88,7 @@ export class NoteService {
     //console.log(tags);
     //?tags=4&tags=1
     let filter = this.createDjangoFilter(filterSearch,"?");
-    this.observable = this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.notes + filter);
+    this.observable = this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.medias + filter);
     return this.observable;
   }
 
@@ -115,18 +115,18 @@ export class NoteService {
     return this.apiService.getPaginatedResults(url+filter);
   }
 
-  public findById(id: number): Observable<Note> {
-    return this.apiService.getById(this.apiService.myNotesEndPoint.notes, id.toString());
+  public findById(id: number): Observable<Webmark> {
+    return this.apiService.getById(this.apiService.myNotesEndPoint.medias, id.toString());
   }
 
-  public archiveNote(note:Note): Observable<any> {
+  public archiveNote(note:Webmark): Observable<any> {
     //crawl
-    return this.apiService.getByIdWithParams(this.apiService.myNotesEndPoint.notes, note.id.toString(),'archive', 50000);
+    return this.apiService.getByIdWithParams(this.apiService.myNotesEndPoint.medias, note.id.toString(),'archive', 50000);
     //return this.apiService.getById(this.apiService.config.crawler, btoa(url), 50000);
   }
 
   public loadTitle(url: string): Observable<any> {
-    return this.apiService.getById(this.apiService.myNotesEndPoint.notes, btoa(url) + "/title", 50000);
+    return this.apiService.getById(this.apiService.myNotesEndPoint.medias, btoa(url) + "/title", 50000);
   }
 
   

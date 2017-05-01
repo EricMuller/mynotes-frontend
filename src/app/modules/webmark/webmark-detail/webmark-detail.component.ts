@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import { Note } from '../model/note';
-import { NoteService } from '../services/note.service';
+import { Webmark } from '../model/webmark';
+import { WebmarkService } from '../services/webmark.service';
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
@@ -12,19 +12,25 @@ import { FilterService } from '../services/search.service';
 import { MdSnackBar } from '@angular/material';
 import { Filter } from '../model/filter';
 import { AuthgardService } from 'app/shared/modules/authentification/authgard.service'
+import {KIND_LINK,KIND_NOTE,KIND_TODO}   from '../model/webmark';
 
 @Component({
-  selector: 'app-note-detail',
-  templateUrl: './note-detail.component.html',
-  styleUrls: ['./note-detail.component.css']
+  selector: 'app-webmark-detail',
+  templateUrl: './webmark-detail.component.html',
+  styleUrls: ['./webmark-detail.component.css']
 })
-export class NoteDetailComponent implements OnInit {
+export class WebmarkDetailComponent implements OnInit {
 
-  public note: Note = new Note();
+  public note: Webmark = new Webmark();
 
+  public KINDS = [ {'kind': KIND_LINK,'icon' : 'link' }
+                  ,{'kind': KIND_NOTE,'icon' : 'note' }
+                  ,{'kind': KIND_TODO,'icon' : 'schedule' }];
+  
+  
   public  showEditor:boolean =false;
 
-  constructor( private router: Router,private location: Location,private noteService: NoteService, private route: ActivatedRoute
+  constructor( private router: Router,private location: Location,private noteService: WebmarkService, private route: ActivatedRoute
   , private notifier: NotifierService, private snackBar: MdSnackBar,private filterService: FilterService,
   private authgardService :AuthgardService) {
 
@@ -47,8 +53,8 @@ export class NoteDetailComponent implements OnInit {
 
         );
       } else {
-        this.note = new Note();
-        this.note.type ='BOOKMARK';
+        this.note = new Webmark();
+        this.note.kind = KIND_LINK;
       }
     });
 
@@ -58,11 +64,11 @@ export class NoteDetailComponent implements OnInit {
 
   }
 
-  public pageView(note: Note) {
+  public pageView(note: Webmark) {
 
   }
 
-  public save(note: Note) {
+  public save(note: Webmark) {
     this.noteService.saveNote(note).subscribe(x => {
       this.snackBar.open('Note saved with Succes', 'Ok', { duration: 3000 });
       this.back();

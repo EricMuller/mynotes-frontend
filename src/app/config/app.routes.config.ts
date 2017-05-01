@@ -1,9 +1,9 @@
 
-import { NoteListComponent } from 'app/modules/note/note-list/note-list.component';
-import { NoteDetailComponent } from 'app/modules/note/note-detail/note-detail.component';
-import { NoteCreateComponent } from 'app/modules/note/note-create/note-create.component';
-import { NoteFilterComponent } from 'app/modules/note/note-search/note-search.component';
-import { NoteComponent } from 'app/modules/note/note/note.component';
+import { WebmarkListComponent } from 'app/modules/webmark/webmark-list/webmark-list.component';
+import { WebmarkDetailComponent } from 'app/modules/webmark/webmark-detail/webmark-detail.component';
+import { WebmarkCreateComponent } from 'app/modules/webmark/webmark-create/webmark-create.component';
+import { WebmarkFilterComponent } from 'app/modules/webmark/webmark-search/webmark-search.component';
+import { WebmarkComponent } from 'app/modules/webmark/webmark/webmark.component';
 
 import { LoginComponent } from 'app/shared/modules/authentification/login/login.component';
 import { AuthgardService } from 'app/shared/modules/authentification/authgard.service';
@@ -26,28 +26,28 @@ import { RegistrationComponent } from 'app/shared/modules/authentification/regis
 
 export const ROUTES_CONFIG = [
   {
-    path: '', redirectTo: 'favorites/search', pathMatch: 'full'    
+    path: '', redirectTo: 'webmarks/search', pathMatch: 'full'    
   },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'upload', component: FavoriteUploadComponent },
 
   { path: 'tag/create', component: TagCreateDialogComponent },
   {
-    path: 'favorites', component: NoteComponent, canActivate: [AuthgardService],
+    path: 'webmarks', component: WebmarkComponent, canActivate: [AuthgardService],
     children: [
       {
         path: 'search',
-        component: NoteFilterComponent
+        component: WebmarkFilterComponent
         , canActivate: [AuthgardService]
       },
       {
         path: 'list',
-        component: NoteListComponent
+        component: WebmarkListComponent
         , canActivate: [AuthgardService]
       },
       {
         path: 'folder',
-        component: NoteListComponent
+        component: WebmarkListComponent
       },
       {
         path: 'backup',
@@ -56,9 +56,9 @@ export const ROUTES_CONFIG = [
     ]
   },
 
-  { path: 'favorites/detail/:id', component: NoteDetailComponent, canActivate: [AuthgardService] },
+  { path: 'favorites/detail/:id', component: WebmarkDetailComponent, canActivate: [AuthgardService] },
   {
-    path: 'favorites/list2', component: NoteListComponent, canActivate: [AuthgardService],
+    path: 'favorites/list2', component: WebmarkListComponent, canActivate: [AuthgardService],
     children: [
       {
         path: 'upload',
@@ -66,7 +66,7 @@ export const ROUTES_CONFIG = [
       },
       {
         path: 'drop',
-        component: NoteCreateComponent
+        component: WebmarkCreateComponent
       },
     ]
   },
