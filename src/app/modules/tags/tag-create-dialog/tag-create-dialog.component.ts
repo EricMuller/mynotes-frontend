@@ -15,11 +15,10 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class TagCreateDialogComponent implements OnInit {
 
- 
-
   public form: FormGroup;
 
-  constructor(public dialogRef: MdDialogRef<TagCreateDialogComponent>, private tagService: TagService, private notifierService: NotifierService,private _fb: FormBuilder) { 
+  constructor(public dialogRef: MdDialogRef<TagCreateDialogComponent>, private tagService: TagService, 
+                private notifierService: NotifierService,private _fb: FormBuilder) { 
 
     this.form = this._fb.group({
       name: ['', Validators.required],

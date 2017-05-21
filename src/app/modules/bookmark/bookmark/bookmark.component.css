@@ -1,0 +1,23 @@
+.header-toolbar {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    opacity: 1 !important;
+}
+
+button.md-tool-fab.mat-mini-fab{
+    height: 35px;
+    width: 35px;
+}
+
+
+.full-size {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+

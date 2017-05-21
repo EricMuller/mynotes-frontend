@@ -1,0 +1,155 @@
+<!--
+<md-menu #appMenuAppNew="mdMenu">
+  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</md-menu>
+
+<md-menu #appMenu="mdMenu"> 
+  <button md-menu-item *ngIf="isAuthentified()" (click)="logout()"> Log Out </button>
+</md-menu>
+
+<md-toolbar color="primary">
+  <span>
+    <button md-icon-button (click)="back()"><md-icon>keyboard_backspace</md-icon> </button>
+  </span>
+  <span *ngIf="note.id">{{note.title}}</span>
+  <span *ngIf="!note.id">Create a new bookmark</span>
+  <span class="fill-remaining-space"></span>
+
+  <span>
+    <button *ngIf="note.title" md-icon-button (click)="save(note)" placeholder="Save">
+        <md-icon>save</md-icon>
+    </button>
+    <a *ngIf="note.url && note.id" md-icon-button target="_blank" href="{{note.url}}"><md-icon>open_in_browser</md-icon></a>
+  </span>
+  <span>
+    <button md-icon-button [mdMenuTriggerFor]="appMenu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </span>
+</md-toolbar>-->
+
+<div class="container">
+
+  <div class="row">
+    <!--  Tool bar -->
+    <div class="app-note-detail-content">
+
+      <md-toolbar>
+        <span *ngIf="!bookmark.title">Create New {{bookmark.kind}}</span>
+        <span *ngIf="bookmark.title">{{bookmark.title}}</span>
+
+        <span class="fill-remaining-space"></span>
+        <span>
+                <button md-icon-button *ngIf="bookmark.title" (click)="save(bookmark)" placeholder="Search">
+                <md-icon >save</md-icon> 
+                </button>
+            </span>
+      </md-toolbar>
+
+      <div style="display: flex;flex-wrap: wrap; margin: 5px">
+        <div>
+          <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="bookmark.kind">
+            <md-button-toggle *ngFor="let type of KINDS " value="{{type.kind}}">
+              <md-icon>{{type.icon}}</md-icon>{{type.kind}}</md-button-toggle>
+          </md-button-toggle-group>
+
+        </div>
+        <div>
+          <app-rating [(rate)]="bookmark.rate" (rate-change)="onRate($event)"></app-rating>
+        </div>
+        <div class="fill-remaining-space"></div>
+        <div style="display: flex;align-items: center;margin-right:10px; ">
+          <md-icon *ngIf="bookmark.favorite" color="accent" (click)="bookmark.favorite=false;">favorite</md-icon>
+          <md-icon *ngIf="!bookmark.favorite" color="accent" (click)="bookmark.favorite=true;">favorite_border</md-icon>
+          <md-checkbox color="primary" [(ngModel)]="bookmark.favorite" class="hidden">Fav</md-checkbox>
+        </div>
+      </div>
+
+      <md-tab-group (selectedIndexChange)="selectedIndexChange($event)">
+        <md-tab>
+          <template md-tab-label>
+            General
+          </template>
+          <md-card>
+            <md-card-content>
+              <md-input-container class="full-width">
+                <input mdInput placeholder="Title" [(ngModel)]="bookmark.title" required>
+              </md-input-container>
+              <md-input-container class="full-width">
+                <input mdInput placeholder="URL" [(ngModel)]="bookmark.url">
+
+              </md-input-container>
+              <button md-raised-button color="primary" (click)="loadTitle(bookmark.url)" placeholder="load Title">Load Title from url</button>
+              <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
+
+            </md-card-content>
+            <md-card-actions>
+
+            </md-card-actions>
+          </md-card>
+
+          <app-tag-select-card [(tagSelected)]="bookmark.tags"></app-tag-select-card>
+          <!--<md-card>
+          (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
+      <md-card-header>
+        <md-card-title><span *ngFor="let tag of note.tags" class="inline"> <div class="tag-cloud-list">{{tag.name}}</div>  
+          <button md-icon-button color="primary" (click)="delete(tag)"><md-icon>delete</md-icon></button>
+      </span></md-card-title>
+      </md-card-header>
+      <md-card-content>
+         
+        <form>
+          <md-input-container>
+            <input type="text" placeholder="Tag" mdInput [formControl]="myControl" [mdAutocomplete]="auto" ngModel>
+
+          </md-input-container>
+          <button *ngIf="(filteredOptions | async)?.length==0" md-button (click)="createTag($event)">Create...</button>
+          <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+            <md-option *ngFor="let tag of filteredOptions | async" [value]="tag">
+              {{ tag.name }}
+            </md-option>
+          </md-autocomplete>
+
+        </form>
+      </md-card-content>
+    </md-card>
+    -->
+
+        </md-tab>
+
+        <md-tab>
+          <template md-tab-label>
+            Editor
+          </template>
+
+        </md-tab>
+
+        <md-tab>
+          <template md-tab-label>
+            Tracking
+          </template>
+          <md-card class="date">
+            <md-card-header>
+              <md-card-title><strong>Date</strong></md-card-title>
+            </md-card-header>
+            <md-card-content>
+              Date Creation:{{bookmark.created_dt | date:'medium'}}
+              <!--<input type='text' #myDate [(ngModel)]='note.created_dt'/><br>-->
+            </md-card-content>
+          </md-card>
+
+        </md-tab>
+
+
+      </md-tab-group>
+
+
+      <div *ngIf="showEditor" class="editor">
+        <!--<app-tiny-editor [(ngModel)]='note.description' ></app-tiny-editor> -->
+        <app-tiny-editor [elementId]="my-editor-id" [content]='bookmark.description' (onEditorKeyup)="keyupHandlerFunction($event)"></app-tiny-editor>
+      </div>
+      <!-- <button (click)="save()" md-mini-fab class="mini-fab"><md-icon>save</md-icon></button>-->
+    </div>
+
+  </div>
+</div>

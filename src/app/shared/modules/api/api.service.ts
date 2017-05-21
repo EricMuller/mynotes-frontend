@@ -1,15 +1,12 @@
 
 
 import { Injectable, Inject } from '@angular/core';
-import { MyWebmarkEndPoint } from 'app/config/app.api.config';
+import { MyWebmarksEndPoint } from 'app/config/app.api.config';
 import { Http, Response, Headers } from '@angular/http';
 import { CustomHttp } from 'app/shared/modules/http/custom.http'
 import { Observable } from 'rxjs/Rx';
 import { PaginatedResult } from 'app/shared/services/paginated-result'
 import { ResponseService } from 'app/shared/services/response.service'
-
-
-
 
 
 /*
@@ -63,7 +60,7 @@ export class ApiService {
 
     constructor(private http: CustomHttp, 
                 private response: ResponseService,
-                @Inject('mynotes.endpoint') public myNotesEndPoint: MyWebmarkEndPoint) {
+                @Inject('mywebmark.endpoint') public myWebmarksEndPoint: MyWebmarksEndPoint) {
         console.log('NoteService constructor');
     }
 

@@ -1,0 +1,49 @@
+<md-menu #folderMenu="mdMenu">
+    <button md-menu-item><md-icon>delete</md-icon> Delete Folder </button>
+</md-menu>
+
+<div class="container">
+
+    <div class="row">
+        <!--- content note -->
+        <md-toolbar>
+            <span>{{breadcrumb()}}</span>
+            <span class="fill-remaining-space"></span>
+            <span>
+                <button md-icon-button (click)="openFolderCreateDialog()" placeholder="Search">
+                <md-icon >create_new_folder</md-icon> 
+                </button>
+            </span>
+
+        </md-toolbar>
+        <h3>
+            <!-- <div  *ngFor="let tag of tags |  async" class="tag-cloud-list" > {{tag.name}}</div>-->
+        </h3>
+        <h3 md-subheader *ngIf="current"><button md-button (click)="browseParentFolder()">..</button></h3>
+        <md-nav-list>
+            <md-list-item *ngFor="let folder of result.data">
+                <div style="margin-right: 10px">
+                    <button md-icon-button>
+                    <md-icon color="primary"  md-list-icon>folder</md-icon> 
+                </button>
+                </div>
+
+                <span> 
+                  <div [mdMenuTriggerFor]="folderMenu"><a md-line [routerLinkActive]="['active']"  style="max-width: 600px;overflow: hidden" mdTooltip="{{folder.title}}" 
+                  (click) ="browseFolder(folder)" > {{folder.name }} </a></div>
+              </span>
+                <span class="fill-remaining-space"></span>
+                <button md-icon-button (click)="deleteFolder(folder)" placeholder="Send to Trash" color="primary" class="hide-sm">
+                    <md-icon>delete_forever</md-icon>
+                </button>
+            </md-list-item>
+
+            <md-divider></md-divider>
+            <md-list-item *ngIf="result.links.next" (click)="next()">
+                <md-icon>keyboard_arrow_down</md-icon>
+            </md-list-item>
+
+        </md-nav-list>
+        <div *ngIf="result.data.length==0">No result</div>
+    </div>
+</div>

@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, AfterViewInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms'
-import { TagAbstractComponent } from '../tag-abstract/tag-abstract.component'
 import { ApiService } from 'app/shared/modules/api/api.service';
 import { TagService } from 'app/modules/tags/services/tag.service'
 import { ObservableService } from 'app/shared/modules/observable/observable.service'
 import { Observable } from 'rxjs/Rx';
-import { TagCloud } from '../model/tag-cloud'
+import { TagCount } from '../model/tag-count'
 import { Letter } from '../model/letter'
 import { MdDialog } from '@angular/material';
 import { MdSnackBar } from '@angular/material';
@@ -21,13 +20,15 @@ export class TagSelectComponent implements OnInit, OnChanges {
   @Input('tagSelected')
   private tagSelected: Array<any>;
   @Output('tagAdded')
-  private addTag = new EventEmitter<TagCloud>();
+  private addTag = new EventEmitter<TagCount>();
   @Output('tagRemoved')
-  private removeTag = new EventEmitter<TagCloud>();
+  private removeTag = new EventEmitter<TagCount>();
 
-  public tags: Array<TagCloud>;
+  @Input('readonly')
+  public readonly: Boolean;
+
+  public tags: Array<TagCount>;
   public nextLink: string;
-
   public letters: Array<Letter> = [];
 
   constructor(private apiService: ApiService, private snackBar: MdSnackBar, public dialog: MdDialog) {
@@ -50,14 +51,11 @@ export class TagSelectComponent implements OnInit, OnChanges {
   }
 
   protected getTags() {
-    console.log(this.tagSelected);
 
-    this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.tagsCloud + "?page_size=500").subscribe(
+    this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.tagsCount + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;
-        //this.updateSize(result.aggregate_data.max_count)
-        //this.selectTag();
         this.selectTag();
         this.buildLetters();
       },
@@ -119,14 +117,14 @@ export class TagSelectComponent implements OnInit, OnChanges {
     //  this.getNextTagsCloud();
   }
 
-  public isSelected(tag: TagCloud): boolean {
+  public isSelected(tag: TagCount): boolean {
     return "current" == tag.color;
   }
-  public setSelected(tag: TagCloud) {
+  public setSelected(tag: TagCount) {
     tag.color = "current";
   }
 
-  public selectItem(tag: TagCloud) {
+  public selectItem(tag: TagCount) {
     if (this.isSelected(tag)) {
       tag.color = "";
       this.removeTag.next(tag);

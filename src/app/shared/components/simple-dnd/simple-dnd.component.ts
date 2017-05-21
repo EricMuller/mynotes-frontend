@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebmarkService } from 'app/modules/webmark/services/webmark.service';
+import { BookmarkService } from 'app/modules/bookmark/services/bookmark.service';
 import { MdSnackBar } from '@angular/material';
 
 @Component({
@@ -9,7 +9,7 @@ import { MdSnackBar } from '@angular/material';
 })
 export class SimpleDndComponent implements OnInit {
 
-  constructor(private noteService: WebmarkService,private snackBar: MdSnackBar) { }
+  constructor(private noteService: BookmarkService,private snackBar: MdSnackBar) { }
 
   ngOnInit() {
   }
@@ -26,7 +26,7 @@ export class SimpleDndComponent implements OnInit {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     console.log(data);
-    this.noteService.createNote(data).subscribe(x => {
+    this.noteService.createBookmark(data).subscribe(x => {
       console.log(x)
       this.snackBar.open('Note created with Succes', 'Ok', { duration: 3000 });
     });;

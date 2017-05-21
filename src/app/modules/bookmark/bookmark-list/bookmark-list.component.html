@@ -1,0 +1,81 @@
+<!--  body -->
+<div class="container">
+
+  <div class="row">
+    <!--- content media -->
+    <md-toolbar>
+      <span *ngIf="showResult">Found ({{bookmarks.length}}) Resultats </span>
+      <span *ngIf="!showResult">Search a Bookmark </span>
+      <span class="fill-remaining-space"></span>
+      <span>
+        <button  *ngIf="showResult" md-icon-button (click)="search()" mdTooltip="Filter result">
+            <md-icon>filter_list</md-icon> 
+        </button>
+        <button *ngIf="showResult" md-icon-button (click)="showSearch()" mdTooltip="Search">
+            <md-icon>search</md-icon> 
+        </button>
+
+        <button *ngIf="!showResult"  md-raised-button (click)="search()" mdTooltip="Search">
+            <md-icon>search</md-icon> Search
+        </button>
+        <button *ngIf="showResult"  md-raised-button (click)="search()" mdTooltip="Refresh">
+            <md-icon>refresh</md-icon> Refresh
+        </button>
+      </span>
+    </md-toolbar>
+
+    <app-bookmark-search *ngIf="!showResult"></app-bookmark-search>
+    <md-nav-list *ngIf="showResult">
+
+      {{tags}}
+      <md-list-item *ngFor="let bookmark of bookmarks" ngmodel>
+
+        <div style="margin-right: 0px">
+          <!--<a *ngIf="bookmark.url && bookmark.id" md-list-icon md-icon target="_blank" href="{{bookmark.url}}" mdTooltip="Open in Browser">
+            <md-icon color="primary">open_in_new</md-icon>
+          </a>-->
+          <div><a md-icon-button (click)="detail(bookmark)"  style="max-width: 600px;overflow: hidden" mdTooltip="Edit Bookmark"> <md-icon color="primary" class="hide-sm" class="hide-sm">create</md-icon> </a></div>
+          <!--<md-icon md-list-icon *ngIf="!bookmark.url" color="primary">note</md-icon>-->
+        </div>
+        <!--<a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', bookmark.id ]" style="max-height: 100px">
+                          {{ bookmark.title }}
+                          
+              </a>-->
+        <!-- [routerLink]="['/webmark/detail', bookmark.id ]"-->
+        <span> 
+            <div><a md-line  href="{{bookmark.url}}" target="_blank" style="max-width: 600px;overflow: hidden" mdTooltip="{{bookmark.title}}"> {{ bookmark.title }} </a></div>
+            <div *ngFor="let tag of bookmark.tags" class="tag-cloud-list"> {{tag.name}}</div>
+           
+        </span>
+
+        <span class="fill-remaining-space"></span>
+        <div style="display: flex;justify-content: center;align-items: center;" class="hide-sm">
+          <button *ngFor="let key of bookmark.rate | toArray" md-icon-button color="primary" class="hide-sm"><md-icon>star_rate</md-icon></button>
+          <md-icon *ngIf="bookmark.favorite" color="accent" class="hide-sm"> favorite</md-icon>
+          <md-icon *ngIf="!bookmark.favorite" color="primary" class="hide-sm">favorite_border</md-icon>
+          <button *ngIf="bookmark.status!='T' " md-icon-button (click)="trash(bookmark)" placeholder="Send to Trash" color="primary"
+            class="hide-sm">
+                    <md-icon>delete</md-icon>
+                </button>
+
+          <button *ngIf="bookmark.status=='T'" md-icon-button (click)="delete(bookmark)" placeholder="Send to Trash" color="primary"
+            class="hide-sm">
+                    <md-icon>delete_forever</md-icon>
+                </button>
+          <button *ngIf="bookmark.id && !bookmark.archive_id" md-icon-button (click)="archive($event.target,bookmark)" color="primary" class="hide-sm"><md-icon>cloud_upload</md-icon></button>
+          <!--<button *ngIf="bookmark.id && bookmark.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
+          <a *ngIf="bookmark.id && bookmark.archive_id" md-icon-button target="_blank" href="{{urlDownload(bookmark)}}">
+            <md-icon color="primary" class="hide-sm" class="hide-sm">cloud_down</md-icon>
+          </a>
+          
+        </div>
+        <!--<app-rating [(rate)]="bookmark.rate"></app-rating>-->
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-list-item *ngIf="links.next" (click)="next()">
+        <md-icon>keyboard_arrow_down</md-icon>
+      </md-list-item>
+    </md-nav-list>
+
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { CustomHttp } from 'app/shared/modules/http/custom.http'
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Tag } from '../model/tag';
-import { TagCloud } from '../model/tag-cloud'
+import { TagCount } from '../model/tag-count'
 //import { SearchNoteResult } from './search-note-result';
 
 import { ApiService } from 'app/shared/modules/api/api.service';
@@ -16,32 +16,32 @@ import { Subject } from 'rxjs/Rx';
 @Injectable()
 export class TagService {
 
-  public  producer = new Subject<TagCloud>();
+  public  producer = new Subject<TagCount>();
 
-  public  selectedTagClouds: Observable<TagCloud> = Observable.of(new TagCloud(''));
+  public  selectedTagClouds: Observable<TagCount> = Observable.of(new TagCount(''));
 
   constructor(private apiService: ApiService) {
   }
  
- public getSelected(): Observable<TagCloud> {
+ public getSelected(): Observable<TagCount> {
       return this.producer.asObservable();
  }
 
- public next( tag: TagCloud) {
+ public next( tag: TagCount) {
      this.producer.next(tag);
   }
 
- public getTagsCloud(): Observable<PaginatedResult> {
-    return this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.tagsCloud);
+ public getTagsCount(): Observable<PaginatedResult> {
+    return this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.tagsCount);
  }
 
  public getUserTags(): Observable<PaginatedResult> {
-    return this.apiService.getPaginatedResults(this.apiService.myNotesEndPoint.tags+"?page_size=500");
+    return this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.tags+"?page_size=500");
  }
 
 
  public saveTag(tag: Tag): Observable<any> {
-      return this.apiService.post(this.apiService.myNotesEndPoint.tags, tag);
+      return this.apiService.post(this.apiService.myWebmarksEndPoint.tags, tag);
   }
 
 }

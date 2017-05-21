@@ -27,9 +27,9 @@ import { ToArrayPipe } from 'app/shared/pipes/to-array.pipe';
 import { AppComponent } from './app.component';
 import { NavHeaderComponent } from 'app/shared/components/nav-header/nav-header.component';
 // note
-import { NoteComponents } from 'app/modules/webmark/components';
-import { WebmarkService } from 'app/modules/webmark/services/webmark.service';
-import { FilterService } from 'app/modules/webmark/services/search.service';
+import { NoteComponents } from 'app/modules/bookmark/components';
+import { BookmarkService } from 'app/modules/bookmark/services/bookmark.service';
+import { FilterService } from 'app/modules/bookmark/services/search.service';
 import { ResponseService } from 'app/shared/services/response.service';
 
 import { NotificationsComponent } from 'app/shared/modules/notifications/notifications.component';
@@ -37,16 +37,14 @@ import { LoginComponent } from './shared/modules/authentification/login/login.co
 import { AuthentificationService } from './shared/modules/authentification/authentification.service';
 import { AuthgardService } from './shared/modules/authentification/authgard.service';
 import { HomeComponent } from './modules/home/home/home.component';
-import { TagCloudComponent } from './modules/tags/tag-cloud/tag-cloud.component';
+import { TagCountComponent } from './modules/tags/tag-count/tag-count.component';
 import { TagService } from './modules/tags/services/tag.service';
 import { TagSelectComponent } from './modules/tags/tag-select/tag-select.component';
-import { TagAbstractComponent } from './modules/tags/tag-abstract/tag-abstract.component';
 
 import { TagCreateDialogComponent } from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
 
 import { TagListComponent } from './modules/tags/tag-list/tag-list.component';
 import { ObservableService } from 'app/shared/modules/observable/observable.service';
-import { TagUploadComponent } from './modules/tags/tag-upload/tag-upload.component';
 import { FavoriteUploadComponent } from './modules/favorite/favorite-upload/favorite-upload.component';
 import { FavoriteListComponent } from './modules/favorite/favorite-list/favorite-list.component';
 import { FavoriteDetailComponent } from './modules/favorite/favorite-detail/favorite-detail.component';
@@ -66,8 +64,13 @@ import { InputValidationComponent } from './shared/components/input-validation/i
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { KeysPipe } from './shared/pipes/keys.pipe';
 
-import {WsClientService} from './shared/modules/ws/ws-client.service';
-import {WebsocketService} from './shared/modules/ws/websocket.service';
+import { WsClientService } from './shared/modules/ws/ws-client.service';
+import { WebsocketService } from './shared/modules/ws/websocket.service';
+import { FolderListComponent } from './modules/folder/folder-list/folder-list.component';
+import { FolderService } from './modules/folder/services/folder.service';
+import { FolderCreateDialogComponent } from './modules/folder/folder-create-dialog/folder-create-dialog.component';
+
+import { MdTabStore } from 'app/modules/tab-store/tab-store.service'
 
 //import * as Drive from "gapi.drive.realtime";
 
@@ -75,7 +78,6 @@ import {WebsocketService} from './shared/modules/ws/websocket.service';
   path: '',
   loadChildren: '/app/app.module'
 }];*/
-
 
 @NgModule({
   declarations: [
@@ -87,11 +89,9 @@ import {WebsocketService} from './shared/modules/ws/websocket.service';
     NotificationsComponent,
     LoginComponent,
     HomeComponent,
-    TagCloudComponent,
+    TagCountComponent,
     TagSelectComponent,
-    TagAbstractComponent,
     TagListComponent,
-    TagUploadComponent,
     FavoriteUploadComponent,
     FavoriteListComponent,
     FavoriteDetailComponent,
@@ -105,7 +105,10 @@ import {WebsocketService} from './shared/modules/ws/websocket.service';
     RegistrationComponent,
     InputValidationComponent,
     FilterPipe,
-    KeysPipe
+    KeysPipe,
+    FolderCreateDialogComponent,
+    FolderListComponent
+
   ],
   imports: [
     MaterialModule,
@@ -118,12 +121,15 @@ import {WebsocketService} from './shared/modules/ws/websocket.service';
     DatepickerModule,
     BrowserAnimationsModule
   ],
-  providers: [WebmarkService, FilterService, ApiService, AuthentificationService,
-    { provide: 'mynotes.endpoint', useValue: MYWEBMARK_ENPOINT },
+  entryComponents: [
+    FolderCreateDialogComponent,
+  ],
+  providers: [BookmarkService, FilterService, ApiService, AuthentificationService,
+    { provide: 'mywebmark.endpoint', useValue: MYWEBMARK_ENPOINT },
     { provide: 'authentification.endpoint', useValue: AUTHENTIFICATION_ENDPOINT },
     NotifierService, HTTP_PROVIDER, AuthgardService, ResponseService, TagService, ObservableService,
-    WsClientService,WebsocketService
-    ],
+    WsClientService, WebsocketService, FolderService, MdTabStore
+  ],
 
   bootstrap: [AppComponent]
 })

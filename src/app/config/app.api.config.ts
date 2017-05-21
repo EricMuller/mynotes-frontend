@@ -1,24 +1,26 @@
 
 
 
-export class MyWebmarkEndPoint {
+export class MyWebmarksEndPoint {
     public title: string;
     public pageSize:number;
-    public medias: string;
+    public bookmarks: string;
     public tags: string;
-    public tagsCloud: string;
+    public tagsCount: string;
     public upload: string;
     public archive: string;
+    public folders: string;
 }
 
-export const MYWEBMARK_ENPOINT: MyWebmarkEndPoint = {
-  title: 'django rest api',
+export const MYWEBMARK_ENPOINT: MyWebmarksEndPoint = {
+  title: 'webmarks REST API',
   pageSize: 20,
-  medias: '/mywebmarks/api/v1/medias/',
-  tags: '/mywebmarks/api/v1/tags/',
-  tagsCloud: '/mywebmarks/api/v1/tags-cloud/',
-  upload: '/mywebmarks/api/v1/upload/',
-  archive:  '/mywebmarks/api/v1/archive/',
+  bookmarks: '/api/v1/bookmarks/',
+  tags: '/api/v1/tags/',
+  tagsCount: '/api/v1/tags/count/',
+  upload: '/api/v1/upload/',
+  archive:  '/api/v1/archives/',
+  folders:  '/api/v1/folders/',
  
 };
 
@@ -31,9 +33,8 @@ export class AuthentificationEndPoint {
 }
 
 export const AUTHENTIFICATION_ENDPOINT: AuthentificationEndPoint = {
-  title: 'django rest authent',
-  token: '/authentication/rest-auth/token/',
-  registration: '/authentication/rest-auth/registration/',
-  account_confirm_email: '/authentication/rest-auth/registration/account-confirm-email/',
-    
+  title: 'django authent REST API',
+  token: '/api/v1/auth/token/',
+  registration: '/api/v1/auth/registration/',
+  account_confirm_email: '/api/v1/auth/registration/account-confirm-email/',
 };
