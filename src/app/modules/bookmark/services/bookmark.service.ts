@@ -9,50 +9,29 @@ import { Filter } from '../model/filter';
 // import { NOTES } from './mock-notes';
 
 import { ApiService } from 'app/shared/modules/api/api.service';
-import { ResponseService } from 'app/shared/services/response.service'
-import { PaginatedResult } from 'app/shared/services/paginated-result'
+import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
 import { BehaviorSubject } from "rxjs/Rx";
-
 
 @Injectable()
 export class BookmarkService {
 
   private observable: Observable<PaginatedResult>;
 
-  //private _webmarks: BehaviorSubject<PaginatedResult> = new BehaviorSubject(new PaginatedResult());
-
-  /*public cache: {
-    webmarks: PaginatedResult[]
-  };*/
-
   constructor(private apiService: ApiService) {
     console.log('BookmarkService constructor');
   }
-
-  /*get result(): Observable<PaginatedResult> {
-    return this._webmarks.asObservable();
-  }*/
-
- /* public getObservable(): Observable<PaginatedResult> {
-    if (this.observable) {
-      return this.observable;
-    } else {
-      console.log('observable is null');
-      return Observable.of(new PaginatedResult())
-    }
-  }*/
 
   public createBookmark(url: string): Observable<any> {
     let bookmark: Bookmark = new Bookmark();
     bookmark.url = url;
     bookmark.title = url;
-    return this.apiService.post(this.apiService.myWebmarksEndPoint.bookmarks, bookmark);
+    return this.apiService.post(this.apiService.endPoints.bookmarks, bookmark);
 
   }
 
   public deleteBookmark(bookmark: Bookmark): Observable<any> {
     if (bookmark.id > 0) {
-      return this.apiService.deleteById(this.apiService.myWebmarksEndPoint.bookmarks, bookmark.id.toString());
+      return this.apiService.deleteById(this.apiService.endPoints.bookmarks, bookmark.id.toString());
     }
 
   }
@@ -65,13 +44,13 @@ export class BookmarkService {
 
   public saveBookmark(bookmark: Bookmark): Observable<any> {
     if (bookmark.id > 0) {
-      return this.apiService.put(this.apiService.myWebmarksEndPoint.bookmarks + bookmark.id + "/", bookmark);
+      return this.apiService.put(this.apiService.endPoints.bookmarks + bookmark.id + "/", bookmark);
     } else {
-      return this.apiService.post(this.apiService.myWebmarksEndPoint.bookmarks, bookmark);
+      return this.apiService.post(this.apiService.endPoints.bookmarks, bookmark);
     }
   }
 
-  private createDjangoFilter(filterSearch: Filter,pre: string): string {
+  private createDjangoFilter(filterSearch: Filter, pre: string): string {
     let filter: string = pre;
 
     if (filterSearch != null) {
@@ -84,74 +63,55 @@ export class BookmarkService {
       }
 
       if (filterSearch.type != "") {
-          filter = filter + '&kind='+filterSearch.kind;
+        filter = filter + '&kind=' + filterSearch.kind;
       }
     }
-   
-    filter = filter + "&ordering=-updated_dt" ;
+
+    filter = filter + "&ordering=-updated_dt";
     return filter
   }
 
   public search(filterSearch: Filter): Observable<PaginatedResult> {
-   
-    let filter = this.createDjangoFilter(filterSearch,"?");
 
-    let obs :Observable<PaginatedResult>  = this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.bookmarks + filter);
+    let filter = this.createDjangoFilter(filterSearch, "?");
 
-    /*obs.subscribe(
-      result => {
-        //this.cache.webmarks.slice(0);
-        //this.cache.webmarks.push(result);
-        //this.pushNotes(result)
-        this._webmarks.next(result);
-      },
-      err => {
-        console.error(err);
-    });
-*/
+    let obs: Observable<PaginatedResult> = this.apiService.getPaginatedResults(this.apiService.endPoints.bookmarks + filter);
+
     return obs;
   }
 
 
-  public getNextPaginatedResults(url: string,filterSearch: Filter) :Observable<PaginatedResult> {
+  public getNextPaginatedResults(url: string, filterSearch: Filter): Observable<PaginatedResult> {
 
-    let filter = this.createDjangoFilter(filterSearch,"&");
-    return  this.apiService.getPaginatedResults(url+filter) ;
-    /*.subscribe( result => {
-        this._webmarks.next(result);
-      },
-      err => {
-        console.error(err);
-    });*/
-
+    let filter = this.createDjangoFilter(filterSearch, "&");
+    return this.apiService.getPaginatedResults(url + filter);
   }
 
-  public getPaginatedResults(url: string,filterSearch: Filter): Observable<PaginatedResult> {
+  public getPaginatedResults(url: string, filterSearch: Filter): Observable<PaginatedResult> {
 
-    let filter = this.createDjangoFilter(filterSearch,"&");
-    return this.apiService.getPaginatedResults(url+filter);
+    let filter = this.createDjangoFilter(filterSearch, "&");
+    return this.apiService.getPaginatedResults(url + filter);
   }
 
   public findById(id: number): Observable<Bookmark> {
-    return this.apiService.getById(this.apiService.myWebmarksEndPoint.bookmarks, id.toString());
+    return this.apiService.getById(this.apiService.endPoints.bookmarks, id.toString());
   }
 
-  public archiveBookmark(bookmark:Bookmark): Observable<any> {
+  public archiveBookmark(bookmark: Bookmark): Observable<any> {
     //crawl
-    return this.apiService.getByIdWithParams(this.apiService.myWebmarksEndPoint.bookmarks, bookmark.id.toString(),'archive', 50000);
-    //return this.apiService.getById(this.apiService.config.crawler, btoa(url), 50000);
+    return this.apiService.getByIdWithParams(this.apiService.endPoints.bookmarks, bookmark.id.toString(), 'archive', 50000);
   }
 
   public loadTitle(url: string): Observable<any> {
-    return this.apiService.getById(this.apiService.myWebmarksEndPoint.bookmarks, btoa(url) + "/title", 50000);
+    return this.apiService.getById(this.apiService.endPoints.bookmarks, btoa(url) + "/title", 50000);
   }
 
-   public urlHtml(bookmark: Bookmark) {
-      return this.apiService.myWebmarksEndPoint.archive + bookmark.archive_id + ".html"
-   }
+  public urlHtml(bookmark: Bookmark) {
+    return this.apiService.endPoints.archive + bookmark.archive_id + ".html"
+  }
 
   public urlDownload(bookmark: Bookmark) {
-    return this.apiService.myWebmarksEndPoint.archive + bookmark.archive_id + "/download/"
+    return this.apiService.endPoints.archive + bookmark.archive_id + "/download/"
   }
 
 }

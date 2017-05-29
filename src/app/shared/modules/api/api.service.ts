@@ -1,68 +1,23 @@
 
 
 import { Injectable, Inject } from '@angular/core';
-import { MyWebmarksEndPoint } from 'app/config/app.api.config';
+import { WebmarksEndPoint } from 'app/config/app.api.config';
 import { Http, Response, Headers } from '@angular/http';
 import { CustomHttp } from 'app/shared/modules/http/custom.http'
 import { Observable } from 'rxjs/Rx';
-import { PaginatedResult } from 'app/shared/services/paginated-result'
-import { ResponseService } from 'app/shared/services/response.service'
+import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
+import { ResponseService } from 'app/shared/modules/api/response.service'
 
-
-/*
-@Injectable()
-export class ApiNamingService {
-
-    constructor( @Inject('api.config') public apiConfig: ApiConfig) {
-        //this.API_ENDPOINT = 'api/v1/';
-        //this.CONSUMER_KEY = 'someReallyStupidTextWhichWeHumansCantRead'
-        console.log("Injected config:", this.apiConfig);
-    }
-
-    public url(url: string): string {
-        return this.apiConfig.apiUrl + url;
-    }
-
-    public create(url: string, page: number, pageSize?: number): string {
-
-        let strPageSize: string = String(this.apiConfig.pageSize);
-
-        if (pageSize) {
-            strPageSize = String(pageSize);
-        }
-
-        return this.apiConfig.apiUrl + url + "?page=" + String(page) + "&page_size=" + strPageSize;
-    }
-
-
-    /*public getNotesListEnpoint(): string {
-        // dont forget backslash
-        return this.apiConfig.apiUrl + "notes/";
-    }
-
-    public getTagsListEnpoint(): string {
-        // dont forget backslash
-        return this.apiConfig.apiUrl + "tags/";
-    }
-
-    public getTagsCloudListEnpoint(): string {
-        // dont forget backslash
-        return this.apiConfig.apiUrl + "tags-cloud/";
-    }*/
-
-/*
-}
-*/
 
 @Injectable()
 export class ApiService {
 
-
     constructor(private http: CustomHttp, 
                 private response: ResponseService,
-                @Inject('mywebmark.endpoint') public myWebmarksEndPoint: MyWebmarksEndPoint) {
+                @Inject('mywebmark.endpoint') public endPoints: WebmarksEndPoint) {
         console.log('NoteService constructor');
     }
+
 
     public getByIdWithParams(url: string,id: string,params:string,timeout?: number): Observable<any> {
         return this.http.get(url+id+"/"+params,timeout)

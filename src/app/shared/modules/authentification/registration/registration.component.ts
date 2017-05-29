@@ -3,8 +3,8 @@ import { AuthentificationService } from '../authentification.service'
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 import { Registration } from 'app/shared/modules/authentification/model/registration.model'
 import { Router, ActivatedRoute } from '@angular/router';
-import { RestHelper } from 'app/modules/helpers/RestHelper';
-import { FormHelper } from 'app/modules/helpers/FormHelper';
+import { RestHelper } from 'app/modules/helpers/rest-helper';
+import { FormHelper } from 'app/modules/helpers/form-helper';
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -24,10 +24,10 @@ export class RegistrationComponent implements OnInit {
     private _fb: FormBuilder) {
 
     this.form = this._fb.group({
-      email: ['t@free.fr', Validators.required],
-      username: ['t', Validators.required],
-      password1: ['ttttttt', Validators.required],
-      password2: ['ttttttt', Validators.required],
+      email: ['e.mul@free.fr', Validators.required],
+      username: ['webdev', Validators.required],
+      password1: ['webdev', Validators.required],
+      password2: ['webdev', Validators.required],
       non_field_errors: [''],
       
     });
@@ -47,12 +47,12 @@ export class RegistrationComponent implements OnInit {
     this.form.controls['non_field_errors'].setValue('');
     this.authentificationService.register(email, username, password1, password2).subscribe(
       data => {
-        this.notifierService.notifySuccess('Successful Registration', 2000);
+        this.notifierService.notifyWarn('Successful Registration,Please Validate your subscription in your mailbox', 0);
         this.router.navigate(['/login']);
       },
       error => {
-        let restResponse = RestHelper.extractErrors(error);
-        if (!FormHelper.updateValidationMessageToForm(restResponse, this.form)) {
+        let restResponse = RestHelper.getRestResponse(error);
+        if (!FormHelper.updateFormWithRestResponse(restResponse, this.form)) {
           this.notifierService.notifyError(String(restResponse.exception));
         }
       });

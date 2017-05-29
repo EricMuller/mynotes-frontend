@@ -8,8 +8,8 @@ import { Folder } from '../model/folder';
 
 
 import { ApiService } from 'app/shared/modules/api/api.service';
-import { ResponseService } from 'app/shared/services/response.service'
-import { PaginatedResult } from 'app/shared/services/paginated-result'
+import { ResponseService } from 'app/shared/modules/api/response.service'
+import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
 
 @Injectable()
 export class FolderService {
@@ -19,34 +19,34 @@ export class FolderService {
  
  public searchByParentId(parentId: number): Observable<PaginatedResult> {
       let filter = '?parent_id='+parentId.toString();
-      return  this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.folders + filter);
+      return  this.apiService.getPaginatedResults(this.apiService.endPoints.folders + filter);
   }
 
   public searchByLevel(level: number): Observable<PaginatedResult> {
     let filter = '?level='+level.toString();
-    return this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.folders + filter);
+    return this.apiService.getPaginatedResults(this.apiService.endPoints.folders + filter);
   }
 
 
   public findById(id: number): Observable<Folder> {
-    return this.apiService.getById(this.apiService.myWebmarksEndPoint.bookmarks, id.toString());
+    return this.apiService.getById(this.apiService.endPoints.bookmarks, id.toString());
   }
 
   public createFolder(folder : Folder): Observable<any> {
-    return this.apiService.post(this.apiService.myWebmarksEndPoint.folders, folder);
+    return this.apiService.post(this.apiService.endPoints.folders, folder);
   }
 
   public deleteFolder(folder: Folder): Observable<any> {
     if (folder.id > 0) {
-      return this.apiService.deleteById(this.apiService.myWebmarksEndPoint.folders, folder.id.toString());
+      return this.apiService.deleteById(this.apiService.endPoints.folders, folder.id.toString());
     }
   }
  
   public saveFolder(folder: Folder): Observable<any> {
     if (folder.id > 0) {
-      return this.apiService.put(this.apiService.myWebmarksEndPoint.folders + folder.id + "/", folder);
+      return this.apiService.put(this.apiService.endPoints.folders + folder.id + "/", folder);
     } else {
-      return this.apiService.post(this.apiService.myWebmarksEndPoint.folders, folder);
+      return this.apiService.post(this.apiService.endPoints.folders, folder);
     }
   }
 

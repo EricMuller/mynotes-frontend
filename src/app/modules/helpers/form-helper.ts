@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 @Injectable()
 export class FormHelper {
 
-  static updateValidationMessageToForm(restResponse: any, form: FormGroup) {
+  static updateFormWithRestResponse(restResponse:any, form: FormGroup) {
     if (restResponse.type == 'ValidationError') {
       debugger
       for (let key in restResponse.fields) {
@@ -24,6 +24,9 @@ export class FormHelper {
         }
       }
       return true;
+    }else{
+      debugger
+      
     }
     return false;
   }

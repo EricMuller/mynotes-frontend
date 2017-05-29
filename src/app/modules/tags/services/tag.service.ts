@@ -7,10 +7,8 @@ import { TagCount } from '../model/tag-count'
 //import { SearchNoteResult } from './search-note-result';
 
 import { ApiService } from 'app/shared/modules/api/api.service';
-import { ResponseService } from 'app/shared/services/response.service'
 
-
-import { PaginatedResult } from 'app/shared/services/paginated-result'
+import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
 import { Subject } from 'rxjs/Rx';
 
 @Injectable()
@@ -32,16 +30,16 @@ export class TagService {
   }
 
  public getTagsCount(): Observable<PaginatedResult> {
-    return this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.tagsCount);
+    return this.apiService.getPaginatedResults(this.apiService.endPoints.tagsCount);
  }
 
  public getUserTags(): Observable<PaginatedResult> {
-    return this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.tags+"?page_size=500");
+    return this.apiService.getPaginatedResults(this.apiService.endPoints.tags+"?page_size=500");
  }
 
 
  public saveTag(tag: Tag): Observable<any> {
-      return this.apiService.post(this.apiService.myWebmarksEndPoint.tags, tag);
+      return this.apiService.post(this.apiService.endPoints.tags, tag);
   }
 
 }

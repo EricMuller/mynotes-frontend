@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginatedResult } from 'app/shared/services/paginated-result'
+import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
 
 import { FolderService } from 'app/modules/folder/services/folder.service'
 import { Folder } from 'app/modules/folder/model/folder'

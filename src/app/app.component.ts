@@ -9,11 +9,14 @@ import { TimerObservable } from "rxjs/observable/TimerObservable";
 import { AuthgardService } from './shared/modules/authentification/authgard.service'
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 
+
+
 @Component({
   selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  
 })
 
 

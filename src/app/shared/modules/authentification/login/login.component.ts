@@ -7,14 +7,20 @@ import { AuthentificationService } from '../authentification.service'
 import {  FormGroup, FormBuilder, FormControl, Validators  } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 
-import { RestHelper } from 'app/modules/helpers/RestHelper';
-import { FormHelper } from 'app/modules/helpers/FormHelper';
+import { RestHelper } from 'app/modules/helpers/rest-helper';
+import { FormHelper } from 'app/modules/helpers/form-helper';
+
+// import fade in animation
+import { fadeInAnimation } from 'app/shared/modules/animations/animations';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    providers: [AuthentificationService]
+    providers: [AuthentificationService],
+    animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' }
 })
 
 export class LoginComponent implements OnInit {
@@ -44,9 +50,6 @@ export class LoginComponent implements OnInit {
         this.authenticationService.logout();
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
-        
-
     }
 
     login() {
@@ -58,9 +61,8 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([this.returnUrl]);
             },
             error => {
-                debugger
-                let restResponse = RestHelper.extractErrors(error);
-                if (!FormHelper.updateValidationMessageToForm(restResponse, this.form)) {
+                let restResponse = RestHelper.getRestResponse(error);
+                if (!FormHelper.updateFormWithRestResponse(restResponse, this.form)) {
                     this.notifierService.notifyError(restResponse.exception);
                   }
                 this.loading = false;

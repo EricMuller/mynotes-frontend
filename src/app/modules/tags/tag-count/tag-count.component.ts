@@ -28,7 +28,7 @@ export class TagCountComponent {
   }
 
   protected getTagsCount() {
-    this.apiservice.getPaginatedResults(this.apiservice.myWebmarksEndPoint.tagsCount + "?page_size=500").subscribe(
+    this.apiservice.getPaginatedResults(this.apiservice.endPoints.tagsCount + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;

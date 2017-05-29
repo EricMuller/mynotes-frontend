@@ -6,10 +6,7 @@ import { Observable } from 'rxjs/Rx';
 //import { SearchNoteResult } from './search-note-result';
 
 import { ApiService } from 'app/shared/modules/api/api.service';
-import { ResponseService } from 'app/shared/services/response.service'
 
-
-import { PaginatedResult } from 'app/shared/services/paginated-result'
 import { Subject } from 'rxjs/Rx';
 
 

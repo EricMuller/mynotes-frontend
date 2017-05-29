@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { FolderService } from 'app/modules/folder/services/folder.service';
 import { Folder } from 'app/modules/folder/model/folder';
-import { RestHelper } from 'app/modules/helpers/RestHelper';
-import { FormHelper } from 'app/modules/helpers/FormHelper';
+import { RestHelper } from 'app/modules/helpers/rest-helper';
+import { FormHelper } from 'app/modules/helpers/form-helper';
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -43,8 +43,8 @@ export class FolderCreateDialogComponent implements OnInit {
         this.notifierService.notifyInfo('Folder created with Succes', 3000);
         this.dialogRef.close('ok');
       }, error => {
-        let restResponse = RestHelper.extractErrors(error);
-        if (!FormHelper.updateValidationMessageToForm(restResponse, this.form)) {
+        let restResponse = RestHelper.getRestResponse(error);
+        if (!FormHelper.updateFormWithRestResponse(restResponse, this.form)) {
           this.notifierService.notifyError(String(restResponse.exception));
         }
       });

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +31,7 @@ import { NavHeaderComponent } from 'app/shared/components/nav-header/nav-header.
 import { NoteComponents } from 'app/modules/bookmark/components';
 import { BookmarkService } from 'app/modules/bookmark/services/bookmark.service';
 import { FilterService } from 'app/modules/bookmark/services/search.service';
-import { ResponseService } from 'app/shared/services/response.service';
+import { ResponseService } from 'app/shared/modules/api/response.service';
 
 import { NotificationsComponent } from 'app/shared/modules/notifications/notifications.component';
 import { LoginComponent } from './shared/modules/authentification/login/login.component';
@@ -70,7 +71,8 @@ import { FolderListComponent } from './modules/folder/folder-list/folder-list.co
 import { FolderService } from './modules/folder/services/folder.service';
 import { FolderCreateDialogComponent } from './modules/folder/folder-create-dialog/folder-create-dialog.component';
 
-import { MdTabStore } from 'app/modules/tab-store/tab-store.service'
+import { MdTabStore } from 'app/modules/tab-store/tab-store.service';
+import { ConfirmComponent } from './shared/modules/authentification/confirm/confirm.component'
 
 //import * as Drive from "gapi.drive.realtime";
 
@@ -107,7 +109,8 @@ import { MdTabStore } from 'app/modules/tab-store/tab-store.service'
     FilterPipe,
     KeysPipe,
     FolderCreateDialogComponent,
-    FolderListComponent
+    FolderListComponent,
+    ConfirmComponent
 
   ],
   imports: [

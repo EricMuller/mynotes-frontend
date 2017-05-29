@@ -5,7 +5,7 @@ import { Bookmark } from '../model/bookmark';
 import { Filter } from '../model/filter';
 import { RouterModule } from '@angular/router';
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
-import { PaginatedResult } from 'app/shared/services/paginated-result'
+import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
 import { TagService } from 'app/modules/tags/services/tag.service'
 import { TagCount } from 'app/modules/tags/model/tag-count'
 import { Tag } from 'app/modules/tags/model/tag'

@@ -22,6 +22,7 @@ import { TagCreateDialogComponent } from 'app/modules/tags/tag-create-dialog/tag
 import { BackupListComponent } from 'app/modules/backup/backup-list/backup-list.component'
 
 import { RegistrationComponent } from 'app/shared/modules/authentification/registration/registration.component'
+import { ConfirmComponent } from 'app/shared/modules/authentification/confirm/confirm.component'
 import { FolderListComponent } from 'app/modules/folder/folder-list/folder-list.component'
 
 
@@ -41,6 +42,7 @@ export const ROUTES_CONFIG = [
       {  path: 'folder',  component: WebmarkListComponent    },
       {  path: 'backup',  component: BackupListComponent     },
       {  path: 'folders', component: FolderListComponent     },
+      {  path: '**',  redirectTo: 'list'   },
     ]
   },
 
@@ -53,7 +55,8 @@ export const ROUTES_CONFIG = [
   },
   { path: 'tags', component: TagListComponent },
   { path: 'register', component: RegistrationComponent },
+  { path: 'confirm/:id', component: ConfirmComponent },
   { path: 'login', component: LoginComponent },
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'bookmark/search' }
 ];

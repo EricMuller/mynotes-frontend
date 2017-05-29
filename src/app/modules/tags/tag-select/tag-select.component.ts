@@ -52,7 +52,7 @@ export class TagSelectComponent implements OnInit, OnChanges {
 
   protected getTags() {
 
-    this.apiService.getPaginatedResults(this.apiService.myWebmarksEndPoint.tagsCount + "?page_size=500").subscribe(
+    this.apiService.getPaginatedResults(this.apiService.endPoints.tagsCount + "?page_size=500").subscribe(
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;

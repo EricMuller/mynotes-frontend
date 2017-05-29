@@ -3,8 +3,8 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { MdSnackBar } from '@angular/material';
 import { TagService } from 'app/modules/tags/services/tag.service';
 import { Tag } from 'app/modules/tags/model/tag';
-import { RestHelper } from 'app/modules/helpers/RestHelper';
-import { FormHelper } from 'app/modules/helpers/FormHelper';
+import { RestHelper } from 'app/modules/helpers/rest-helper';
+import { FormHelper } from 'app/modules/helpers/form-helper';
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -40,8 +40,8 @@ export class TagCreateDialogComponent implements OnInit {
         //this.loadTag();
       },error => {
         debugger
-        let restResponse = RestHelper.extractErrors(error);
-        if (!FormHelper.updateValidationMessageToForm(restResponse, this.form)) {
+        let restResponse = RestHelper.getRestResponse(error);
+        if (!FormHelper.updateFormWithRestResponse(restResponse, this.form)) {
             this.notifierService.notifyError(String(restResponse.exception));
         }
       });

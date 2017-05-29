@@ -1,16 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-export class RestResponse {
-  constructor(className, exception, fields) {
-    this.type = className;
-    this.exception = exception;
-    this.fields = fields;
-  };
-  type: string;
-  exception: string;
-  fields: any;
+import { RestResponse } from './rest-response';
 
-}
 
 export class Field {
 
@@ -19,12 +10,12 @@ export class Field {
 @Injectable()
 export class RestHelper {
 
-  static getContentTYpe(response: any): any {
+  static getContentType(response: any): any {
     return response.headers.get('Content-Type');
   }
 
-  static extractErrors(response: any): any {
-    let contentType = RestHelper.getContentTYpe(response);
+  static getRestResponse(response: any): RestResponse {
+    let contentType = RestHelper.getContentType(response);
     if (response.status === 404) {
       let restResponse = new RestResponse("UrlNotFoundError", response.url + 'Not Found', null);
       return restResponse;

@@ -1,7 +1,7 @@
 
 
 
-export class MyWebmarksEndPoint {
+export class WebmarksEndPoint {
     public title: string;
     public pageSize:number;
     public bookmarks: string;
@@ -12,7 +12,7 @@ export class MyWebmarksEndPoint {
     public folders: string;
 }
 
-export const MYWEBMARK_ENPOINT: MyWebmarksEndPoint = {
+export const MYWEBMARK_ENPOINT: WebmarksEndPoint = {
   title: 'webmarks REST API',
   pageSize: 20,
   bookmarks: '/api/v1/bookmarks/',
