@@ -34,7 +34,7 @@
           <!--<a *ngIf="bookmark.url && bookmark.id" md-list-icon md-icon target="_blank" href="{{bookmark.url}}" mdTooltip="Open in Browser">
             <md-icon color="primary">open_in_new</md-icon>
           </a>-->
-          <div><a md-icon-button (click)="detail(bookmark)"  style="max-width: 600px;overflow: hidden" mdTooltip="Edit Bookmark"> <md-icon color="primary" class="hide-sm" class="hide-sm">create</md-icon> </a></div>
+          <div><a md-icon-button (click)="detail(bookmark)"  style="max-width: 600px;overflow: hidden" mdTooltip="Edit Bookmark"> <md-icon color="primary">create</md-icon> </a></div>
           <!--<md-icon md-list-icon *ngIf="!bookmark.url" color="primary">note</md-icon>-->
         </div>
         <!--<a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', bookmark.id ]" style="max-height: 100px">
