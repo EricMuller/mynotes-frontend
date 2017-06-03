@@ -1,6 +1,5 @@
 <!--  body -->
 <div class="container">
-
   <div class="row">
     <!--- content media -->
     <md-toolbar>
@@ -34,13 +33,16 @@
           <!--<a *ngIf="bookmark.url && bookmark.id" md-list-icon md-icon target="_blank" href="{{bookmark.url}}" mdTooltip="Open in Browser">
             <md-icon color="primary">open_in_new</md-icon>
           </a>-->
-          <div><a md-icon-button (click)="detail(bookmark)"  style="max-width: 600px;overflow: hidden" mdTooltip="Edit Bookmark"> <md-icon color="primary">create</md-icon> </a></div>
+          <div>
+            <a md-icon-button (click)="detail(bookmark)" style="max-width: 600px;overflow: hidden" mdTooltip="Edit Bookmark">
+              <md-icon color="primary">create</md-icon>
+            </a>
+          </div>
           <!--<md-icon md-list-icon *ngIf="!bookmark.url" color="primary">note</md-icon>-->
         </div>
         <!--<a md-line [routerLinkActive]="['active']" [routerLink]="['/favorites/detail', bookmark.id ]" style="max-height: 100px">
                           {{ bookmark.title }}
-                          
-              </a>-->
+        </a>-->
         <!-- [routerLink]="['/webmark/detail', bookmark.id ]"-->
         <span> 
             <div><a md-line  href="{{bookmark.url}}" target="_blank" style="max-width: 600px;overflow: hidden" mdTooltip="{{bookmark.title}}"> {{ bookmark.title }} </a></div>
@@ -61,12 +63,13 @@
             class="hide-sm">
                     <md-icon>delete_forever</md-icon>
                 </button>
-          <button *ngIf="bookmark.id && !bookmark.archive_id" md-icon-button (click)="archive($event.target,bookmark)" color="primary" class="hide-sm"><md-icon>cloud_upload</md-icon></button>
+          <button *ngIf="bookmark.id && !bookmark.archive_id" md-icon-button (click)="archive($event.target,bookmark)" color="primary"
+            class="hide-sm"><md-icon>cloud_upload</md-icon></button>
           <!--<button *ngIf="bookmark.id && bookmark.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
           <a *ngIf="bookmark.id && bookmark.archive_id" md-icon-button target="_blank" href="{{urlDownload(bookmark)}}">
             <md-icon color="primary" class="hide-sm" class="hide-sm">cloud_down</md-icon>
           </a>
-          
+
         </div>
         <!--<app-rating [(rate)]="bookmark.rate"></app-rating>-->
       </md-list-item>
@@ -75,6 +78,5 @@
         <md-icon>keyboard_arrow_down</md-icon>
       </md-list-item>
     </md-nav-list>
-
   </div>
 </div>

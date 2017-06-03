@@ -93,8 +93,6 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
       });
   }
 
-  
-
   /**
    * Call BookmarkService update bookmark status  as delete
    * @param bookmark 
@@ -167,8 +165,6 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
     }
   }
 
- 
-
   /*public getTags() {
 
     let map = new Map();
@@ -221,6 +217,5 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   public urlDownload(bookmark: Bookmark) {
     return this.bookmarkService.urlDownload(bookmark);
   }
-
 
 }
