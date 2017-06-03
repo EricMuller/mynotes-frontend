@@ -9,10 +9,8 @@ import { ApiService } from 'app/shared/modules/api/api.service';
 
 import { Subject } from 'rxjs/Rx';
 
-
 export const NEW :number = 0; 
 export const REMOVE :number = 1;
-
 
 export class Event {
   id: number;
