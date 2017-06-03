@@ -52,6 +52,8 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   public bookmarks: Array<any> = [];
 
   public links: any = {};
+  
+  public modeEdition:boolean = false;
 
   constructor(private bookmarkService: BookmarkService, private searchService: FilterService
     , private notifier: NotifierService, private tabStore: MdTabStore) {

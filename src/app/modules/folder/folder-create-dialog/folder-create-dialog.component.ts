@@ -34,7 +34,6 @@ export class FolderCreateDialogComponent implements OnInit {
     let name = this.form.controls['name'].value
     if (name != "") {
       let parentId = 0;
-      debugger
       if (this.data){
           parentId =this.data['parentId'];
       }

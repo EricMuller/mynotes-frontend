@@ -33,62 +33,69 @@
   <div class="row">
     <!--  Tool bar -->
     <div class="app-note-detail-content">
-
+      <!-- TOOLBAR  -->
       <md-toolbar>
         <span *ngIf="!bookmark.title">Create New {{bookmark.kind}}</span>
         <span *ngIf="bookmark.title">{{bookmark.title}}</span>
 
         <span class="fill-remaining-space"></span>
         <span>
-                <button md-icon-button *ngIf="bookmark.title" (click)="save(bookmark)" placeholder="Search">
-                <md-icon >save</md-icon> 
+                <button md-icon-button *ngIf="bookmark.title" (click)="save(bookmark)" placeholder="Search" [disabled]="modeEdition==false">
+                <md-icon  [color]="getColorEdition()" >save</md-icon> 
                 </button>
-            </span>
+        </span>
+        <md-slide-toggle [checked]="modeEdition" [(ngModel)]="modeEdition"></md-slide-toggle>
       </md-toolbar>
-
+      <!--  END TOOLBAR  -->
+      <!--  CONTENT  -->
       <div style="display: flex;flex-wrap: wrap; margin: 5px">
         <div>
-          <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="bookmark.kind">
-            <md-button-toggle *ngFor="let type of KINDS " value="{{type.kind}}">
+          <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="bookmark.kind" >
+            <md-button-toggle *ngFor="let type of KINDS " value="{{type.kind}}" [disabled]="modeEdition==false">
               <md-icon>{{type.icon}}</md-icon>{{type.kind}}</md-button-toggle>
           </md-button-toggle-group>
-
         </div>
         <div>
-          <app-rating [(rate)]="bookmark.rate" (rate-change)="onRate($event)"></app-rating>
+          <app-rating [(rate)]="bookmark.rate" (rate-change)="onRate($event)" [disabled]="modeEdition==false"></app-rating>
         </div>
         <div class="fill-remaining-space"></div>
-        <div style="display: flex;align-items: center;margin-right:10px; ">
-          <md-icon *ngIf="bookmark.favorite" color="accent" (click)="bookmark.favorite=false;">favorite</md-icon>
-          <md-icon *ngIf="!bookmark.favorite" color="accent" (click)="bookmark.favorite=true;">favorite_border</md-icon>
-          <md-checkbox color="primary" [(ngModel)]="bookmark.favorite" class="hidden">Fav</md-checkbox>
+        <div style="display: flex;align-items: center;margin-right:10px; " >
+          <md-icon *ngIf="bookmark.favorite" color="accent" (click)="selectFavorite(false)" >favorite</md-icon>
+          <md-icon *ngIf="!bookmark.favorite" color="accent" (click)="selectFavorite(true)">favorite_border</md-icon>
+          <md-checkbox color="primary" [(ngModel)]="bookmark.favorite" class="hidden" >Fav</md-checkbox>
         </div>
       </div>
 
+     
       <md-tab-group (selectedIndexChange)="selectedIndexChange($event)">
         <md-tab>
           <template md-tab-label>
             General
           </template>
           <md-card>
-            <md-card-content>
-              <md-input-container class="full-width">
-                <input mdInput placeholder="Title" [(ngModel)]="bookmark.title" required>
+            <md-card-content >
+              
+              <md-input-container class="full-width" >
+                <input mdInput placeholder="Title" [(ngModel)]="bookmark.title" required [disabled]="modeEdition==false">
               </md-input-container>
-              <md-input-container class="full-width">
-                <input mdInput placeholder="URL" [(ngModel)]="bookmark.url">
+              
 
+              <md-input-container class="full-width">
+                <input mdInput placeholder="URL" [(ngModel)]="bookmark.url" [disabled]="modeEdition==false">
               </md-input-container>
-              <button md-raised-button color="primary" (click)="loadTitle(bookmark.url)" placeholder="load Title">Load Title from url</button>
+
+              <button md-raised-button color="primary" (click)="loadTitle(bookmark.url)" placeholder="load Title" [disabled]="modeEdition==false">Load Title from url</button>
               <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
 
             </md-card-content>
             <md-card-actions>
 
             </md-card-actions>
+
           </md-card>
 
-          <app-tag-select-card [(tagSelected)]="bookmark.tags"></app-tag-select-card>
+          <app-tag-select-card [(tagSelected)]="bookmark.tags" [readonly]="modeEdition==false" [disabled]="modeEdition==false"></app-tag-select-card>
+
           <!--<md-card>
           (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
       <md-card-header>

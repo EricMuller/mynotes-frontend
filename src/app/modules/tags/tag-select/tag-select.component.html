@@ -1,20 +1,28 @@
 <div class="app-tag-select-card">
+ <md-card class="md-card">
+  <md-chip-list>
+          <md-chip *ngFor="let tag of  tags | callback: filterSelected " [selected]="!disabled" (click)="selectItem(tag)"  [disabled]="disabled">{{tag.name}}</md-chip>
+  </md-chip-list>
+ </md-card>
+
   <md-card class="md-card">
     
-    <md-card-content id="conteneur">
+    <md-card-content id="conteneur" *ngIf="!disabled" >
       <md-chip-list>
-        <md-chip *ngFor="let l of  letters" selected="{{l.selected}}" (click)="selectLetter(l)" >{{l.name}}</md-chip>
+        Select a Tag <md-chip *ngFor="let letter of  letters"  (click)="selectLetter(letter)" [disabled]="disabled">{{letter.name}}</md-chip>
       </md-chip-list>
     </md-card-content>
-    <md-card-content id="conteneur">
+    
+    <md-card-content id="conteneur" *ngIf="!disabled">
       <md-chip-list>
-        <!--<div *ngFor="let tag of  tags " class='tag-cloud size-{{tag.size}} {{tag.itemclass}}' id="{{tag.id}}">{{tag.name}}</div>-->
-        <md-chip *ngFor="let tag of  tags" [color]="tag.color" selected="{{tag.show || isSelected(tag)}}" (click)="selectItem(tag)" [ngClass]="{'background-primary-color': tag.show }">{{tag.name}}</md-chip>
-        <md-chip *ngIf="nextLink" class='tag-cloud' (click)="next()">...</md-chip>
+        <md-chip *ngFor="let tag of  tags | callback: filterNotSelected" (click)="selectItem(tag)"  [selected]="tag.show"  [ngClass]="{'background-primary-color': true}">{{tag.name}}</md-chip>
+        <md-chip *ngIf="nextLink" class='tag-cloud' (click)="next()" [disabled]="disabled">...</md-chip>
+        <!--<div *ngFor="let tag of  tags" >disabled:{{disabled}}/{{tag.name}}:{{tag.color}}:{{tag.selected}} / </div>-->
       </md-chip-list>
     </md-card-content>
+
     <md-card-actions *ngIf="!readonly">
-      <button md-button (click)="openTagCreateDialog()">NEW TAG</button>
+      <button md-button (click)="openTagCreateDialog()" [disabled]="disabled">NEW TAG</button>
     </md-card-actions>
   </md-card>
 </div>

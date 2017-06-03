@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, AfterViewInit, OnChanges ,ApplicationRef} from '@angular/core';
 import { FormControl } from '@angular/forms'
 import { ApiService } from 'app/shared/modules/api/api.service';
 import { TagService } from 'app/modules/tags/services/tag.service'
@@ -27,11 +27,14 @@ export class TagSelectComponent implements OnInit, OnChanges {
   @Input('readonly')
   public readonly: Boolean;
 
+  @Input('disabled')
+  public disabled: Boolean = false;
+
   public tags: Array<TagCount>;
   public nextLink: string;
   public letters: Array<Letter> = [];
 
-  constructor(private apiService: ApiService, private snackBar: MdSnackBar, public dialog: MdDialog) {
+  constructor(private apiService: ApiService, public dialog: MdDialog,private applicationRef:ApplicationRef) {
   }
 
   ngOnInit() {
@@ -56,8 +59,8 @@ export class TagSelectComponent implements OnInit, OnChanges {
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;
-        this.selectTag();
         this.buildLetters();
+        this.selectTag();
       },
       err => {
         console.error(err);
@@ -66,20 +69,18 @@ export class TagSelectComponent implements OnInit, OnChanges {
   }
   private buildLetters() {
     let letters: Array<string> = [];
-    this.letters =[];
+    this.letters = [];
     for (var j = 0; this.tags.length > j; j++) {
       letters.push(this.tags[j].name.substring(0, 1).toUpperCase());
-      this.tags[j].show = true;
+      this.tags[j].show = false;
+      this.tags[j].selected=false;
     }
 
-    for(var l of Array.from(new Set(letters))){
+    for (var l of Array.from(new Set(letters))) {
       let letter = new Letter(l);
-      this.letters.push(letter) ;
+      this.letters.push(letter);
     }
 
-    
-
-    console.log(this.letters);
   }
 
   private selectTag() {
@@ -87,22 +88,41 @@ export class TagSelectComponent implements OnInit, OnChanges {
       for (var j = 0; this.tags.length > j; j++) {
         if (this.tags[j].id == this.tagSelected[i].id) {
           //this.tags[j].color = "current";
-          this.setSelected(this.tags[j]);
+          //this.setSelected(this.tags[j]);
+          this.tags[j].selected=true;
           break;
         }
       }
-
     }
   }
 
+/**
+ * 
+ * @param tag filter
+ */
+  public filterSelected(tag: TagCount) {
+    return tag.selected == true;
+  }
 
+  public filterNotSelected(tag: TagCount) {
+    return tag.selected == false ;
+  }
+
+/**
+ * filter by  letter
+ * @param l 
+ */
   public selectLetter(l: Letter) {
+
     for (var j = 0; this.tags.length > j; j++) {
       if (this.tags[j].name.substring(0, 1).toUpperCase() == l.name) {
         this.tags[j].show = true;
+        
       } else {
         this.tags[j].show = false;
       }
+      //this.tags[j].color = this.tagColor(this.tags[j]);
+      
     }
 
     for (var j = 0; this.letters.length > j; j++) {
@@ -112,33 +132,62 @@ export class TagSelectComponent implements OnInit, OnChanges {
         this.letters[j].selected = false;
       }
     }
+     
   }
+
   public next(event) {
     //  this.getNextTagsCloud();
   }
 
-  public isSelected(tag: TagCount): boolean {
+  /*public isSelected(tag: TagCount): boolean {
     return "current" == tag.color;
-  }
-  public setSelected(tag: TagCount) {
+  }*/
+
+  /*public setSelected(tag: TagCount) {
     tag.color = "current";
+  }*/
+
+  public tagColor(tag) {
+   
+    if (tag.show == true) {
+      if (tag.selected ==true) {
+        return "accent";
+      } else {
+        return "primary";
+      }
+    }else{
+      if (tag.selected ==true) {
+        return "accent";
+      } else {
+        return "current";
+      }
+    }
+   
   }
 
   public selectItem(tag: TagCount) {
-    if (this.isSelected(tag)) {
-      tag.color = "";
-      this.removeTag.next(tag);
-      this.tagRemoved(tag);
-    } else {
-      this.setSelected(tag);
-      this.addTag.next(tag);
-      this.tagAdded(tag);
+    
+    if (!this.disabled) {
+      if (tag.selected) {
+        //tag.color = "";
+        tag.selected = false;
+        this.removeTag.next(tag);
+        this.tagRemoved(tag);
+      } else {
+        //this.setSelected(tag);
+        //tag.color = "current";
+        tag.selected = true;
+        this.addTag.next(tag);
+        this.tagAdded(tag);
+      }
+
+      //tag.color = this.tagColor(tag);
+         
     }
   }
 
   public tagAdded(eventTag) {
     this.tagSelected.push(eventTag);
-
   }
 
   public tagRemoved(eventTag) {

@@ -33,6 +33,9 @@ export class WebmarkDetailComponent implements OnInit {
 
   public showEditor: boolean = false;
 
+  public modeEdition:boolean = false; 
+ 
+
   constructor(private router: Router, private location: Location, private bookmarkService: BookmarkService, private route: ActivatedRoute
     , private notifier: NotifierService, private snackBar: MdSnackBar, private filterService: FilterService,
     private authgardService: AuthgardService) {
@@ -61,7 +64,9 @@ export class WebmarkDetailComponent implements OnInit {
 
   }
 
- 
+ public getColorEdition():string{
+  return this.modeEdition ? "primary" :"current";
+ }
 
 /**
  * Call bookmarkService Save bookmark in db
@@ -70,6 +75,7 @@ export class WebmarkDetailComponent implements OnInit {
   public save(bookmark: Bookmark) {
      this.bookmarkService.saveBookmark(bookmark).subscribe(x => {
       this.snackBar.open('Bookmark saved with Succes', 'Ok', { duration: 3000 });
+      this.modeEdition=false;
      // this.back();
     });
   }
@@ -101,6 +107,12 @@ export class WebmarkDetailComponent implements OnInit {
       this.showEditor = true;
     } else {
       this.showEditor = false;
+    }
+  }
+
+  public selectFavorite(favorite:boolean) {
+    if(this.modeEdition){
+      this.bookmark.favorite=favorite;
     }
   }
 

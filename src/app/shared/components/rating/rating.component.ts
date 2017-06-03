@@ -12,7 +12,10 @@ export class RatingComponent implements OnInit {
   private rate:number ;
   @Output('rateChange')
   private updateRate = new EventEmitter<number>();
- 
+
+  @Input('disabled')
+  public disabled:Boolean =false;
+
   constructor() { 
    
   }

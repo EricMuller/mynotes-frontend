@@ -33,19 +33,17 @@ export class FolderListComponent implements OnInit {
 
   private path: Stack<Folder> = new Stack<Folder>();
 
+  public modeEdition: boolean = false;
+
   constructor(private folderService: FolderService, private dialog: MdDialog, private notifier: NotifierService) { }
 
   ngOnInit() {
     this.searchByLevelId(0);
   }
 
-  public breadcrumb(): string {
-    let s = "";
-    for (let node of this.path._store) {
-      s += "/" + node.name;
-    }
-    return s == "" ? "/" : s;
-  }
+  /**
+   * 
+   */
   public browseParentFolder() {
     if (this.current.parent_id) {
       let current = this.path.pop();
@@ -58,14 +56,20 @@ export class FolderListComponent implements OnInit {
     }
     this.current = this.path.current();
   }
-
+  /**
+   * Call folderService search parent folder 
+   * @param folder 
+   */
   public browseFolder(folder: Folder) {
     this.current = folder;
     this.path.push(folder);
     this.clearResult();
     this.searchByParentId(folder.id);
   }
-
+  /**
+   *  Call folderService search children folder 
+   * @param id 
+   */
   private searchByLevelId(id: number) {
     this.folderService.searchByLevel(id)
       .subscribe(
@@ -77,6 +81,23 @@ export class FolderListComponent implements OnInit {
       });
   }
 
+  public updateFolder(folder) {
+    
+    this.folderService.saveFolder(folder)
+      .subscribe(
+      result => {
+        this.notifier.notifyError("Folder Updated successfully!",2000);
+        folder.modeEdition = false
+      },
+      err => {
+        this.notifier.notifyError(err);
+        
+      });
+  }
+  /**
+   * 
+   * @param id 
+   */
   private searchByParentId(id: number) {
     this.folderService.searchByParentId(id)
       .subscribe(
@@ -90,18 +111,9 @@ export class FolderListComponent implements OnInit {
       });
   }
 
-  private clearResult() {
-    this.result = new PaginatedResult();
-  }
-
-  private pushResult(result: PaginatedResult) {
-    this.result.links.next = result.links.next;
-    for (var i = 0; result.data.length > i; i++) {
-      let folder: Folder = result.data[i];
-      this.result.data.push(folder);
-    }
-  }
-
+  /**
+   * Open DIALOG creation
+   */
   public openFolderCreateDialog() {
     let config = new MdDialogConfig();
     if (this.current) {
@@ -117,6 +129,24 @@ export class FolderListComponent implements OnInit {
     });
   }
 
+  /**
+   * Call FolderService delete folder
+   * @param folder 
+   */
+  public deleteFolder(folder: Folder) {
+    this.folderService.deleteFolder(folder)
+      .subscribe(
+      result => {
+        this.notifier.notifyInfo('Folder ' + folder.name + ' Deleted.');
+        this.refresh();
+      },
+      err => {
+        console.error(err);
+        this.notifier.notifyError('Error deleting' + folder.name + ' Deleted.');
+      });
+
+  }
+
   private refresh() {
     this.clearResult();
     if (this.current) {
@@ -126,18 +156,24 @@ export class FolderListComponent implements OnInit {
     }
   }
 
-  public deleteFolder(folder: Folder) {
-    this.folderService.deleteFolder(folder)
-      .subscribe(
-      result => {
-        this.notifier.notifyInfo('Note' + folder.name + ' Deleted.');
-        this.refresh();
-      },
-      err => {
-        console.error(err);
-        this.notifier.notifyError('Error deleting' + folder.name + ' Deleted.');
-      });
+  public breadcrumb(): string {
+    let s = "";
+    for (let node of this.path._store) {
+      s += "/" + node.name;
+    }
+    return s == "" ? "/" : s;
+  }
 
+  private clearResult() {
+    this.result = new PaginatedResult();
+  }
+
+  private pushResult(result: PaginatedResult) {
+    this.result.links.next = result.links.next;
+    for (var i = 0; result.data.length > i; i++) {
+      let folder: Folder = result.data[i];
+      this.result.data.push(folder);
+    }
   }
 
 }

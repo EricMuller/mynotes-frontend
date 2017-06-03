@@ -17,10 +17,11 @@
         <button *ngIf="!showResult"  md-raised-button (click)="search()" mdTooltip="Search">
             <md-icon>search</md-icon> Search
         </button>
-        <button *ngIf="showResult"  md-raised-button (click)="search()" mdTooltip="Refresh">
-            <md-icon>refresh</md-icon> Refresh
+        <button *ngIf="showResult"  md-icon-button (click)="search()" mdTooltip="Refresh">
+            <md-icon>refresh</md-icon> 
         </button>
       </span>
+      <md-slide-toggle *ngIf="showResult" [checked]="modeEdition" [(ngModel)]="modeEdition"></md-slide-toggle>
     </md-toolbar>
 
     <app-bookmark-search *ngIf="!showResult"></app-bookmark-search>
@@ -54,21 +55,21 @@
           <button *ngFor="let key of bookmark.rate | toArray" md-icon-button color="primary" class="hide-sm"><md-icon>star_rate</md-icon></button>
           <md-icon *ngIf="bookmark.favorite" color="accent" class="hide-sm"> favorite</md-icon>
           <md-icon *ngIf="!bookmark.favorite" color="primary" class="hide-sm">favorite_border</md-icon>
-          <button *ngIf="bookmark.status!='T' " md-icon-button (click)="trash(bookmark)" placeholder="Send to Trash" color="primary"
+          <button *ngIf="bookmark.status!='T' && modeEdition" md-icon-button (click)="trash(bookmark)" placeholder="Send to Trash" color="primary"
             class="hide-sm">
                     <md-icon>delete</md-icon>
                 </button>
 
-          <button *ngIf="bookmark.status=='T'" md-icon-button (click)="delete(bookmark)" placeholder="Send to Trash" color="primary"
+          <button *ngIf="bookmark.status=='T' && modeEdition" md-icon-button (click)="delete(bookmark)" placeholder="Send to Trash" color="primary"
             class="hide-sm">
                     <md-icon>delete_forever</md-icon>
                 </button>
-          <button *ngIf="bookmark.id && !bookmark.archive_id" md-icon-button (click)="archive($event.target,bookmark)" color="primary"
+          <button *ngIf="bookmark.id && !bookmark.archive_id && modeEdition" md-icon-button (click)="archive($event.target,bookmark)" color="primary"
             class="hide-sm"><md-icon>cloud_upload</md-icon></button>
 
           <!--<button *ngIf="bookmark.id && bookmark.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
 
-          <a *ngIf="bookmark.id && bookmark.archive_id" md-icon-button target="_blank" href="{{urlDownload(bookmark)}}">
+          <a *ngIf="bookmark.id && bookmark.archive_id && modeEdition" md-icon-button target="_blank" href="{{urlDownload(bookmark)}}">
             <md-icon color="primary" class="hide-sm" class="hide-sm">cloud_down</md-icon>
           </a>
 

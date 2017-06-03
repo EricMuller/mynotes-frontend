@@ -29,6 +29,7 @@ export class NotifierService {
     }
 
     public notifyError(message: string, timeOut: number = 0) {
+        console.log(message);
         this._notifications.next(new Notification(NotifierService.DANGER, message, timeOut));
     }
 

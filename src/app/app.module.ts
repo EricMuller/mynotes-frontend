@@ -64,6 +64,7 @@ import { RegistrationComponent } from './shared/modules/authentification/registr
 import { InputValidationComponent } from './shared/components/input-validation/input-validation.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { KeysPipe } from './shared/pipes/keys.pipe';
+import { CallbackPipe } from './shared/pipes/callback.pipe';
 
 import { WsClientService } from './shared/modules/ws/ws-client.service';
 import { WebsocketService } from './shared/modules/ws/websocket.service';
@@ -108,6 +109,7 @@ import { ConfirmComponent } from './shared/modules/authentification/confirm/conf
     InputValidationComponent,
     FilterPipe,
     KeysPipe,
+    CallbackPipe,
     FolderCreateDialogComponent,
     FolderListComponent,
     ConfirmComponent

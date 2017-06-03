@@ -1,6 +1,6 @@
 <span *ngFor="let item of range; let i = index"> 
-    <button md-icon-button (click)="update(i + 1)"  color="primary" class="star">
-          <md-icon *ngIf="i < rate ">star_rate</md-icon>
+    <button md-icon-button (click)="update(i + 1)"  color="primary" class="star" [disabled]="disabled">
+          <md-icon *ngIf="i < rate " >star_rate</md-icon>
           <md-icon *ngIf="i >= rate" >star_border</md-icon>
     </button>
 </span>
