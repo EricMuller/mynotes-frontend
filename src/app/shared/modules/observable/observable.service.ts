@@ -15,7 +15,6 @@ export const REMOVE :number = 1;
 export class Event {
   id: number;
   object: any;
-
 }
 
 @Injectable()
@@ -23,9 +22,7 @@ export class ObservableService {
 
   public producer = new Subject<Event>();
 
-  //public observable: Observable<Event> = Observable.of(new Event());
   constructor() {
-
   }
 
   public getObservable(): Observable<Event> {
