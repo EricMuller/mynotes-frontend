@@ -77,6 +77,8 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
         console.error(err);
       });
   }
+
+
   /**
    * Call bookmarkService search next page results 
    * @param event 
