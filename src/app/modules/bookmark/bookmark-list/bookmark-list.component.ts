@@ -78,6 +78,7 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
       });
   }
 
+
   /**
    * Call bookmarkService search next page results 
    * @param event 
@@ -140,7 +141,6 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
     }
   }
 
-
 /**
    * Delete bookmark in  component array 
    * @param bookmark 
@@ -185,7 +185,6 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    
   }
 
   get notes() {

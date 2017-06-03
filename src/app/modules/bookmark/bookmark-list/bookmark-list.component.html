@@ -65,13 +65,14 @@
                 </button>
           <button *ngIf="bookmark.id && !bookmark.archive_id" md-icon-button (click)="archive($event.target,bookmark)" color="primary"
             class="hide-sm"><md-icon>cloud_upload</md-icon></button>
+
           <!--<button *ngIf="bookmark.id && bookmark.archive_id" md-icon-button color="primary"><md-icon>backup</md-icon></button>-->
+
           <a *ngIf="bookmark.id && bookmark.archive_id" md-icon-button target="_blank" href="{{urlDownload(bookmark)}}">
             <md-icon color="primary" class="hide-sm" class="hide-sm">cloud_down</md-icon>
           </a>
 
         </div>
-        <!--<app-rating [(rate)]="bookmark.rate"></app-rating>-->
       </md-list-item>
       <md-divider></md-divider>
       <md-list-item *ngIf="links.next" (click)="next()">
