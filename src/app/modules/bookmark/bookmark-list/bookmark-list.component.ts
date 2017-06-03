@@ -184,13 +184,12 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
 
   }*/
 
-
   public detail(bookmark: Bookmark) {
     this.tabStore.navigate('detail','/bookmark/detail', bookmark.id);
   }
 
   ngOnDestroy() {
-    //this.subscription.unsubscribe();
+    
   }
 
   get notes() {
