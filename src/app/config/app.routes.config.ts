@@ -24,33 +24,36 @@ import { BackupListComponent } from 'app/modules/backup/backup-list/backup-list.
 import { RegistrationComponent } from 'app/shared/modules/authentification/registration/registration.component'
 import { ConfirmComponent } from 'app/shared/modules/authentification/confirm/confirm.component'
 import { FolderListComponent } from 'app/modules/folder/folder-list/folder-list.component'
-
+import { PolicyComponent } from 'app/modules/policy/policy.component'
 
 export const ROUTES_CONFIG = [
   {
-    path: '', redirectTo: 'bookmark/search', pathMatch: 'full'    
+    path: '', redirectTo: 'bookmark/search', pathMatch: 'full'
   },
+  { path: 'policy', component: PolicyComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'upload', component: FavoriteUploadComponent },
   { path: 'tag/create', component: TagCreateDialogComponent },
-  { path: 'bookmark', component: BookmarkComponent, canActivate: [AuthgardService],
+  {
+    path: 'bookmark', component: BookmarkComponent, canActivate: [AuthgardService],
     children: [
-      {  path: 'search',  component: BookmarkFilterComponent , canActivate: [AuthgardService]   },
-      {  path: 'list',    component: WebmarkListComponent   , canActivate: [AuthgardService]   },
-      {  path: 'detail/:id', component: WebmarkDetailComponent, canActivate: [AuthgardService] },
-      {  path: 'new',   component: WebmarkDetailComponent  , canActivate: [AuthgardService] },
-      {  path: 'folder',  component: WebmarkListComponent    },
-      {  path: 'backup',  component: BackupListComponent     },
-      {  path: 'folders', component: FolderListComponent     },
-      {  path: '**',  redirectTo: 'list'   },
+      { path: 'search', component: BookmarkFilterComponent, canActivate: [AuthgardService] },
+      { path: 'list', component: WebmarkListComponent, canActivate: [AuthgardService] },
+      { path: 'detail/:id', component: WebmarkDetailComponent, canActivate: [AuthgardService] },
+      { path: 'new', component: WebmarkDetailComponent, canActivate: [AuthgardService] },
+      { path: 'folder', component: WebmarkListComponent },
+      { path: 'backup', component: BackupListComponent },
+      { path: 'folders', component: FolderListComponent },
+      { path: '**', redirectTo: 'list' },
     ]
   },
 
   { path: 'favorites/detail/:id', component: WebmarkDetailComponent, canActivate: [AuthgardService] },
-  { path: 'favorites/list2', component: WebmarkListComponent, canActivate: [AuthgardService],
+  {
+    path: 'favorites/list2', component: WebmarkListComponent, canActivate: [AuthgardService],
     children: [
-      { path: 'upload',  component: FavoriteUploadComponent },
-      { path: 'drop',    component: BookmarkCreateComponent  },
+      { path: 'upload', component: FavoriteUploadComponent },
+      { path: 'drop', component: BookmarkCreateComponent },
     ]
   },
   { path: 'tags', component: TagListComponent },

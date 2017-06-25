@@ -51,7 +51,7 @@ export class TinyEditorComponent implements AfterViewInit, OnDestroy {
           inline: true,
           //selector: '#' + this.elementId,
           plugins: ['link', 'table'],
-          skin_url: '/assets/skins/lightgray',
+          skin_url: '/assets/vendors/tinyeditor/skins/lightgray',
           //themes: "modern",
           //theme: 'inlite',
           setup: editor => {

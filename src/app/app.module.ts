@@ -73,7 +73,8 @@ import { FolderService } from './modules/folder/services/folder.service';
 import { FolderCreateDialogComponent } from './modules/folder/folder-create-dialog/folder-create-dialog.component';
 
 import { MdTabStore } from 'app/modules/tab-store/tab-store.service';
-import { ConfirmComponent } from './shared/modules/authentification/confirm/confirm.component'
+import { ConfirmComponent } from './shared/modules/authentification/confirm/confirm.component';
+import { PolicyComponent } from './modules/policy/policy.component'
 
 //import * as Drive from "gapi.drive.realtime";
 
@@ -112,7 +113,8 @@ import { ConfirmComponent } from './shared/modules/authentification/confirm/conf
     CallbackPipe,
     FolderCreateDialogComponent,
     FolderListComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    PolicyComponent
 
   ],
   imports: [
