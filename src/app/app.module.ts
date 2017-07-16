@@ -76,6 +76,11 @@ import { MdTabStore } from 'app/modules/tab-store/tab-store.service';
 import { ConfirmComponent } from './shared/modules/authentification/confirm/confirm.component';
 import { PolicyComponent } from './modules/policy/policy.component'
 
+import { ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog } from './modules/dialog/dialog-demo';
+import { LoginGoogleComponent } from './shared/modules/authentification/login/login-google/login-google.component';
+import { LoginLinkedInComponent } from './shared/modules/authentification/login/login-linked-in/login-linked-in.component';
+
+
 //import * as Drive from "gapi.drive.realtime";
 
 /*export const ROUTE_CONFIG = [{
@@ -114,7 +119,8 @@ import { PolicyComponent } from './modules/policy/policy.component'
     FolderCreateDialogComponent,
     FolderListComponent,
     ConfirmComponent,
-    PolicyComponent
+    PolicyComponent,
+    ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog, LoginGoogleComponent, LoginLinkedInComponent
 
   ],
   imports: [
@@ -130,6 +136,7 @@ import { PolicyComponent } from './modules/policy/policy.component'
   ],
   entryComponents: [
     FolderCreateDialogComponent,
+    ContentElementDialog,JazzDialog,IFrameDialog
   ],
   providers: [BookmarkService, FilterService, ApiService, AuthentificationService,
     { provide: 'mywebmark.endpoint', useValue: MYWEBMARK_ENPOINT },

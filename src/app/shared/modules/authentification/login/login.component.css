@@ -1,5 +1,5 @@
 .app-login-content div.row {
-  margin-left: 00px;
+  margin-left: 0px;
   margin-right: 0px;
   margin-top: 10px;
   margin-bottom: 0px;
@@ -8,4 +8,34 @@
 md-toolbar{
  margin-bottom: 50px;
 
+}
+
+.form__orDivider {
+    margin: 10px 0;
+    font-family: Georgia,Times New Roman,serif;
+    font-style: italic;
+    opacity: .5;
+    font-weight: 300;
+    color: #9fa3a9;
+    text-align: center;
+}
+
+.g-signin2{
+  width: 100%;
+  /*opacity: .5;*/
+}
+.opaque {
+  opacity: .5;
+}
+
+.g-signin2 > div{
+  margin: 0 auto;
+}
+.abcRioButtonContentWrapper{
+  width: 100%;
+}
+
+.mat-card {
+  padding-top: 5px; 
+  padding-bottom: 5px; 
 }

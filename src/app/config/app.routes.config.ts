@@ -26,10 +26,13 @@ import { ConfirmComponent } from 'app/shared/modules/authentification/confirm/co
 import { FolderListComponent } from 'app/modules/folder/folder-list/folder-list.component'
 import { PolicyComponent } from 'app/modules/policy/policy.component'
 
+import { ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog } from 'app/modules/dialog/dialog-demo';
+
 export const ROUTES_CONFIG = [
   {
     path: '', redirectTo: 'bookmark/search', pathMatch: 'full'
   },
+  { path: 'demo', component: DialogDemo },
   { path: 'policy', component: PolicyComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'upload', component: FavoriteUploadComponent },

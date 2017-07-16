@@ -19,9 +19,10 @@ export class AuthentificationService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.endpoints.token, JSON.stringify({ username: username, password: password }), options)
+    return this.http.post(this.endpoints.login, JSON.stringify({ username: username, password: password }), options)
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
+        debugger
         let user = response.json();
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -31,6 +32,27 @@ export class AuthentificationService {
         }
       });
   }
+
+  public loginSocial(access_token: string, application: string): Observable<any> {
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.endpoints.login + application + "/", JSON.stringify({ 'access_token': access_token }), options)
+      .map((response: Response) => {
+        // login successful if there's a jwt token in the response
+        let json = response.json();
+        if (json && json.key) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          // localStorage.setItem('currentUser', JSON.stringify(user));
+          json.token = json.key;
+          localStorage.setItem('currentUser', JSON.stringify(json));
+
+        }
+      });
+  }
+
+
 
   public logout() {
     // remove user from local storage to log user out

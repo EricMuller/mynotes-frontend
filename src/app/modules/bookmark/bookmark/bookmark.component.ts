@@ -51,9 +51,10 @@ export class BookmarkComponent implements OnInit {
 
     let currentUser = this.authgardService.getCurrentUser();
 
-    if (currentUser != null) {
+    if (currentUser != null && currentUser.username != null ) {
       return currentUser.username.slice(0, 1).toUpperCase();
     }
+    
   }
   public token() {
     let currentUser = this.authgardService.getCurrentUser();

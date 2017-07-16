@@ -27,7 +27,7 @@ export class CustomHttp extends Http {
   }*/
 
   get(url: string, timeout?: number, options?: RequestOptionsArgs): Observable<any> {
-    console.log('Before the get request...');
+    console.debug('Before the get request...');
     let default_timeout: number = 20000000;
     if (timeout != null) {
       default_timeout = timeout;
@@ -48,18 +48,18 @@ export class CustomHttp extends Http {
       //.retryWhen(error => error.delay(500))
       //.timeout(default_timeout)
       .finally(() => {
-        console.log('After the request...');
+        console.debug('After the request...');
       });
   }
 
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
-    console.log('Before the post request...');
-    console.log(url);
-    console.log(body);
+    console.debug('Before the post request...');
+    console.debug(url);
+    console.debug(body);
     return super.post(url, body, this.jwt(options))
       .catch((response) => {
       debugger
-        if (response.status === 400 || response.status === 422 || response.status === 404) {
+        if (response.status === 400 || response.status === 422 || response.status === 404 || response.status === 401 ) {
           return Observable.throw(response);
         } else {
           let contentType = response.headers.get('Content-Type');
@@ -74,13 +74,13 @@ export class CustomHttp extends Http {
       }
       )
       .finally(() => {
-        console.log('After the post request...');
+        console.debug('After the post request...');
       });
   }
 
   delete(url: string, options?: RequestOptionsArgs): Observable<any> {
-    console.log('Before the delete request...');
-    console.log(url);
+    console.debug('Before the delete request...');
+    console.debug(url);
     return super.delete(url,  this.jwt(options))
       .catch((response) => {
       
@@ -99,7 +99,7 @@ export class CustomHttp extends Http {
       }
       )
       .finally(() => {
-        console.log('After the delete request...');
+        console.debug('After the delete request...');
       });
   }
 
@@ -114,9 +114,9 @@ export class CustomHttp extends Http {
   }
 
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
-    console.log('Before the put request...');
-    console.log(url);
-    console.log(body);
+    console.debug('Before the put request...');
+    console.debug(url);
+    console.debug(body);
     return super.put(url, body, this.jwt(options))
       .catch((response) => {
         if (response.status === 400 || response.status === 422) {
@@ -129,7 +129,7 @@ export class CustomHttp extends Http {
       }
       )
       .finally(() => {
-        console.log('After the put request...');
+        console.debug('After the put request...');
       });
   }
 
@@ -138,10 +138,10 @@ export class CustomHttp extends Http {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       //Bearer
-      let headers = new Headers({ 'Authorization': 'Token ' + currentUser.token });
-      if (options != null) {
-        options.headers = headers;
+      if (options != null && options.headers != null ) {
+        options.headers.append('Authorization','Token ' + currentUser.token);
       } else {
+        let headers = new Headers({ 'Authorization': 'Token ' + currentUser.token });
         return new RequestOptions({ headers: headers });
       }
     }

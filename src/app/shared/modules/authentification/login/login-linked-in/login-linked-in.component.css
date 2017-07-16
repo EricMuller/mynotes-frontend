@@ -1,0 +1,13 @@
+.opaque {
+    /*font-family: Georgia,Times New Roman,serif;*/
+    /*font-style: italic;*/
+    opacity: .5;
+    font-weight: 300;
+    /*color: #9fa3a9;*/
+}
+
+.element:nth-child(3) /* On prend le deuxième bloc élément */
+{
+    background-color: blue;
+    align-self: center; /* Seul ce bloc sera aligné à la fin */
+}

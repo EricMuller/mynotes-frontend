@@ -27,14 +27,16 @@ export const MYWEBMARK_ENPOINT: WebmarksEndPoint = {
 
 export class AuthentificationEndPoint {
     public title: string;
-    public token :string;
+    public login :string;
     public registration :string;
     public account_confirm_email: string;
 }
 
 export const AUTHENTIFICATION_ENDPOINT: AuthentificationEndPoint = {
   title: 'django authent REST API',
-  token: '/api/v1/auth/token/',
-  registration: '/api/v1/auth/registration/',
-  account_confirm_email: '/api/v1/auth/registration/account-confirm-email/',
+  login: '/api/rest_auth/login/',
+  // login_google: '/api/v1/auth/login/google/',
+  //login_google: '/api/v1/auth/accounts/google/login/',
+  registration: '/api/rest_auth/registration/',
+  account_confirm_email: '/api/rest_auth/registration/account-confirm-email/',
 };

@@ -1,5 +1,5 @@
 {
-  "/api/v1": {
+  "/api": {
     "target": "http://192.168.0.100:8000/",
     "secure": false,
     "pathRewrite_save": {"^/rets" : ""}

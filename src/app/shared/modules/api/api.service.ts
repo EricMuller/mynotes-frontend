@@ -12,26 +12,26 @@ import { ResponseService } from 'app/shared/modules/api/response.service'
 @Injectable()
 export class ApiService {
 
-    constructor(private http: CustomHttp, 
-                private response: ResponseService,
-                @Inject('mywebmark.endpoint') public endPoints: WebmarksEndPoint) {
+    constructor(private http: CustomHttp,
+        private response: ResponseService,
+        @Inject('mywebmark.endpoint') public endPoints: WebmarksEndPoint) {
         console.log('NoteService constructor');
     }
 
 
-    public getByIdWithParams(url: string,id: string,params:string,timeout?: number): Observable<any> {
-        return this.http.get(url+id+"/"+params,timeout)
+    public getByIdWithParams(url: string, id: string, params: string, timeout?: number): Observable<any> {
+        return this.http.get(url + id + "/" + params, timeout)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
-    public getById(url: string,id: string, timeout?: number): Observable<any> {
-        return this.http.get(url+id+"/",timeout)
+    public getById(url: string, id: string, timeout?: number): Observable<any> {
+        return this.http.get(url + id + "/", timeout)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
 
-    public deleteById(url: string,id: string, timeout?: number): Observable<any> {
-        return this.http.delete(url+id+"/",timeout)
+    public deleteById(url: string, id: string, timeout?: number): Observable<any> {
+        return this.http.delete(url + id + "/", timeout)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
@@ -49,7 +49,7 @@ export class ApiService {
             .catch(this.response.handleError).share();
     }
 
-    public getPage(url: string,page: number): Observable<PaginatedResult> {
+    public getPage(url: string, page: number): Observable<PaginatedResult> {
         return this.http.get(url)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
@@ -62,39 +62,39 @@ export class ApiService {
                 .map((res:Response) => res.json())
                 //...errors if any
                 .catch((error:any) => Observable.throw(error.json().error || 'Server error'));*/
-    
-    public post (url: string, jsonData: any): Observable<any> {
+
+    public post(url: string, jsonData: any): Observable<any> {
         return this.http.post(url, jsonData).map(this.response.extractBody)
-          .catch(this.response.handleError).share();
+            .catch(this.response.handleError).share();
     }
 
     public put(url: string, jsonData: any): Observable<any> {
         return this.http.put(url, jsonData).map(this.response.extractBody)
-          .catch(this.response.handleError).share();
+            .catch(this.response.handleError).share();
     }
 
-    public postWithFile (url: string, postData: any, files: File[]): Observable<any> {
+    public postWithFile(url: string, postData: any, files: File[]): Observable<any> {
 
         let headers = new Headers();
-        let formData:FormData = new FormData();
+        let formData: FormData = new FormData();
         //formData.append('files', files[0], files[0].name);
         // For multiple files
-         for (let i = 0; i < files.length; i++) {
-             formData.append(`files[]`, files[i], files[i].name);
-         }
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`files[]`, files[i], files[i].name);
+        }
 
-        if(postData !=="" && postData !== undefined && postData !==null) {
+        if (postData !== "" && postData !== undefined && postData !== null) {
             for (var property in postData) {
                 if (postData.hasOwnProperty(property)) {
                     formData.append(property, postData[property]);
                 }
             }
         }
-        console.log("postWithFile :formData="+formData)
+        console.log("postWithFile :formData=" + formData)
         return this.http.post(url, formData, {
             headers: headers
         }).map(this.response.extractBody)
-          .catch(this.response.handleError).share();
+            .catch(this.response.handleError).share();
         /*var returnReponse = new Promise((resolve, reject) => {
         this.http.post(url, formData, {
             headers: headers
@@ -111,6 +111,6 @@ export class ApiService {
         });
         return returnReponse;*/
 
-        
-     }
+
+    }
 }

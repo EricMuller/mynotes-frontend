@@ -7,21 +7,33 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <!--<script src="https://apis.google.com/js/api:client.js"></script>->
+  <!--<meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="28025127281-bc876va0d6rvv0ltt6iflt8j4qrg033k.apps.googleusercontent.com">
+  -->
+ 
+  <script>
+    /* gapi.load('auth2',function () {
+      gapi.auth2.init();
+    });*/
+     
+  </script>
+  
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--<link href="node_modules/@angular/material/core/theming/prebuilt/indigo-pink.css" rel="stylesheet">-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
   <!--<link href="node_modules/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">-->
-  <link href="/assets/vendors/material2/theming/prebuilt/indigo-pink.css" rel="stylesheet">
-
-
+  <link rel="stylesheet" href="/assets/vendors/material2/theming/prebuilt/indigo-pink.css" >
+  
 </head>
 
 <body>
-
   <app-root>
- <style>
+    <style>
       .pre-bootstrap {
         position: absolute;
         left: calc(50% - 30px);
@@ -71,7 +83,6 @@
         }
       }
     </style>
-   
 
     <div class="pre-bootstrap">
       <div class="pre-bootstrap-text">Loading..</div>
