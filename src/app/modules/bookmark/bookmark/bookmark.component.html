@@ -8,7 +8,16 @@
 
 <md-menu #appMenu="mdMenu">
   <!--<button md-menu-item> Settings </button>-->
-  <button md-menu-item *ngIf="isAuthentified()" (click)="logout()"><md-icon>exit_to_app</md-icon>{{username()}}  Log Out </button>
+  
+  <md-card >
+     <md-card-content>
+       {{user.first_name}} {{user.last_name}}
+       {{user.email}}
+     </md-card-content>
+     <md-card-actions>
+    <button md-button *ngIf="isAuthentified()" (click)="logout()"><md-icon>exit_to_app</md-icon> Log Out </button>
+     </md-card-actions>
+  </md-card>
 </md-menu>
 
 <div class="header-toolbar">

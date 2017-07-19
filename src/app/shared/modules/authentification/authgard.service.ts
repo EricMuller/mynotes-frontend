@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthentificationService } from 'app/shared/modules/authentification/authentification.service'
 import { WsClientService } from 'app/shared/modules/ws/ws-client.service';
-
+import { User } from 'app/shared/modules/authentification/model/user.model';
 @Injectable()
 export class AuthgardService implements CanActivate {
 
-    constructor(private router: Router,private authentificationService: AuthentificationService) { }
+    constructor(private router: Router, private authentificationService: AuthentificationService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.getCurrentUser()) {
@@ -15,22 +15,27 @@ export class AuthgardService implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
 
-    public logout(){
-      this.authentificationService.logout();
-      this.router.navigate(['/login']);
+    public logout() {
+        this.authentificationService.logout();
+        this.router.navigate(['/login']);
+        this.reloadPage();
+        
     }
 
+    private reloadPage() {
+        window.location.reload();
+    }
 
-    public getCurrentUser(): any {
-        let currentUser = localStorage.getItem('currentUser')
+    public getCurrentUser(): User {
+        let currentUser = localStorage.getItem('webmarks_user')
         return currentUser ? JSON.parse(currentUser) : null;
     }
 
-    public  isAuthentified(): boolean {
-          return this.getCurrentUser() != null ;
+    public isAuthentified(): boolean {
+        return this.getCurrentUser() != null;
     }
 }

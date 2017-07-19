@@ -135,13 +135,13 @@ export class CustomHttp extends Http {
 
   public jwt(options?: RequestOptionsArgs): RequestOptionsArgs {
     // create authorization header with jwt token
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
+    let token = JSON.parse(localStorage.getItem('webmarks_token'));
+    if (token) {
       //Bearer
       if (options != null && options.headers != null ) {
-        options.headers.append('Authorization','Token ' + currentUser.token);
+        options.headers.append('Authorization','Token ' + token);
       } else {
-        let headers = new Headers({ 'Authorization': 'Token ' + currentUser.token });
+        let headers = new Headers({ 'Authorization': 'Token ' + token });
         return new RequestOptions({ headers: headers });
       }
     }

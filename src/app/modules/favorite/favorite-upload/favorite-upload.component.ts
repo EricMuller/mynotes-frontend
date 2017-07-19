@@ -21,7 +21,7 @@ export class FavoriteUploadComponent implements OnInit {
 
   ngOnInit() {
     
-/*    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+/*    let currentUser = JSON.parse(localStorage.getItem('webmarks_token'));
     
     this.uploader = new FileUploader({ url: this.apiservice.config.upload ,authToken: 'Token ' +currentUser.token});
     

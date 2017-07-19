@@ -54,14 +54,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.logout();
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
-        /* var google = document.createElement("script");
-         linkedIn.type = "text/javascript";
-         linkedIn.src = "https://apis.google.com/js/platform.js";
-          linkedIn.src = "http://platform.linkedin.com/in.js";
-         linkedIn.innerHTML = "<meta name=""google-signin-scope"" content=""profile email"">" +
-         "<meta name=""google-signin-client_id"" content=""28025127281-bc876va0d6rvv0ltt6iflt8j4qrg033k.apps.googleusercontent.com"">";
- */
+      
     }
 
     public onLinkedIn(access_token: string) {
@@ -85,17 +78,18 @@ export class LoginComponent implements OnInit {
         this.authenticationService.loginSocial(access_token, application)
             .subscribe(
             data => {
-
-                this.notifierService.notifySuccess('Successful connected with ' + application, 2000);
-                this.router.navigate([this.returnUrl]);
-                this.loading = false;
+                this.authenticationService.user().subscribe(user=> {
+                    localStorage.setItem('webmarks_user', JSON.stringify(user));
+                    this.notifierService.notifySuccess('Successful connected with ' + application, 2000);
+                    this.router.navigate([this.returnUrl]);
+                    this.loading = false;
+                });
             },
             error => {
                 //this.signOut();
                 this.loading = false;
             });
     }
-
 
     /**
      * 
@@ -105,8 +99,11 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.form.controls['username'].value, this.form.controls['password'].value)
             .subscribe(
             data => {
-                this.notifierService.notifySuccess('Successful connected', 2000);
-                this.router.navigate([this.returnUrl]);
+                this.authenticationService.user().subscribe(user=> {
+                    localStorage.setItem('webmarks_user', JSON.stringify(user));
+                    this.notifierService.notifySuccess('Successful connected', 2000);
+                    this.router.navigate([this.returnUrl])
+                });
             },
             error => {
                 let restResponse = RestHelper.getRestResponse(error);

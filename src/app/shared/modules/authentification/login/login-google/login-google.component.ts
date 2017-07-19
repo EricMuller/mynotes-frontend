@@ -27,107 +27,69 @@ export class LoginGoogleComponent implements AfterViewInit {
     public auth2: any;
 
     constructor(private ngZone: NgZone, private element: ElementRef) {
-        window['onGoogleLoad'] = (user) => ngZone.run(() => this.onGoogleLoad(user));
-        //window['onGoogleAuth'] = (authInstance) => ngZone.run(() => this.onGoogleAuth(authInstance));
-        window['userChanged'] = (authInstance) => ngZone.run(() => this.userChanged(authInstance));
+        window['onGoogleProfil'] = (user) => ngZone.run(() => this.onGoogleProfil(user));
+        window['googleInitAuth'] = () => ngZone.run(() => this.googleInitAuth());
         window['onGoogleLogOut'] = () => ngZone.run(() => this.onGoogleLogOut());
 
+        let script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/api.js?onload=googleInitAuth';
+        script.type = 'text/javascript';
+        document.getElementsByTagName('head')[0].appendChild(script);
     }
 
     ngOnInit() {
-        //<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-        /*var script = document.createElement("script");
-        script.id = "script_linkedIn_frmk";
-        script.type = "text/javascript";
-        script.src = "https://apis.google.com/js/platform.js";
-        document.head.appendChild(script);*/
+     
     }
 
+    ngAfterViewInit() {
+    
+    }
     /**
         * Google 
         * @param googleUser 
         */
-    public onGoogleLoad(googleUser: any) {
-        console.log('onGoogleLoad');
-        console.debug(googleUser);
+    public onGoogleProfil(googleUser: any) {
+        console.debug('onGoogleLoad');
         var profile = googleUser.getBasicProfile();
         let access_token = googleUser.getAuthResponse().access_token;
-
         this.account.access_token = access_token;
         this.account.id = profile.getId();
         this.account.email = profile.getEmail();
         this.account.firstName = profile.getGivenName();
         this.account.lastName = profile.getFamilyName();
         this.account.url = profile.getImageUrl();
-
     }
 
-    public googleInit() {
-        console.log('googleInit');
+    /**
+     * 
+     */
+    public googleInitAuth() {
+        console.debug('googleInit');
         let that = this;
-        this.auth2 = gapi.load('auth2', () => {
-            this.auth2 = gapi.auth2.init({
+
+        gapi.load('client:auth2', function () {
+            console.debug("gapi loaaded ");
+            gapi.auth2.init({
                 client_id: that.clientId,
-                scope: that.scope
+                scope: "profile email" // this isn't required
+            }).then(function (auth2) {
+                console.debug("signed in: " + auth2.isSignedIn.get());
+                if (auth2.isSignedIn.get()) {
+                    that.onGoogleProfil(auth2.currentUser.get());
+                }
             });
-            // that.attachSignin(that.element.nativeElement.firstChild);
         });
 
-
     }
-
-    public userChanged(user) {
-        console.log('User now: ', user);
-        //googleUser = user;
-    }
-
-
-    /*public onGoogleAuth(authInstance) {
-        //this.auth2 = authInstance;
-        console.log('onGoogleAuth');
-        console.debug(authInstance);
-
-        if (authInstance.isSignedIn.get()) {
-            var profile = authInstance.currentUser.get().getBasicProfile();
-            console.debug(profile);
-        }
-
-        // Sign the user in, and then retrieve their ID.
-        authInstance.signIn().then(function () {
-            console.log(gapi.auth2.currentUser.get().getId());
-        });
-
-    }*/
-    /*
-        public attachSignin(element) {
-            let that = this;
-            this.auth2.attachClickHandler(element, {},
-                function (googleUser) {
-    
-                    let profile = googleUser.getBasicProfile();
-                    console.log('Token || ' + googleUser.getAuthResponse().id_token);
-                    console.log('ID: ' + profile.getId());
-                    console.log('Name: ' + profile.getName());
-                    console.log('Image URL: ' + profile.getImageUrl());
-                    console.log('Email: ' + profile.getEmail());
-                    //YOUR CODE HERE
-    
-    
-                }, function (error) {
-                    console.log(JSON.stringify(error, undefined, 2));
-                });
-        }
-    */
 
     public signOut(): void {
         var that = this;
-
         var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function (authResult) {
-            this.onGoogleLogOut();
-        });
-
+        if (auth2.isSignedIn.get()) {
+            auth2.signOut().then(function (authResult) {
+                that.onGoogleLogOut();
+            });
+        }
     }
 
     public onGoogleLogOut(): void {
@@ -142,15 +104,10 @@ export class LoginGoogleComponent implements AfterViewInit {
         } else {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signIn().then(function (user) {
-                that.onGoogleLoad(user);
+                that.onGoogleProfil(user);
                 that.signinChange.next(this.account.access_token);
             });
 
         }
     }
-
-    ngAfterViewInit() {
-        this.googleInit();
-    }
-
 }

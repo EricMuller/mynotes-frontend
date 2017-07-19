@@ -1,11 +1,3 @@
-
-
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<!--<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="28025127281-bc876va0d6rvv0ltt6iflt8j4qrg033k.apps.googleusercontent.com">
--->
-
 <div style="display: flex;">
     <div style="margin-right: 20px" class="element">
         <img md-fab-image src="/assets/vendors/social_icons/g+.png" (click)="signIn()">
@@ -21,8 +13,6 @@
     <div class="fill-remaining-space">
     </div>
     <div class="element">
-        <div  class="g-signin2" style="padding-top: 15px;display:none;" data-onsuccess="onGoogleLoad">button</div>
-         <!--   <button md-raised-button   (click)="signIn()">Sign in </button>-->
          <div class="element" style="padding-top: 15px">
           <button *ngIf="account.id" md-raised-button style="width: 120px;" class="opaque"  (click)="signIn()"><i class="fa fa-google" aria-hidden="true"></i> &nbsp;Sign in </button>
           <button *ngIf="!account.id" md-raised-button style="width: 120px;" class="opaque" (click)="signIn()"><i class="fa fa-google" aria-hidden="true"></i> <span class="opaque">&nbsp;<b>Connexion</b> </span></button>
