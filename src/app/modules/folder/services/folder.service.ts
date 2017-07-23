@@ -34,7 +34,7 @@ export class FolderService {
 
    public searchBookmarksByFolder(folderId: number): Observable<PaginatedResult> {
 
-    return this.apiService.getPaginatedResults(this.apiService.endPoints.folders + "/" + folderId.toString() + "/bookmarks");
+    return this.apiService.getPaginatedResults(this.apiService.endPoints.folders + folderId.toString() + "/bookmarks/");
    
   }
 
