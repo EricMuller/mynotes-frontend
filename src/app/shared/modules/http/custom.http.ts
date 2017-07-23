@@ -78,7 +78,7 @@ export class CustomHttp extends Http {
       });
   }
 
-  delete(url: string, options?: RequestOptionsArgs): Observable<any> {
+  delete(url: string,  timeout?: number,options?: RequestOptionsArgs): Observable<any> {
     console.debug('Before the delete request...');
     console.debug(url);
     return super.delete(url,  this.jwt(options))
@@ -115,8 +115,8 @@ export class CustomHttp extends Http {
 
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     console.debug('Before the put request...');
-    console.debug(url);
-    console.debug(body);
+    console.debug('url='+url);
+    console.debug('body='+body);
     return super.put(url, body, this.jwt(options))
       .catch((response) => {
         if (response.status === 400 || response.status === 422) {

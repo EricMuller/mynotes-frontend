@@ -42,6 +42,13 @@ export class BookmarkService {
 
   }
 
+  public addFolderToBookmark(bookmarkId: number, folderId: number): Observable<any> {
+        return this.apiService.put(this.apiService.endPoints.bookmarks + bookmarkId.toString() + "/folders/", { id: folderId });
+  }
+  public removeFolderToBookmark(bookmarkId: number, folderId: number): Observable<any> {
+        return this.apiService.deleteById(this.apiService.endPoints.bookmarks + bookmarkId.toString() + "/folders/",  folderId.toString() );
+  }
+
   public saveBookmark(bookmark: Bookmark): Observable<any> {
     if (bookmark.id > 0) {
       return this.apiService.put(this.apiService.endPoints.bookmarks + bookmark.id + "/", bookmark);
@@ -79,6 +86,7 @@ export class BookmarkService {
 
     return obs;
   }
+
 
 
   public getNextPaginatedResults(url: string, filterSearch: Filter): Observable<PaginatedResult> {

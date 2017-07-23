@@ -1,0 +1,8 @@
+<h1 md-dialog-title>Select a folder</h1>
+<md-dialog-content>
+<app-folder-list (folderChange)="onFolderChange($event)" onlyFolder="true"></app-folder-list>
+</md-dialog-content>
+<div md-dialog-actions>
+  <button md-button (click)="closeDialog()">cancel</button>
+  <button md-button (click)="addFolderToBookmark()">Select</button>
+</div>

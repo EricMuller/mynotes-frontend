@@ -87,15 +87,15 @@
               <button md-raised-button color="primary" (click)="loadTitle(bookmark.url)" placeholder="load Title" [disabled]="modeEdition==false">Load Title from url</button>
               <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
 
+            
             </md-card-content>
             <md-card-actions>
-
             </md-card-actions>
 
           </md-card>
 
           <app-tag-select-card [(tagSelected)]="bookmark.tags" [readonly]="modeEdition==false" [disabled]="modeEdition==false"></app-tag-select-card>
-
+          
           <!--<md-card>
           (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
       <md-card-header>

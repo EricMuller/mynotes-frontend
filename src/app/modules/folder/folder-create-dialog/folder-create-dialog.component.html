@@ -5,11 +5,11 @@
     <input mdInput placeholder="Name" type="text" formControlName="name" #elm required>
     <md-hint *ngIf="form.controls.name.errors && (form.controls.name.dirty || form.controls.name.touched)" [ngStyle]="{'color': 'red'}">
       {{form.controls.name.errors.message}}</md-hint>
-     <md-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
-    {{form.controls.non_field_errors.value}}</md-hint>
+    <md-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+      {{form.controls.non_field_errors.value}}</md-hint>
   </md-input-container>
   <div md-dialog-actions>
-    <button md-button (click)="create()">create</button>
-    <button md-button (click)="close()">cancel</button>
+    <button md-button (click)="createFolder()">create</button>
+    <button md-button (click)="closeDialog()">cancel</button>
   </div>
 </form>

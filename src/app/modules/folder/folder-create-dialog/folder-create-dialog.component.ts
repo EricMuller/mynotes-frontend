@@ -17,8 +17,10 @@ export class FolderCreateDialogComponent implements OnInit {
   public form: FormGroup;
 
   constructor(public dialogRef: MdDialogRef<FolderCreateDialogComponent>,
-    private folderService: FolderService, private notifierService: NotifierService,
-    private _fb: FormBuilder, @Inject(MD_DIALOG_DATA) public data: any) {
+            private folderService: FolderService,
+            private notifierService: NotifierService,
+            private _fb: FormBuilder,
+            @Inject(MD_DIALOG_DATA) public data: any) {
 
     this.form = this._fb.group({
       name: ['', Validators.required],
@@ -29,13 +31,15 @@ export class FolderCreateDialogComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  public create() {
+/**
+ * 
+ */
+  public createFolder() {
     let name = this.form.controls['name'].value
     if (name != "") {
       let parentId = 0;
-      if (this.data){
-          parentId =this.data['parentId'];
+      if (this.data) {
+        parentId = this.data['parentId'];
       }
       let folder: Folder = Folder.create(name, parentId);
       this.folderService.saveFolder(folder).subscribe(tag => {
@@ -50,8 +54,10 @@ export class FolderCreateDialogComponent implements OnInit {
     }
 
   }
-
-  public close() {
+/**
+ * 
+ */
+  public closeDialog() {
     this.dialogRef.close('cancel');
   }
 

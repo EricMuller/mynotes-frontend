@@ -79,6 +79,7 @@ import { PolicyComponent } from './modules/policy/policy.component'
 import { ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog } from './modules/dialog/dialog-demo';
 import { LoginGoogleComponent } from './shared/modules/authentification/login/login-google/login-google.component';
 import { LoginLinkedInComponent } from './shared/modules/authentification/login/login-linked-in/login-linked-in.component';
+import { FolderSelectDialogComponent } from './modules/folder/folder-select-dialog/folder-select-dialog.component';
 
 
 //import * as Drive from "gapi.drive.realtime";
@@ -120,7 +121,7 @@ import { LoginLinkedInComponent } from './shared/modules/authentification/login/
     FolderListComponent,
     ConfirmComponent,
     PolicyComponent,
-    ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog, LoginGoogleComponent, LoginLinkedInComponent
+    ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog, LoginGoogleComponent, LoginLinkedInComponent, FolderSelectDialogComponent
 
   ],
   imports: [
@@ -136,7 +137,7 @@ import { LoginLinkedInComponent } from './shared/modules/authentification/login/
   ],
   entryComponents: [
     FolderCreateDialogComponent,
-    ContentElementDialog,JazzDialog,IFrameDialog
+    ContentElementDialog,JazzDialog,IFrameDialog,FolderSelectDialogComponent
   ],
   providers: [BookmarkService, FilterService, ApiService, AuthentificationService,
     { provide: 'mywebmark.endpoint', useValue: MYWEBMARK_ENPOINT },

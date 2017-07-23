@@ -30,7 +30,7 @@ export class MdTabStore {
   public activeTabIndex = 0;
 
   private data_tabs: MdTab[] = [
-    { code: 'folder', index: 0, label: '', icon: 'favorite', link: '/bookmark/folders', template: '/bookmark/folders', close: false, active: false },
+    { code: 'folder', index: 0, label: '', icon: 'folder', link: '/bookmark/folders', template: '/bookmark/folders', close: false, active: false },
     { code: 'list', index: 1, label: '', icon: 'view_list', link: '/bookmark/list', template: '/bookmark/list', close: false, active: false },
     { code: 'detail', index: 2, label: '', icon: 'create', link: '/bookmark/detail/0', template: '/bookmark/detail', close: false, active: false },
     //{ code: 'new',index:2,label:'', icon: 'create', link: '/bookmark/new',template: '/bookmark/new' ,close: false, active: false }

@@ -28,9 +28,16 @@ export class FolderService {
   }
 
 
-  public findById(id: number): Observable<Folder> {
+  /*public findById(id: number): Observable<Folder> {
     return this.apiService.getById(this.apiService.endPoints.bookmarks, id.toString());
+  }*/
+
+   public searchBookmarksByFolder(folderId: number): Observable<PaginatedResult> {
+
+    return this.apiService.getPaginatedResults(this.apiService.endPoints.folders + "/" + folderId.toString() + "/bookmarks");
+   
   }
+
 
   public createFolder(folder : Folder): Observable<any> {
     return this.apiService.post(this.apiService.endPoints.folders, folder);

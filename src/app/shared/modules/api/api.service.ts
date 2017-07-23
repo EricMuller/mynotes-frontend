@@ -24,6 +24,7 @@ export class ApiService {
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
+
     public getById(url: string, id: string, timeout?: number): Observable<any> {
         return this.http.get(url + id + "/", timeout)
             .map(this.response.extractBody)
@@ -31,7 +32,8 @@ export class ApiService {
     }
 
     public deleteById(url: string, id: string, timeout?: number): Observable<any> {
-        return this.http.delete(url + id + "/", timeout)
+
+        return this.http.delete(url + "/" + id)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
@@ -69,6 +71,7 @@ export class ApiService {
     }
 
     public put(url: string, jsonData: any): Observable<any> {
+        debugger
         return this.http.put(url, jsonData).map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
-
+import { Bookmark } from 'app/modules/bookmark/model/bookmark';
+import { BookmarkService } from 'app/modules/bookmark/services/bookmark.service';
 import { FolderService } from 'app/modules/folder/services/folder.service'
 import { Folder } from 'app/modules/folder/model/folder'
 import { FolderCreateDialogComponent } from 'app/modules/folder/folder-create-dialog/folder-create-dialog.component'
 import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
 import { MdDialog, MdDialogConfig } from '@angular/material';
-
+import { MdTabStore, MdTab } from 'app/modules/tab-store/tab-store.service'
 class Stack<T> {
   _store: T[] = [];
   push(val: T) {
@@ -27,7 +28,8 @@ class Stack<T> {
 })
 export class FolderListComponent implements OnInit {
 
-  public result: PaginatedResult = new PaginatedResult();
+  public folders: PaginatedResult = new PaginatedResult();
+  public bookmarks: PaginatedResult = new PaginatedResult();
 
   public current: Folder;
 
@@ -35,7 +37,14 @@ export class FolderListComponent implements OnInit {
 
   public modeEdition: boolean = false;
 
-  constructor(private folderService: FolderService, private dialog: MdDialog, private notifier: NotifierService) { }
+  @Output('folderChange')
+  public folderEmitter = new EventEmitter<Folder>();
+
+  @Input('onlyFolder')
+  public onlyFolder: boolean = false;
+
+  constructor(private folderService: FolderService, private dialog: MdDialog, private notifier: NotifierService,private tabStore: MdTabStore,
+      private bookmarkService:BookmarkService) { }
 
   ngOnInit() {
     this.searchByLevelId(0);
@@ -55,6 +64,8 @@ export class FolderListComponent implements OnInit {
       this.searchByLevelId(0);
     }
     this.current = this.path.current();
+
+    this.folderEmitter.next(this.current);
   }
   /**
    * Call folderService search parent folder 
@@ -65,6 +76,8 @@ export class FolderListComponent implements OnInit {
     this.path.push(folder);
     this.clearResult();
     this.searchByParentId(folder.id);
+
+    this.folderEmitter.next(this.current);
   }
   /**
    *  Call folderService search children folder 
@@ -74,7 +87,7 @@ export class FolderListComponent implements OnInit {
     this.folderService.searchByLevel(id)
       .subscribe(
       result => {
-        this.pushResult(result)
+        this.pushFolderResult(result)
       },
       err => {
         console.error(err);
@@ -82,16 +95,16 @@ export class FolderListComponent implements OnInit {
   }
 
   public updateFolder(folder) {
-    
+
     this.folderService.saveFolder(folder)
       .subscribe(
       result => {
-        this.notifier.notifyError("Folder Updated successfully!",2000);
+        this.notifier.notifyError("Folder Updated successfully!", 2000);
         folder.modeEdition = false
       },
       err => {
         this.notifier.notifyError(err);
-        
+
       });
   }
   /**
@@ -99,18 +112,36 @@ export class FolderListComponent implements OnInit {
    * @param id 
    */
   private searchByParentId(id: number) {
+    this.searchFolderByParentId(id);
+    if (!this.onlyFolder) {
+      this.searchBookmarkByParentId(id);
+    }
+  }
+
+  private searchFolderByParentId(id: number) {
     this.folderService.searchByParentId(id)
       .subscribe(
       result => {
         console.log('result');
-        this.pushResult(result)
+        this.pushFolderResult(result)
 
       },
       err => {
         console.error(err);
       });
   }
+  private searchBookmarkByParentId(id: number) {
+    this.folderService.searchBookmarksByFolder(id)
+      .subscribe(
+      result => {
+        console.log('result');
+        this.pushBookmarkResult(result)
 
+      },
+      err => {
+        console.error(err);
+      });
+  }
   /**
    * Open DIALOG creation
    */
@@ -119,10 +150,8 @@ export class FolderListComponent implements OnInit {
     if (this.current) {
       config.data = { parentId: this.current.id }
     }
-
     let dialogRef = this.dialog.open(FolderCreateDialogComponent, config);
     dialogRef.afterClosed().subscribe(result => {
-      debugger
       if (result == 'ok') {
         this.refresh();
       };
@@ -147,6 +176,37 @@ export class FolderListComponent implements OnInit {
 
   }
 
+  /**
+   * Delete bookmark in  component array 
+   * @param bookmark 
+   */
+  private removeBookmark(bookmark: Bookmark) {
+    for (var i = 0; this.bookmarks.data.length > i; i++) {
+      if (this.bookmarks.data[i].id == bookmark.id) {
+        this.bookmarks.data.splice(i, 1);
+      }
+    }
+  }
+
+  /**
+   * Call removeFolderToBookmark remove Bookmark in current folder
+   * @param bookmark 
+   */
+  public removeFolderToBookmark(bookmark:Bookmark) {
+    this.bookmarkService.removeFolderToBookmark(bookmark.id,this.current.id)
+      .subscribe(
+      result => {
+        this.notifier.notifyInfo(bookmark.title + ' Deleted.');
+        this.removeBookmark(bookmark);
+      },
+      err => {
+        console.error(err);
+        this.notifier.notifyError('Error removing ' + bookmark.title + ' Deleted.');
+      });
+
+  }
+
+
   private refresh() {
     this.clearResult();
     if (this.current) {
@@ -165,15 +225,29 @@ export class FolderListComponent implements OnInit {
   }
 
   private clearResult() {
-    this.result = new PaginatedResult();
+    this.folders = new PaginatedResult();
+    this.bookmarks = new PaginatedResult();
   }
 
-  private pushResult(result: PaginatedResult) {
-    this.result.links.next = result.links.next;
+  private pushFolderResult(result: PaginatedResult) {
+    this.folders.links.next = result.links.next;
     for (var i = 0; result.data.length > i; i++) {
       let folder: Folder = result.data[i];
-      this.result.data.push(folder);
+      this.folders.data.push(folder);
     }
+  }
+
+  private pushBookmarkResult(result: PaginatedResult) {
+    this.bookmarks.links.next = result.links.next;
+    for (var i = 0; result.data.length > i; i++) {
+      let bookmark: Bookmark = result.data[i];
+      this.bookmarks.data.push(bookmark);
+    }
+  }
+
+
+  public detail(bookmark: Bookmark) {
+    this.tabStore.navigate('detail','/bookmark/detail', bookmark.id);
   }
 
 }

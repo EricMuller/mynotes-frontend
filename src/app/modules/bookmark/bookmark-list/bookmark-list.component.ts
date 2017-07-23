@@ -20,10 +20,9 @@ import { List } from 'immutable';
 import { Subject } from "rxjs/Subject";
 import { MdTabStore, MdTab } from 'app/modules/tab-store/tab-store.service'
 import { Router } from '@angular/router';
-export const routerConfig = [{
-  path: '',
-  component: WebmarkListComponent
-}];
+import { FolderSelectDialogComponent } from 'app/modules/folder/folder-select-dialog/folder-select-dialog.component'
+import { MdDialog, MdDialogConfig } from '@angular/material';
+
 
 
 /*export function asObservable(subject: Subject) {
@@ -56,7 +55,7 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   public modeEdition:boolean = false;
 
   constructor(private bookmarkService: BookmarkService, private searchService: FilterService
-    , private notifier: NotifierService, private tabStore: MdTabStore) {
+    , private notifier: NotifierService, private tabStore: MdTabStore, private dialog: MdDialog) {
     this.filter = this.searchService.get();
   }
 
@@ -167,6 +166,24 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
     }
   }
 
+/**
+   * Open Select Dialog
+   */
+  public openFolderCreateDialog(id:string) {
+    let config = new MdDialogConfig();
+   
+    config.data = { bookmarkId: id }
+   
+
+    let dialogRef = this.dialog.open(FolderSelectDialogComponent, config);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'ok') {
+        //this.refresh();
+      };
+    });
+  }
+
+
   /*public getTags() {
 
     let map = new Map();
@@ -220,3 +237,8 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   }
 
 }
+
+export const routerConfig = [{
+  path: '',
+  component: WebmarkListComponent
+}];

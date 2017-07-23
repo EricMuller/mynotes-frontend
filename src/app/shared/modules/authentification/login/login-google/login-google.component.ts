@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, NgZone, Output,Input, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { SocialAccount } from 'app/shared/modules/authentification/model/social-account.model'
 
 declare const gapi: any;
@@ -15,7 +15,9 @@ export class LoginGoogleComponent implements AfterViewInit {
 
     public account: SocialAccount = new SocialAccount();
 
-    private clientId: string = '28025127281-bc876va0d6rvv0ltt6iflt8j4qrg033k.apps.googleusercontent.com';
+    @Input('clientId')
+    private clientId:string;
+
     private scope = [
         'profile',
         'email',
@@ -57,7 +59,7 @@ export class LoginGoogleComponent implements AfterViewInit {
         this.account.email = profile.getEmail();
         this.account.firstName = profile.getGivenName();
         this.account.lastName = profile.getFamilyName();
-        this.account.url = profile.getImageUrl();
+        this.account.profileUrl = profile.getImageUrl();
     }
 
     /**
@@ -100,12 +102,12 @@ export class LoginGoogleComponent implements AfterViewInit {
     public signIn(): void {
         var that = this;
         if (this.account.access_token) {
-            that.signinChange.next(this.account.access_token);
+            that.signinChange.next(that.account.access_token);
         } else {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signIn().then(function (user) {
                 that.onGoogleProfil(user);
-                that.signinChange.next(this.account.access_token);
+                that.signinChange.next(that.account.access_token);
             });
 
         }

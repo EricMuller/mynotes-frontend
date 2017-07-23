@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, NgZone, Output,Input, EventEmitter } from '@angular/core';
 
 import { SocialAccount } from 'app/shared/modules/authentification/model/social-account.model'
 
@@ -15,8 +15,9 @@ export class LoginLinkedInComponent implements OnInit {
   private signinChange = new EventEmitter<string>();
 
   public account: SocialAccount = new SocialAccount();
-
-  private clientId: string = '77jyupgk7s70w1';
+  
+  @Input('clientId')
+  private clientId: string;
 
   constructor(private ngZone: NgZone) {
     window['onLinkedInLoad'] = () => ngZone.run(() => this.onLinkedInLoad());

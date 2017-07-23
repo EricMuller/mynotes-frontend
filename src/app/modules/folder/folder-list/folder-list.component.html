@@ -4,68 +4,88 @@
 </md-menu>
 <!-- END LIST MENU -->
 
-<div class="container">
 
-    <div class="row">
-        <!-- TOOLBAR-->
-        <md-toolbar>
-            <span>{{breadcrumb()}}</span>
-            <span class="fill-remaining-space"></span>
-            <span>
+
+<div class="row">
+    <!-- TOOLBAR-->
+    <md-toolbar>
+        <span>{{breadcrumb()}}</span>
+        <span class="fill-remaining-space"></span>
+        <span>
                 <span *ngIf="modeEdition" >
                     <button  md-icon-button (click)="openFolderCreateDialog()" placeholder="Search">
                         <md-icon color="primary">create_new_folder</md-icon>
                     </button>
                </span>
-            <md-slide-toggle [checked]="modeEdition" [(ngModel)]="modeEdition"></md-slide-toggle>
-            </span>
-        </md-toolbar>
-        <!-- END TOOLBAR-->
-        <h3 md-subheader *ngIf="current"><button md-button (click)="browseParentFolder()">..</button></h3>
+        <md-slide-toggle [checked]="modeEdition" [(ngModel)]="modeEdition"></md-slide-toggle>
+        </span>
+    </md-toolbar>
+    <!-- END TOOLBAR-->
+    <h3 md-subheader *ngIf="current"><button md-button (click)="browseParentFolder()"> <md-icon color="primary">keyboard_return</md-icon></button></h3>
 
-        <!-- LIST -->
-        <md-nav-list>
-            <md-list-item *ngFor="let folder of result.data">
-                <div style="margin-right: 10px">
-                    <button md-icon-button (click)="browseFolder(folder)">
+    <!-- LIST -->
+    <md-nav-list>
+        <md-list-item *ngFor="let folder of folders.data">
+            <div style="margin-right: 10px">
+                <button md-icon-button (click)="browseFolder(folder)">
                     <md-icon color="primary"  md-list-icon>folder</md-icon> 
                 </button>
-                </div>
+            </div>
 
-                <span *ngIf="!modeEdition || !folder.modeEdition"> 
+            <span *ngIf="!modeEdition || !folder.modeEdition"> 
                   <!--<div [mdMenuTriggerFor]="folderMenu">-->
                       <a md-line [routerLinkActive]="['active']"  style="max-width: 600px;overflow: hidden" mdTooltip="{{folder.title}}" >
                    {{folder.name }} 
                    </a>
                 </span>
-               <span *ngIf="modeEdition && folder.modeEdition">
+            <span *ngIf="modeEdition && folder.modeEdition">
                    <md-input-container>
                         <input mdInput type="text" [value]="folder.name" [(ngModel)]="folder.name"  name="name" #name="ngModel" >
                    </md-input-container>
                 </span>
-                <span class="fill-remaining-space"></span>
-                <button *ngIf="modeEdition" md-icon-button placeholder="Rename" color="primary" class="hide-sm" (click)="folder.modeEdition=!folder.modeEdition">
+            <span class="fill-remaining-space"></span>
+            <button *ngIf="modeEdition" md-icon-button placeholder="Rename" color="primary" class="hide-sm" (click)="folder.modeEdition=!folder.modeEdition">
                     <md-icon *ngIf="folder.modeEdition" >undo</md-icon>
                     <md-icon *ngIf="!folder.modeEdition" >edit</md-icon>
                 </button>
-                <button *ngIf="modeEdition && folder.modeEdition" md-icon-button placeholder="save" color="primary" class="hide-sm" (click)="updateFolder(folder)">
+            <button *ngIf="modeEdition && folder.modeEdition" md-icon-button placeholder="save" color="primary" class="hide-sm" (click)="updateFolder(folder)">
                     <md-icon *ngIf="folder.modeEdition"  >save</md-icon>
                 </button>
 
-                <button *ngIf="modeEdition" md-icon-button (click)="deleteFolder(folder)" placeholder="Delete forever" color="primary" class="hide-sm">
+            <button *ngIf="modeEdition" md-icon-button (click)="deleteFolder(folder)" placeholder="Delete forever" color="primary" class="hide-sm">
                     <md-icon>delete_forever</md-icon>
                 </button>
 
-            </md-list-item>
+        </md-list-item>
 
-            <md-divider></md-divider>
-            <md-list-item *ngIf="result.links.next" (click)="next()">
-                <md-icon>keyboard_arrow_down</md-icon>
-            </md-list-item>
+        <md-divider *ngIf="folders.links.next"></md-divider>
+        <md-list-item *ngIf="folders.links.next" (click)="next()">
+            <md-icon>keyboard_arrow_down</md-icon>
+        </md-list-item>
 
-        </md-nav-list>
-        <!-- END LIST-->
+    </md-nav-list>
+    <md-nav-list>
 
-        <div *ngIf="result.data.length==0">No result</div>
-    </div>
+        <md-list-item *ngFor="let bookmark of bookmarks.data">
+            <div style="margin-right: 10px;">
+                
+                    <a md-icon-button href="{{bookmark.url}}" target="_blank" style="max-width: 600px;overflow: hidden" mdTooltip="{{bookmark.url}}"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                
+            </div>
+
+            <div (click)="detail(bookmark)"> {{ bookmark.title }} </div>
+            <!--<div *ngFor="let tag of bookmark.tags" class="tag-cloud-list"> {{tag.name}}</div>-->
+            <span class="fill-remaining-space"></span>
+            <div style="display: flex;justify-content: center;align-items: center;" class="hide-sm">
+                <button *ngIf="modeEdition" md-icon-button (click)="removeFolderToBookmark(bookmark)" mdTooltip="Remove from folder" color="primary" class="hide-sm">
+                <md-icon>delete_forever</md-icon>
+                </button>
+            </div>
+
+        </md-list-item>
+    </md-nav-list>
+    <!-- END LIST-->
+
+    <!--<div *ngIf="folders.data.length==0">No result</div>-->
+
 </div>
