@@ -46,7 +46,7 @@ export class BookmarkService {
         return this.apiService.put(this.apiService.endPoints.bookmarks + bookmarkId.toString() + "/folders/", { id: folderId });
   }
   public removeFolderToBookmark(bookmarkId: number, folderId: number): Observable<any> {
-        return this.apiService.deleteById(this.apiService.endPoints.bookmarks + bookmarkId.toString() + "/folders/",  folderId.toString() );
+        return this.apiService.deleteById(this.apiService.endPoints.bookmarks + bookmarkId.toString() + "/folders",  folderId.toString() );
   }
 
   public saveBookmark(bookmark: Bookmark): Observable<any> {
