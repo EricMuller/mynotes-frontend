@@ -40,7 +40,7 @@ export class LoginLinkedInComponent implements OnInit {
     var linkedIn = document.createElement("script");
     linkedIn.id = "script_linkedIn_frmk";
     linkedIn.type = "text/javascript";
-    linkedIn.src = "http://platform.linkedin.com/in.js";
+    linkedIn.src = "https://platform.linkedin.com/in.js";
     linkedIn.innerHTML = "\n" +
       "api_key: " + this.clientId + "\n" +
       "authorize: true\n" +
