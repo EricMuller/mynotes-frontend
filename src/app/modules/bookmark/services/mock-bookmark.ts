@@ -1,5 +1,3 @@
-import { Bookmark } from '../model/bookmark';
-
 
 /*export const NOTES: Note[] = [
   {id: 11, title: 'Mr. Nice'},

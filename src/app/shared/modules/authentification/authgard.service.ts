@@ -1,41 +1,42 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthentificationService } from 'app/shared/modules/authentification/authentification.service'
-import { WsClientService } from 'app/shared/modules/ws/ws-client.service';
-import { User } from 'app/shared/modules/authentification/model/user.model';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {AuthentificationService} from 'app/shared/modules/authentification/authentification.service'
+import {User} from 'app/shared/modules/authentification/model/user.model';
+
 @Injectable()
 export class AuthgardService implements CanActivate {
 
-    constructor(private router: Router, private authentificationService: AuthentificationService) { }
+  constructor(private router: Router, private authentificationService: AuthentificationService) {
+  }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.getCurrentUser()) {
-            // logged in so return true
-            return true;
-        }
-
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-        return false;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (this.getCurrentUser()) {
+      // logged in so return true
+      return true;
     }
 
-    public logout() {
-        this.authentificationService.logout();
-        this.router.navigate(['/login']);
-        this.reloadPage();
-        
-    }
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+    return false;
+  }
 
-    private reloadPage() {
-        window.location.reload();
-    }
+  public logout() {
+    this.authentificationService.logout();
+    this.router.navigate(['/login']);
+    this.reloadPage();
 
-    public getCurrentUser(): User {
-        let currentUser = localStorage.getItem('webmarks_user')
-        return currentUser ? JSON.parse(currentUser) : null;
-    }
+  }
 
-    public isAuthentified(): boolean {
-        return this.getCurrentUser() != null;
-    }
+  private reloadPage() {
+    window.location.reload();
+  }
+
+  public getCurrentUser(): User {
+    const currentUser = localStorage.getItem('webmarks_user')
+    return currentUser ? JSON.parse(currentUser) : null;
+  }
+
+  public isAuthentified(): boolean {
+    return this.getCurrentUser() != null;
+  }
 }

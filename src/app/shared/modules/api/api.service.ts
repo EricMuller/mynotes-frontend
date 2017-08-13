@@ -2,7 +2,7 @@
 
 import { Injectable, Inject } from '@angular/core';
 import { WebmarksEndPoint } from 'app/config/app.api.config';
-import { Http, Response, Headers } from '@angular/http';
+import { Headers } from '@angular/http';
 import { CustomHttp } from 'app/shared/modules/http/custom.http'
 import { Observable } from 'rxjs/Rx';
 import { PaginatedResult } from 'app/shared/modules/api/paginated-result'
@@ -20,39 +20,39 @@ export class ApiService {
 
 
     public getByIdWithParams(url: string, id: string, params: string, timeout?: number): Observable<any> {
-        return this.http.get(url + id + "/" + params, timeout)
+        return this.http.customGet(url + id + '/' + params, timeout)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
 
     public getById(url: string, id: string, timeout?: number): Observable<any> {
-        return this.http.get(url + id + "/", timeout)
+        return this.http.customGet(url + id + '/', timeout)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
 
     public deleteById(url: string, id: string, timeout?: number): Observable<any> {
 
-        return this.http.delete(url + "/" + id)
+        return this.http.customeDelete(url + '/' + id)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
 
     public get(url: string): Observable<any> {
-        return this.http.get(url)
+        return this.http.customGet(url)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
 
 
     public getPaginatedResults(url: string): Observable<PaginatedResult> {
-        return this.http.get(url)
+        return this.http.customGet(url)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
 
     public getPage(url: string, page: number): Observable<PaginatedResult> {
-        return this.http.get(url)
+        return this.http.customGet(url)
             .map(this.response.extractBody)
             .catch(this.response.handleError).share();
     }
@@ -80,20 +80,20 @@ export class ApiService {
 
         let headers = new Headers();
         let formData: FormData = new FormData();
-        //formData.append('files', files[0], files[0].name);
+        // formData.append('files', files[0], files[0].name);
         // For multiple files
         for (let i = 0; i < files.length; i++) {
             formData.append(`files[]`, files[i], files[i].name);
         }
 
-        if (postData !== "" && postData !== undefined && postData !== null) {
+        if (postData !== '' && postData !== undefined && postData !== null) {
             for (var property in postData) {
                 if (postData.hasOwnProperty(property)) {
                     formData.append(property, postData[property]);
                 }
             }
         }
-        console.log("postWithFile :formData=" + formData)
+        console.log('postWithFile :formData=' + formData)
         return this.http.post(url, formData, {
             headers: headers
         }).map(this.response.extractBody)

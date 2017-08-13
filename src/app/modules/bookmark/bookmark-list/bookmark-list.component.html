@@ -8,17 +8,17 @@
       <span class="fill-remaining-space"></span>
       <span>
         <button  *ngIf="showResult" md-icon-button (click)="search()" mdTooltip="Filter result">
-            <md-icon>filter_list</md-icon> 
+            <md-icon>filter_list</md-icon>
         </button>
         <button *ngIf="showResult" md-icon-button (click)="showSearch()" mdTooltip="Search">
-            <md-icon>search</md-icon> 
+            <md-icon>search</md-icon>
         </button>
 
         <button *ngIf="!showResult"  md-raised-button (click)="search()" mdTooltip="Search">
             <md-icon>search</md-icon> Search
         </button>
         <button *ngIf="showResult"  md-icon-button (click)="search()" mdTooltip="Refresh">
-            <md-icon>refresh</md-icon> 
+            <md-icon>refresh</md-icon>
         </button>
       </span>
       <md-slide-toggle *ngIf="showResult" [checked]="modeEdition" [(ngModel)]="modeEdition"></md-slide-toggle>
@@ -45,8 +45,9 @@
                           {{ bookmark.title }}
         </a>-->
         <!-- [routerLink]="['/webmark/detail', bookmark.id ]"-->
-        <span> 
+        <span>
             <div><a md-line  href="{{bookmark.url}}" target="_blank" style="max-width: 600px;overflow: hidden" mdTooltip="{{bookmark.url}}"> {{ bookmark.title }} </a></div>
+            <div class="tag-cloud-list"> {{bookmark.url}}</div>
             <div *ngFor="let tag of bookmark.tags" class="tag-cloud-list"> {{tag.name}}</div>
         </span>
 

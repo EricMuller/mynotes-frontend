@@ -1,6 +1,4 @@
 
-import { Bookmark } from '../model/bookmark';
-
 export class SearchNoteResult {
 
   next: number;

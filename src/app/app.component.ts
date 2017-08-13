@@ -1,24 +1,15 @@
-import { Component } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
-
-import { WebsocketService } from './shared/modules/ws/websocket.service';
-import { WsClientService } from './shared/modules/ws/ws-client.service';
-
-import { Subscription } from "rxjs";
-import { TimerObservable } from "rxjs/observable/TimerObservable";
-import { AuthgardService } from './shared/modules/authentification/authgard.service'
-import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
-
-
+import {Component, ViewEncapsulation} from '@angular/core';
+import {WsClientService} from './shared/modules/ws/ws-client.service';
+import {Subscription} from 'rxjs';
+import {AuthgardService} from './shared/modules/authentification/authgard.service'
 
 @Component({
   selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  
-})
 
+})
 
 export class AppComponent {
   title: string = 'app works!';
@@ -26,7 +17,7 @@ export class AppComponent {
 
   private tick: string;
   private timer: Subscription;
-  
+
   private message = {
     token: 'tutorialedge',
     type: 'info',
@@ -48,11 +39,11 @@ export class AppComponent {
   }
 
   ngOnDestroy() {
-   // this.timer.unsubscribe();
+    // this.timer.unsubscribe();
   }
 
-  exception(exception){
-       console.log("exception from Server: " + exception);
+  exception(exception) {
+    console.log('exception from Server: ' + exception);
   }
 
   onScroll(event) {
@@ -64,6 +55,6 @@ export class AppComponent {
     this.wsClientService.messages.next(this.message);
     this.message.data = '';
   }
- 
+
 
 }
