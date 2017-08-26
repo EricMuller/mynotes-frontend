@@ -8,7 +8,7 @@ export class WebmarksEndPoint {
     public tags: string;
     public tagsCount: string;
     public upload: string;
-    public archive: string;
+    public storages: string;
     public folders: string;
 }
 
@@ -19,7 +19,7 @@ export const MYWEBMARK_ENPOINT: WebmarksEndPoint = {
   tags: '/api/v1/tags/',
   tagsCount: '/api/v1/tags/count/',
   upload: '/api/v1/upload/',
-  archive:  '/api/v1/archives/',
+  storages:  '/api/v1/storages/',
   folders:  '/api/v1/folders/',
  
 };

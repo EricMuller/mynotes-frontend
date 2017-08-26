@@ -37,7 +37,7 @@ export class BookmarkService {
   }
 
   public addFolderToBookmark(bookmarkId: number, folderId: number): Observable<any> {
-    return this.apiService.put(this.apiService.endPoints.bookmarks + bookmarkId.toString() + '/folders/', {id: folderId});
+    return this.apiService.post(this.apiService.endPoints.bookmarks + bookmarkId.toString() + '/folders/', {id: folderId});
   }
 
   public removeFolderToBookmark(bookmarkId: number, folderId: number): Observable<any> {
@@ -99,9 +99,12 @@ export class BookmarkService {
     return this.apiService.getById(this.apiService.endPoints.bookmarks, id.toString());
   }
 
-  public archiveBookmark(bookmark: Bookmark): Observable<any> {
-    //crawl
-    return this.apiService.getByIdWithParams(this.apiService.endPoints.bookmarks, bookmark.id.toString(), 'archive', 50000);
+  /**
+   * Crawl and store
+   * @param bookmark
+   */
+  public storeBookmark(bookmark: Bookmark): Observable<any> {
+    return this.apiService.getByIdWithParams(this.apiService.endPoints.bookmarks, bookmark.id.toString(), 'store', 50000);
   }
 
   public loadTitle(url: string): Observable<any> {
@@ -109,11 +112,11 @@ export class BookmarkService {
   }
 
   public urlHtml(bookmark: Bookmark) {
-    return this.apiService.endPoints.archive + bookmark.archive_id + '.html'
+    return this.apiService.endPoints.storages + bookmark.archive_id + '.html'
   }
 
   public urlDownload(bookmark: Bookmark) {
-    return this.apiService.endPoints.archive + bookmark.archive_id + '/download/'
+    return this.apiService.endPoints.storages + bookmark.archive_id + '/download/'
   }
 
 }
