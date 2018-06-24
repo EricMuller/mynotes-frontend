@@ -115,7 +115,13 @@ import {FolderSelectDialogComponent} from './modules/folder/folder-select-dialog
     FolderListComponent,
     ConfirmComponent,
     PolicyComponent,
-    ContentElementDialog, DialogDemo, IFrameDialog, JazzDialog, LoginGoogleComponent, LoginLinkedInComponent, FolderSelectDialogComponent
+    ContentElementDialog,
+    DialogDemo,
+    IFrameDialog,
+    JazzDialog,
+    LoginGoogleComponent,
+    LoginLinkedInComponent,
+    FolderSelectDialogComponent
 
   ],
   imports: [

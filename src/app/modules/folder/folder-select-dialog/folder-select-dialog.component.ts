@@ -24,44 +24,39 @@ export class FolderSelectDialogComponent implements OnInit {
   }
 
   /**
- * 
+ *
  */
   public closeDialog() {
     this.dialogRef.close('cancel');
   }
 
-  /**
-   * 
-   */
+
   public addFolderToBookmark() {
     debugger
     if (!this.selectedFolder) {
       this.notifierService.notifyError("A folder should be selected !");
     } else {
       if (this.bookmarkId && this.selectedFolder.id) {
-        
+
         this.bookmarkService.addFolderToBookmark(this.bookmarkId, this.selectedFolder.id).subscribe(
           (response)=>{
             this.notifierService.notifyError("Ok");
             this.dialogRef.close('ok');
-          
-          }  
+          }
         );
-        
+
       }else{
         this.notifierService.notifyError("Please select a folder or a bookmark");
       }
     }
-
     /* this.folderService.saveFolder(folder).subscribe(tag => {
        this.notifierService.notifyInfo('Folder created with Succes', 3000);
        this.dialogRef.close('ok');
      }, error => {
        let restResponse = RestHelper.getRestResponse(error);
        this.notifierService.notifyError(String(restResponse.exception));
-    
-     });*/
 
+     });*/
   }
 
   public onFolderChange(folder: Folder) {
