@@ -1,35 +1,35 @@
-<md-menu #appMenuAppNew="mdMenu">
-  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
-</md-menu>
+<mat-menu #appMenuAppNew="matMenu">
+  <a mat-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</mat-menu>
 
-<md-menu #appMenu="mdMenu"> </md-menu>
+<mat-menu #appMenu="matMenu"> </mat-menu>
 
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>
-    
-    <button md-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites']"><md-icon>keyboard_backspace</md-icon> </button>
+
+    <button mat-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites']"><mat-icon>keyboard_backspace</mat-icon> </button>
   </span>
   <span>Create a Favorite</span>
   <span class="fill-remaining-space"></span>
 
   <span>
-    <button md-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites/create']" placeholder="New Bookmark">
-        <md-icon>add_box</md-icon>
+    <button mat-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites/create']" placeholder="New Bookmark">
+        <mat-icon>add_box</mat-icon>
     </button>
-    <button md-icon-button >
-     <md-icon>search</md-icon>
+    <button mat-icon-button >
+     <mat-icon>search</mat-icon>
     </button>
   </span>
   <span>
-    <button md-icon-button [mdMenuTriggerFor]="appMenu">
-      <md-icon>more_vert</md-icon>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>more_vert</mat-icon>
     </button>
   </span>
-</md-toolbar>
+</mat-toolbar>
 
 <!--  Tool bar -->
 
 <div class="container">
-   
-  
+
+
 </div>

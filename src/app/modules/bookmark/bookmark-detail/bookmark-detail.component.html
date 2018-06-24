@@ -1,32 +1,32 @@
 <!--
-<md-menu #appMenuAppNew="mdMenu">
-  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
-</md-menu>
+<mat-menu #appMenuAppNew="matMenu">
+  <a mat-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</mat-menu>
 
-<md-menu #appMenu="mdMenu"> 
-  <button md-menu-item *ngIf="isAuthentified()" (click)="logout()"> Log Out </button>
-</md-menu>
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item *ngIf="isAuthentified()" (click)="logout()"> Log Out </button>
+</mat-menu>
 
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>
-    <button md-icon-button (click)="back()"><md-icon>keyboard_backspace</md-icon> </button>
+    <button mat-icon-button (click)="back()"><mat-icon>keyboard_backspace</mat-icon> </button>
   </span>
   <span *ngIf="note.id">{{note.title}}</span>
   <span *ngIf="!note.id">Create a new bookmark</span>
   <span class="fill-remaining-space"></span>
 
   <span>
-    <button *ngIf="note.title" md-icon-button (click)="save(note)" placeholder="Save">
-        <md-icon>save</md-icon>
+    <button *ngIf="note.title" mat-icon-button (click)="save(note)" placeholder="Save">
+        <mat-icon>save</mat-icon>
     </button>
-    <a *ngIf="note.url && note.id" md-icon-button target="_blank" href="{{note.url}}"><md-icon>open_in_browser</md-icon></a>
+    <a *ngIf="note.url && note.id" mat-icon-button target="_blank" href="{{note.url}}"><mat-icon>open_in_browser</mat-icon></a>
   </span>
   <span>
-    <button md-icon-button [mdMenuTriggerFor]="appMenu">
-      <md-icon>more_vert</md-icon>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>more_vert</mat-icon>
     </button>
   </span>
-</md-toolbar>-->
+</mat-toolbar>-->
 
 <div class="container">
 
@@ -34,128 +34,128 @@
     <!--  Tool bar -->
     <div class="app-note-detail-content">
       <!-- TOOLBAR  -->
-      <md-toolbar>
+      <mat-toolbar>
         <span *ngIf="!bookmark.title">Create New {{bookmark.kind}}</span>
         <span *ngIf="bookmark.title">{{bookmark.title}}</span>
 
         <span class="fill-remaining-space"></span>
         <span>
-                <button md-icon-button *ngIf="bookmark.title" (click)="save(bookmark)" placeholder="Search" [disabled]="modeEdition==false">
-                <md-icon  [color]="getColorEdition()" >save</md-icon> 
+                <button mat-icon-button *ngIf="bookmark.title" (click)="save(bookmark)" placeholder="Search" [disabled]="modeEdition==false">
+                <mat-icon  [color]="getColorEdition()" >save</mat-icon>
                 </button>
         </span>
-        <md-slide-toggle [checked]="modeEdition" [(ngModel)]="modeEdition"></md-slide-toggle>
-      </md-toolbar>
+        <mat-slide-toggle [checked]="modeEdition" [(ngModel)]="modeEdition"></mat-slide-toggle>
+      </mat-toolbar>
       <!--  END TOOLBAR  -->
       <!--  CONTENT  -->
       <div style="display: flex;flex-wrap: wrap; margin: 5px">
         <div>
-          <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="bookmark.kind" >
-            <md-button-toggle *ngFor="let type of KINDS " value="{{type.kind}}" [disabled]="modeEdition==false">
-              <md-icon>{{type.icon}}</md-icon>{{type.kind}}</md-button-toggle>
-          </md-button-toggle-group>
+          <mat-button-toggle-group #type="matButtonToggleGroup" [(ngModel)]="bookmark.kind" >
+            <mat-button-toggle *ngFor="let type of KINDS " value="{{type.kind}}" [disabled]="modeEdition==false">
+              <mat-icon>{{type.icon}}</mat-icon>{{type.kind}}</mat-button-toggle>
+          </mat-button-toggle-group>
         </div>
         <div>
           <app-rating [(rate)]="bookmark.rate" (rate-change)="onRate($event)" [disabled]="modeEdition==false"></app-rating>
         </div>
         <div class="fill-remaining-space"></div>
         <div style="display: flex;align-items: center;margin-right:10px; " >
-          <md-icon *ngIf="bookmark.favorite" color="accent" (click)="selectFavorite(false)" >favorite</md-icon>
-          <md-icon *ngIf="!bookmark.favorite" color="accent" (click)="selectFavorite(true)">favorite_border</md-icon>
-          <md-checkbox color="primary" [(ngModel)]="bookmark.favorite" class="hidden" >Fav</md-checkbox>
+          <mat-icon *ngIf="bookmark.favorite" color="accent" (click)="selectFavorite(false)" >favorite</mat-icon>
+          <mat-icon *ngIf="!bookmark.favorite" color="accent" (click)="selectFavorite(true)">favorite_border</mat-icon>
+          <mat-checkbox color="primary" [(ngModel)]="bookmark.favorite" class="hidden" >Fav</mat-checkbox>
         </div>
       </div>
 
-     
-      <md-tab-group (selectedIndexChange)="selectedIndexChange($event)">
-        <md-tab>
-          <template md-tab-label>
+
+      <mat-tab-group (selectedIndexChange)="selectedIndexChange($event)">
+        <mat-tab>
+          <ng-template mat-tab-label>
             General
-          </template>
-          <md-card>
-            <md-card-content >
-              
-              <md-input-container class="full-width" >
-                <input mdInput placeholder="Title" [(ngModel)]="bookmark.title" required [disabled]="modeEdition==false">
-              </md-input-container>
-              
+          </ng-template>
+          <mat-card>
+            <mat-card-content >
 
-              <md-input-container class="full-width">
-                <input mdInput placeholder="URL" [(ngModel)]="bookmark.url" [disabled]="modeEdition==false">
-              </md-input-container>
+              <mat-input-container class="full-width" >
+                <input matInput placeholder="Title" [(ngModel)]="bookmark.title" required [disabled]="modeEdition==false">
+              </mat-input-container>
 
-              <button md-raised-button color="primary" (click)="loadTitle(bookmark.url)" placeholder="load Title" [disabled]="modeEdition==false">Load Title from url</button>
+
+              <mat-input-container class="full-width">
+                <input matInput placeholder="URL" [(ngModel)]="bookmark.url" [disabled]="modeEdition==false">
+              </mat-input-container>
+
+              <button mat-raised-button color="primary" (click)="loadTitle(bookmark.url)" placeholder="load Title" [disabled]="modeEdition==false">Load Title from url</button>
               <!-- <material-datepicker [(date)]="note.schedule_dt"></material-datepicker>-->
 
-            
-            </md-card-content>
-            <md-card-actions>
-            </md-card-actions>
 
-          </md-card>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+
+          </mat-card>
 
           <app-tag-select-card [(tagSelected)]="bookmark.tags" [readonly]="modeEdition==false" [disabled]="modeEdition==false"></app-tag-select-card>
-          
-          <!--<md-card>
-          (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
-      <md-card-header>
-        <md-card-title><span *ngFor="let tag of note.tags" class="inline"> <div class="tag-cloud-list">{{tag.name}}</div>  
-          <button md-icon-button color="primary" (click)="delete(tag)"><md-icon>delete</md-icon></button>
-      </span></md-card-title>
-      </md-card-header>
-      <md-card-content>
-         
-        <form>
-          <md-input-container>
-            <input type="text" placeholder="Tag" mdInput [formControl]="myControl" [mdAutocomplete]="auto" ngModel>
 
-          </md-input-container>
-          <button *ngIf="(filteredOptions | async)?.length==0" md-button (click)="createTag($event)">Create...</button>
-          <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-            <md-option *ngFor="let tag of filteredOptions | async" [value]="tag">
+          <!--<mat-card>
+          (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
+      <mat-card-header>
+        <mat-card-title><span *ngFor="let tag of note.tags" class="inline"> <div class="tag-cloud-list">{{tag.name}}</div>
+          <button mat-icon-button color="primary" (click)="delete(tag)"><mat-icon>delete</mat-icon></button>
+      </span></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <form>
+          <mat-input-container>
+            <input type="text" placeholder="Tag" matInput [formControl]="myControl" [mdAutocomplete]="auto" ngModel>
+
+          </mat-input-container>
+          <button *ngIf="(filteredOptions | async)?.length==0" mat-button (click)="createTag($event)">Create...</button>
+          <mat-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let tag of filteredOptions | async" [value]="tag">
               {{ tag.name }}
-            </md-option>
-          </md-autocomplete>
+            </mat-option>
+          </mat-autocomplete>
 
         </form>
-      </md-card-content>
-    </md-card>
+      </mat-card-content>
+    </mat-card>
     -->
 
-        </md-tab>
+        </mat-tab>
 
-        <md-tab>
-          <template md-tab-label>
+        <mat-tab>
+          <ng-template mat-tab-label>
             Editor
-          </template>
+          </ng-template>
 
-        </md-tab>
+        </mat-tab>
 
-        <md-tab>
-          <template md-tab-label>
+        <mat-tab>
+          <ng-template mat-tab-label>
             Tracking
-          </template>
-          <md-card class="date">
-            <md-card-header>
-              <md-card-title><strong>Date</strong></md-card-title>
-            </md-card-header>
-            <md-card-content>
+          </ng-template>
+          <mat-card class="date">
+            <mat-card-header>
+              <mat-card-title><strong>Date</strong></mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
               Date Creation:{{bookmark.created_dt | date:'medium'}}
               <!--<input type='text' #myDate [(ngModel)]='note.created_dt'/><br>-->
-            </md-card-content>
-          </md-card>
+            </mat-card-content>
+          </mat-card>
 
-        </md-tab>
+        </mat-tab>
 
 
-      </md-tab-group>
+      </mat-tab-group>
 
 
       <div *ngIf="showEditor" class="editor">
         <!--<app-tiny-editor [(ngModel)]='note.description' ></app-tiny-editor> -->
         <app-tiny-editor [elementId]="my-editor-id" [content]='bookmark.description' (onEditorKeyup)="keyupHandlerFunction($event)"></app-tiny-editor>
       </div>
-      <!-- <button (click)="save()" md-mini-fab class="mini-fab"><md-icon>save</md-icon></button>-->
+      <!-- <button (click)="save()" mat-mini-fab class="mini-fab"><mat-icon>save</mat-icon></button>-->
     </div>
 
   </div>

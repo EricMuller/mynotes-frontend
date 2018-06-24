@@ -6,8 +6,8 @@ import {NotifierService} from 'app/shared/modules/notifications/notifier.service
 import {Tag} from 'app/modules/tags/model/tag';
 import {Location} from '@angular/common';
 import {FilterService} from '../services/search.service';
-import {MdSnackBar} from '@angular/material';
 import {AuthgardService} from 'app/shared/modules/authentification/authgard.service'
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-bookmark-detail',
@@ -25,13 +25,13 @@ export class WebmarkDetailComponent implements OnInit {
     , {'kind': KIND_TODO, 'icon': 'schedule'}];
 
 
-  public showEditor: boolean = false;
+  public showEditor = false;
 
-  public modeEdition: boolean = false;
+  public modeEdition = false;
 
 
   constructor(private router: Router, private location: Location, private bookmarkService: BookmarkService, private route: ActivatedRoute
-    , private notifier: NotifierService, private snackBar: MdSnackBar, private filterService: FilterService,
+    , private notifier: NotifierService, private snackBar: MatSnackBar, private filterService: FilterService,
               private authgardService: AuthgardService) {
 
   }
@@ -45,12 +45,12 @@ export class WebmarkDetailComponent implements OnInit {
     this.bookmark.kind = KIND_LINK;
 
     this.route.params.subscribe(params => {
-      let id = params['id'];
-      if (id && id != 0) {
+      const id = params['id'];
+      if (id && id !== '0') {
         this.bookmarkService.findById(id).subscribe(
-          webmark => {
+          bookmark => {
             console.log('ngOnInit');
-            this.bookmark = webmark;
+            this.bookmark = bookmark;
           }
         );
       }
@@ -97,7 +97,7 @@ export class WebmarkDetailComponent implements OnInit {
   }
 
   selectedIndexChange(evt) {
-    this.showEditor = evt == 1;
+    this.showEditor = evt === 1;
   }
 
   public selectFavorite(favorite: boolean) {
@@ -111,7 +111,7 @@ export class WebmarkDetailComponent implements OnInit {
   }
 
   public delete(tag: Tag) {
-    this.bookmark.tags = this.bookmark.tags.filter(t => t.id != tag.id).slice();
+    this.bookmark.tags = this.bookmark.tags.filter(t => t.id !== tag.id).slice();
   }
 
 
@@ -120,8 +120,8 @@ export class WebmarkDetailComponent implements OnInit {
   }
 
   public tagRemoved(eventTag) {
-    for (var i = 0; this.bookmark.tags.length > i; i++) {
-      if (this.bookmark.tags[i].id == eventTag.id) {
+    for (let i = 0; this.bookmark.tags.length > i; i++) {
+      if (this.bookmark.tags[i].id === eventTag.id) {
         this.bookmark.tags.splice(i, 1);
       }
     }

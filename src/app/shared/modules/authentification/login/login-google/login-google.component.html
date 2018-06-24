@@ -1,6 +1,6 @@
 <div style="display: flex;">
     <div style="margin-right: 20px" class="element">
-        <img md-fab-image src="/assets/vendors/social_icons/g+.png" (click)="signIn()">
+        <img mat-fab-image src="/assets/vendors/social_icons/g+.png" (click)="signIn()">
     </div>
     <div class="element">
         <span *ngIf="account.id">
@@ -14,8 +14,8 @@
     </div>
     <div class="element">
          <div class="element" style="padding-top: 15px">
-          <button *ngIf="account.id" md-raised-button style="width: 120px;" class="opaque"  (click)="signIn()"><i class="fa fa-google" aria-hidden="true"></i> &nbsp;Sign in </button>
-          <button *ngIf="!account.id" md-raised-button style="width: 120px;" class="opaque" (click)="signIn()"><i class="fa fa-google" aria-hidden="true"></i> <span class="opaque">&nbsp;<b>Connexion</b> </span></button>
+          <button *ngIf="account.id" mat-raised-button style="width: 120px;" class="opaque"  (click)="signIn()"><i class="fa fa-google" aria-hidden="true"></i> &nbsp;Sign in </button>
+          <button *ngIf="!account.id" mat-raised-button style="width: 120px;" class="opaque" (click)="signIn()"><i class="fa fa-google" aria-hidden="true"></i> <span class="opaque">&nbsp;<b>Connexion</b> </span></button>
     </div>
     </div>
 </div>

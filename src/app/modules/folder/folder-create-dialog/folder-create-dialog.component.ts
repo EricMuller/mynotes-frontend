@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
-import { FolderService } from 'app/modules/folder/services/folder.service';
-import { Folder } from 'app/modules/folder/model/folder';
-import { RestHelper } from 'app/modules/helpers/rest-helper';
-import { FormHelper } from 'app/modules/helpers/form-helper';
-import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {FolderService} from 'app/modules/folder/services/folder.service';
+import {Folder} from 'app/modules/folder/model/folder';
+import {RestHelper} from 'app/modules/helpers/rest-helper';
+import {FormHelper} from 'app/modules/helpers/form-helper';
+import {NotifierService} from 'app/shared/modules/notifications/notifier.service'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-folder-create-dialog',
@@ -16,11 +16,11 @@ export class FolderCreateDialogComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(public dialogRef: MdDialogRef<FolderCreateDialogComponent>,
-            private folderService: FolderService,
-            private notifierService: NotifierService,
-            private _fb: FormBuilder,
-            @Inject(MD_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<FolderCreateDialogComponent>,
+              private folderService: FolderService,
+              private notifierService: NotifierService,
+              private _fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.form = this._fb.group({
       name: ['', Validators.required],
@@ -31,22 +31,23 @@ export class FolderCreateDialogComponent implements OnInit {
 
   ngOnInit() {
   }
-/**
- * 
- */
+
+  /**
+   *
+   */
   public createFolder() {
-    let name = this.form.controls['name'].value
-    if (name != "") {
+    const name = this.form.controls['name'].value
+    if (name !== '') {
       let parentId = 0;
       if (this.data) {
         parentId = this.data['parentId'];
       }
-      let folder: Folder = Folder.create(name, parentId);
+      const folder: Folder = Folder.create(name, parentId);
       this.folderService.saveFolder(folder).subscribe(tag => {
         this.notifierService.notifyInfo('Folder created with Succes', 3000);
         this.dialogRef.close('ok');
       }, error => {
-        let restResponse = RestHelper.getRestResponse(error);
+        const restResponse = RestHelper.getRestResponse(error);
         if (!FormHelper.updateFormWithRestResponse(restResponse, this.form)) {
           this.notifierService.notifyError(String(restResponse.exception));
         }
@@ -54,9 +55,10 @@ export class FolderCreateDialogComponent implements OnInit {
     }
 
   }
-/**
- * 
- */
+
+  /**
+   *
+   */
   public closeDialog() {
     this.dialogRef.close('cancel');
   }

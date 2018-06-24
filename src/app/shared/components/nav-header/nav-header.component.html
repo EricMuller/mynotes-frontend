@@ -1,4 +1,4 @@
-<!--header 
+<!--header
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="containers">
     <div class="navbar-header">
@@ -9,14 +9,14 @@
           </button>
       <a class="navbar-brand" [routerLink]="['/']" tooltip="Search Notes"><span class="fa fa-home"></span> 01NOTES!</a>
      </div>
-   
+
     <ul class="nav navbar-nav "  >
       <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./favorites']">Favorites</a></li>
       <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./favorites']">Notes</a></li>
       <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./tags']">Tags</a></li>
       <li role="presentation"><a [routerLinkActive]="['active']" [routerLink]="['./favorites']">Paramétrage</a></li>
     </ul>
-     
+
     <nav *ngIf="isAuthentified()" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right profile">
         <li class="dropdown top_nav">
@@ -30,55 +30,55 @@
     </nav>
 
   </div>
-  
- 
+
+
 </div>-->
 
 
-<md-menu #appMenuApp="mdMenu">
-    <a md-menu-item  [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
-    <a md-menu-item  [routerLinkActive]="['active']" [routerLink]="['/favorites']">Favorites</a>
-    <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['/tags']">Tags</a>
-</md-menu>
+<mat-menu #appMenuApp="matMenu">
+    <a mat-menu-item  [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+    <a mat-menu-item  [routerLinkActive]="['active']" [routerLink]="['/favorites']">Favorites</a>
+    <a mat-menu-item [routerLinkActive]="['active']" [routerLink]="['/tags']">Tags</a>
+</mat-menu>
 
-<md-menu #appMenu="mdMenu">
-  <button md-menu-item> Settings </button>
-  <button md-menu-item *ngIf="isAuthentified()"> Log Out </button>
-</md-menu>
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item> Settings </button>
+  <button mat-menu-item *ngIf="isAuthentified()"> Log Out </button>
+</mat-menu>
 
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
  <span>
-    <button md-icon-button [mdMenuTriggerFor]="appMenuApp">
-    <md-icon>apps</md-icon>
+    <button mat-icon-button [matMenuTriggerFor]="appMenuApp">
+    <mat-icon>apps</mat-icon>
     </button>
   </span>
   <span>{{title}}</span>
-  <!--<a md-button [routerLinkActive]="['active']" [routerLink]="['//']"><span class="fa fa-home"></span><span>01NOTES!</span></a>
-  <a md-button [routerLinkActive]="['active']" [routerLink]="['./favorites']">Notes</a>
-  <a md-button [routerLinkActive]="['active']" [routerLink]="['./tags']">Tags</a>-->
+  <!--<a mat-button [routerLinkActive]="['active']" [routerLink]="['//']"><span class="fa fa-home"></span><span>01NOTES!</span></a>
+  <a mat-button [routerLinkActive]="['active']" [routerLink]="['./favorites']">Notes</a>
+  <a mat-button [routerLinkActive]="['active']" [routerLink]="['./tags']">Tags</a>-->
   <!-- This fills the remaining space of the current row -->
- 
+
   <span class="example-fill-remaining-space"></span>
 
   <span>
-    <button md-icon-button [mdMenuTriggerFor]="appMenu">
-    <md-icon>more_vert</md-icon>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>more_vert</mat-icon>
     </button>
   </span>
-</md-toolbar>
+</mat-toolbar>
 
-<!--<md-toolbar>
+<!--<mat-toolbar>
 <span>
-  <nav md-tab-nav-bar>
-    <a md-tab-link   [routerLink]="['./favorites']"   routerLinkActive #rla1="routerLinkActive" [active]="rlaSafe && rla1.isActive">   Favorites  </a>
-    <a md-tab-link   [routerLink]="['./favorites']"   routerLinkActive #rla2="routerLinkActive" [active]="rlaSafe && rla2.isActive">  Notes  </a>
-    <a md-tab-link   [routerLink]="['./tags']" routerLinkActive #rla3="routerLinkActive" [active]="rlaSafe && rla3.isActive">   Tags  </a>
-  
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link   [routerLink]="['./favorites']"   routerLinkActive #rla1="routerLinkActive" [active]="rlaSafe && rla1.isActive">   Favorites  </a>
+    <a mat-tab-link   [routerLink]="['./favorites']"   routerLinkActive #rla2="routerLinkActive" [active]="rlaSafe && rla2.isActive">  Notes  </a>
+    <a mat-tab-link   [routerLink]="['./tags']" routerLinkActive #rla3="routerLinkActive" [active]="rlaSafe && rla3.isActive">   Tags  </a>
+
   </nav>
 </span>
 
 
-</md-toolbar>-->
+</mat-toolbar>-->
 
 
 

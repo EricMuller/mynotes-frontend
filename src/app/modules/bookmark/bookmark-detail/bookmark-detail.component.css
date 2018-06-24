@@ -13,16 +13,16 @@
 
 
 /*bug https://github.com/angular/material2/issues/1881*/
-.md-input-prefix md-icon, .md-input-suffix md-icon  { 
+.mat-input-prefix mat-icon, .mat-input-suffix mat-icon  {
   vertical-align: text-bottom;
 }
 
-.app-note-detail-content md-card {
+.app-note-detail-content mat-card {
  /* margin-left: 20px;
   margin-right: 20px;*/
   margin-top: 0px;
   margin-bottom: 0px;
- } 
+ }
 
 
 
@@ -37,34 +37,34 @@
   margin-top: 10px;
 }*/
 
-.app-note-detail-content div.row md-card {
+.app-note-detail-content div.row mat-card {
   margin-left: 1px;
   margin-right: 1px;
 }
- 
 
-/*.app-tag-select-card.md-card {
+
+/*.app-tag-select-card.mat-card {
   margin-left: 1px !important;
   margin-right: 1px !important;
 }*/
 
 /*
-md-card.md-card.mat-card{
+mat-card.mat-card.mat-card{
    margin-left: 1px ;
 }
 
-md-card.rating.mat-card{
+mat-card.rating.mat-card{
     padding-top: 5px;
     padding-bottom: 5px;
     margin-top: 0px ;
     margin-bottom: 1px ;
 }
 
-md-card.date.mat-card{
+mat-card.date.mat-card{
   margin: 10px ;
 }
 */
 
-md-card.mat-card{
+mat-card.mat-card{
   box-shadow: none;
   }

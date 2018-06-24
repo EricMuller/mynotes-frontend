@@ -5,42 +5,42 @@
 
     <div class="row">
     <!--
-      <md-toolbar>
+      <mat-toolbar>
        <span>Search</span>
       <span class="fill-remaining-space"></span>
       <span>
-        <button md-icon-button (click)="search()" placeholder="Search">
-            <md-icon>youtube_searched_for</md-icon> 
+        <button mat-icon-button (click)="search()" placeholder="Search">
+            <mat-icon>youtube_searched_for</mat-icon>
         </button>
       </span>
-      </md-toolbar>
+      </mat-toolbar>
     -->
       <div id="conteneur">
-        <md-card>
-          <md-card-content>
-            <md-button-toggle-group #type="mdButtonToggleGroup" [(ngModel)]="filter.kind">
-              <md-button-toggle value="{{KIND_LINK}}">
-                <md-icon>link</md-icon>Link
-              </md-button-toggle>
-              <md-button-toggle value="{{KIND_NOTE}}">
-                <md-icon>note</md-icon>Note
-              </md-button-toggle>
-              <md-button-toggle value="{{KIND_TODO}}">
-                <md-icon>schedule</md-icon>Todo
-              </md-button-toggle>
-            </md-button-toggle-group>
-          </md-card-content>
-        </md-card>
-        <md-card>
-         <!-- <button md-raised-button color="primary" [routerLink]="['../list']" placeholder="Search">Search Webmark(s)</button>-->
-        </md-card>
+        <mat-card>
+          <mat-card-content>
+            <mat-button-toggle-group #type="matButtonToggleGroup" [(ngModel)]="filter.kind">
+              <mat-button-toggle value="{{KIND_LINK}}">
+                <mat-icon>link</mat-icon>Link
+              </mat-button-toggle>
+              <mat-button-toggle value="{{KIND_NOTE}}">
+                <mat-icon>note</mat-icon>Note
+              </mat-button-toggle>
+              <mat-button-toggle value="{{KIND_TODO}}">
+                <mat-icon>schedule</mat-icon>Todo
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+         <!-- <button mat-raised-button color="primary" [routerLink]="['../list']" placeholder="Search">Search Webmark(s)</button>-->
+        </mat-card>
       </div>
 
-      <md-card>
-        <md-input-container class="full-width">
-          <input mdInput placeholder="Title contains">
-        </md-input-container>
-      </md-card>
+      <mat-card>
+        <mat-input-container class="full-width">
+          <input matInput placeholder="Title contains">
+        </mat-input-container>
+      </mat-card>
     </div>
 
     <div class="row">

@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
-import { Folder } from 'app/modules/folder/model/folder'
-import { NotifierService } from 'app/shared/modules/notifications/notifier.service'
-import { BookmarkService } from 'app/modules/bookmark/services/bookmark.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Folder} from 'app/modules/folder/model/folder'
+import {NotifierService} from 'app/shared/modules/notifications/notifier.service'
+import {BookmarkService} from 'app/modules/bookmark/services/bookmark.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-folder-select-dialog',
@@ -15,7 +15,7 @@ export class FolderSelectDialogComponent implements OnInit {
 
   private bookmarkId: number;
 
-  constructor(public dialogRef: MdDialogRef<FolderSelectDialogComponent>, @Inject(MD_DIALOG_DATA) public data: any
+  constructor(public dialogRef: MatDialogRef<FolderSelectDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any
     , private notifierService: NotifierService, private bookmarkService: BookmarkService) {
   }
 
@@ -24,8 +24,8 @@ export class FolderSelectDialogComponent implements OnInit {
   }
 
   /**
- *
- */
+   *
+   */
   public closeDialog() {
     this.dialogRef.close('cancel');
   }
@@ -34,19 +34,19 @@ export class FolderSelectDialogComponent implements OnInit {
   public addFolderToBookmark() {
     debugger
     if (!this.selectedFolder) {
-      this.notifierService.notifyError("A folder should be selected !");
+      this.notifierService.notifyError('A folder should be selected !');
     } else {
       if (this.bookmarkId && this.selectedFolder.id) {
 
         this.bookmarkService.addFolderToBookmark(this.bookmarkId, this.selectedFolder.id).subscribe(
-          (response)=>{
-            this.notifierService.notifyError("Ok");
+          (response) => {
+            this.notifierService.notifyError('Ok');
             this.dialogRef.close('ok');
           }
         );
 
-      }else{
-        this.notifierService.notifyError("Please select a folder or a bookmark");
+      } else {
+        this.notifierService.notifyError('Please select a folder or a bookmark');
       }
     }
     /* this.folderService.saveFolder(folder).subscribe(tag => {

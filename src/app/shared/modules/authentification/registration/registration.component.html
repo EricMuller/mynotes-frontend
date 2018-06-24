@@ -1,74 +1,74 @@
-<!--<md-menu #appMenuAppNew="mdMenu">
-  <a md-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
-</md-menu>
+<!--<mat-menu #appMenuAppNew="matMenu">
+  <a mat-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</mat-menu>
 
 
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>
-    <button md-icon-button><md-icon>apps</md-icon> </button>
+    <button mat-icon-button><mat-icon>apps</mat-icon> </button>
   </span>
   <span>01Notes!</span>
   <span class="fill-remaining-space"></span>
-</md-toolbar>-->
+</mat-toolbar>-->
 <!-- Signup form -->
 <div class="app-login-content">
   <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 ">
-      <md-card>
-        <md-toolbar color="primary">
-          <div class="md-toolbar-tools">
+    <div class="col-mat-6 col-sm-6 col-xs-12 col-mat-offset-3 col-sm-offset-3 ">
+      <mat-card>
+        <mat-toolbar color="primary">
+          <div class="mat-toolbar-tools">
             <h2><span>Register a new account</span></h2>
           </div>
-        </md-toolbar>
+        </mat-toolbar>
 
         <form role="form" [formGroup]="form" novalidate>
-          <md-card-content>
-            <md-input-container class="full-width">
-              <md-icon md-prefix>email</md-icon>
-              <input mdInput placeholder="Email" type="email" formControlName="email" required>
-              <md-hint *ngIf="form.controls.email.errors && (form.controls.email.dirty || form.controls.email.touched)" [ngStyle]="{'color': 'red'}">
-              {{form.controls.email.errors.message}}</md-hint>
-            </md-input-container>
-          </md-card-content>
+          <mat-card-content>
+            <mat-input-container class="full-width">
+              <mat-icon mat-prefix>email</mat-icon>
+              <input matInput placeholder="Email" type="email" formControlName="email" required>
+              <mat-hint *ngIf="form.controls.email.errors && (form.controls.email.dirty || form.controls.email.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.email.errors.message}}</mat-hint>
+            </mat-input-container>
+          </mat-card-content>
 
-          <md-card-content>
-            <md-input-container class="full-width">
-              <md-icon md-prefix>perm_identity</md-icon>
-              <input mdInput placeholder="Username" formControlName="username" required>
+          <mat-card-content>
+            <mat-input-container class="full-width">
+              <mat-icon mat-prefix>perm_identity</mat-icon>
+              <input matInput placeholder="Username" formControlName="username" required>
 
-              <md-hint *ngIf="form.controls.username.errors && (form.controls.username.dirty || form.controls.username.touched)" [ngStyle]="{'color': 'red'}">
-              {{form.controls.username.errors.message}} </md-hint>
-            </md-input-container>
-          </md-card-content>
+              <mat-hint *ngIf="form.controls.username.errors && (form.controls.username.dirty || form.controls.username.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.username.errors.message}} </mat-hint>
+            </mat-input-container>
+          </mat-card-content>
 
-          <md-card-content>
-            <md-input-container class="full-width">
-              <md-icon md-prefix>lock</md-icon>
-              <input mdInput placeholder="Password" type="password" formControlName="password1" required>
-              <md-hint *ngIf="form.controls.password1.errors && (form.controls.password1.dirty || form.controls.password1.touched)" [ngStyle]="{'color': 'red'}">
-              {{form.controls.password1.errors.messsage}}</md-hint>
-            </md-input-container>
-          </md-card-content>
+          <mat-card-content>
+            <mat-input-container class="full-width">
+              <mat-icon mat-prefix>lock</mat-icon>
+              <input matInput placeholder="Password" type="password" formControlName="password1" required>
+              <mat-hint *ngIf="form.controls.password1.errors && (form.controls.password1.dirty || form.controls.password1.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.password1.errors.messsage}}</mat-hint>
+            </mat-input-container>
+          </mat-card-content>
 
-          <md-card-content>
-            <md-input-container class="full-width">
-              <md-icon md-prefix>lock</md-icon>
-              <input mdInput type="password" formControlName="password2" required color="primary">
-              <md-placeholder>Repeat password</md-placeholder>
-              <md-hint *ngIf="form.controls.password2.errors && (form.controls.password2.dirty || form.controls.password2.touched)" [ngStyle]="{'color': 'red'}">
-              {{form.controls.password2.errors.message}}</md-hint>
+          <mat-card-content>
+            <mat-input-container class="full-width">
+              <mat-icon mat-prefix>lock</mat-icon>
+              <input matInput type="password" formControlName="password2" required color="primary">
+              <mat-placeholder>Repeat password</mat-placeholder>
+              <mat-hint *ngIf="form.controls.password2.errors && (form.controls.password2.dirty || form.controls.password2.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.password2.errors.message}}</mat-hint>
 
-            </md-input-container>
-             <md-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
-              {{form.controls.non_field_errors.value}}</md-hint>
-          </md-card-content>
+            </mat-input-container>
+             <mat-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+              {{form.controls.non_field_errors.value}}</mat-hint>
+          </mat-card-content>
 
-          <md-card-actions align="center">
-            <button md-raised-button color="primary" (click)="register()" placeholder="Sign up" [disabled]="!form.valid">SIGN UP</button>
+          <mat-card-actions align="center">
+            <button mat-raised-button color="primary" (click)="register()" placeholder="Sign up" [disabled]="!form.valid">SIGN UP</button>
             <a [routerLink]="['/login']">cancel</a>
-          </md-card-actions>
+          </mat-card-actions>
         </form>
-      </md-card>
+      </mat-card>
     </div>
   </div>
 </div>

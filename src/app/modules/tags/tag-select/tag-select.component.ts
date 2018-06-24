@@ -1,14 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, AfterViewInit, OnChanges ,ApplicationRef} from '@angular/core';
-import { FormControl } from '@angular/forms'
-import { ApiService } from 'app/shared/modules/api/api.service';
-import { TagService } from 'app/modules/tags/services/tag.service'
-import { ObservableService } from 'app/shared/modules/observable/observable.service'
-import { Observable } from 'rxjs/Rx';
-import { TagCount } from '../model/tag-count'
-import { Letter } from '../model/letter'
-import { MdDialog } from '@angular/material';
-import { MdSnackBar } from '@angular/material';
-import { TagCreateDialogComponent } from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
+import {ApplicationRef, Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {ApiService} from 'app/shared/modules/api/api.service';
+import {TagCount} from '../model/tag-count'
+import {Letter} from '../model/letter'
+
+
+import {TagCreateDialogComponent} from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-tag-select-card',
@@ -34,7 +31,7 @@ export class TagSelectComponent implements OnInit, OnChanges {
   public nextLink: string;
   public letters: Array<Letter> = [];
 
-  constructor(private apiService: ApiService, public dialog: MdDialog,private applicationRef:ApplicationRef) {
+  constructor(private apiService: ApiService, public dialog: MatDialog, private applicationRef: ApplicationRef) {
   }
 
   ngOnInit() {
@@ -45,17 +42,13 @@ export class TagSelectComponent implements OnInit, OnChanges {
     this.getTags();
   }
 
-  ngAfterViewInit() {
-
-  }
-
   update(val) {
     console.log('toto');
   }
 
   protected getTags() {
 
-    this.apiService.getPaginatedResults(this.apiService.endPoints.tagsCount + "?page_size=500").subscribe(
+    this.apiService.getPaginatedResults(this.apiService.endPoints.tagsCount + '?page_size=500').subscribe(
       result => {
         this.tags = result.data;
         this.nextLink = result.links.next;
@@ -67,17 +60,18 @@ export class TagSelectComponent implements OnInit, OnChanges {
       });
 
   }
+
   private buildLetters() {
-    let letters: Array<string> = [];
+    const letters: Array<string> = [];
     this.letters = [];
-    for (var j = 0; this.tags.length > j; j++) {
+    for (let j = 0; this.tags.length > j; j++) {
       letters.push(this.tags[j].name.substring(0, 1).toUpperCase());
       this.tags[j].show = false;
-      this.tags[j].selected=false;
+      this.tags[j].selected = false;
     }
 
     for (var l of Array.from(new Set(letters))) {
-      let letter = new Letter(l);
+      const letter = new Letter(l);
       this.letters.push(letter);
     }
 
@@ -87,42 +81,40 @@ export class TagSelectComponent implements OnInit, OnChanges {
     for (var i = 0; this.tagSelected.length > i; i++) {
       for (var j = 0; this.tags.length > j; j++) {
         if (this.tags[j].id == this.tagSelected[i].id) {
-          //this.tags[j].color = "current";
-          //this.setSelected(this.tags[j]);
-          this.tags[j].selected=true;
+          this.tags[j].selected = true;
           break;
         }
       }
     }
   }
 
-/**
- * 
- * @param tag filter
- */
+  /**
+   *
+   * @param tag filter
+   */
   public filterSelected(tag: TagCount) {
     return tag.selected == true;
   }
 
   public filterNotSelected(tag: TagCount) {
-    return tag.selected == false ;
+    return tag.selected == false;
   }
 
-/**
- * filter by  letter
- * @param l 
- */
+  /**
+   * filter by  letter
+   * @param l
+   */
   public selectLetter(l: Letter) {
 
     for (var j = 0; this.tags.length > j; j++) {
       if (this.tags[j].name.substring(0, 1).toUpperCase() == l.name) {
         this.tags[j].show = true;
-        
+
       } else {
         this.tags[j].show = false;
       }
       //this.tags[j].color = this.tagColor(this.tags[j]);
-      
+
     }
 
     for (var j = 0; this.letters.length > j; j++) {
@@ -132,7 +124,7 @@ export class TagSelectComponent implements OnInit, OnChanges {
         this.letters[j].selected = false;
       }
     }
-     
+
   }
 
   public next(event) {
@@ -148,25 +140,25 @@ export class TagSelectComponent implements OnInit, OnChanges {
   }*/
 
   public tagColor(tag) {
-   
+
     if (tag.show == true) {
-      if (tag.selected ==true) {
-        return "accent";
+      if (tag.selected == true) {
+        return 'accent';
       } else {
-        return "primary";
+        return 'primary';
       }
-    }else{
-      if (tag.selected ==true) {
-        return "accent";
+    } else {
+      if (tag.selected == true) {
+        return 'accent';
       } else {
-        return "current";
+        return 'current';
       }
     }
-   
+
   }
 
   public selectItem(tag: TagCount) {
-    
+
     if (!this.disabled) {
       if (tag.selected) {
         //tag.color = "";
@@ -182,7 +174,7 @@ export class TagSelectComponent implements OnInit, OnChanges {
       }
 
       //tag.color = this.tagColor(tag);
-         
+
     }
   }
 
@@ -203,7 +195,8 @@ export class TagSelectComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       if (result = 'ok') {
         this.getTags();
-      };
+      }
+      ;
     });
   }
 

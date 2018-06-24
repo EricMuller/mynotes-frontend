@@ -5,7 +5,7 @@
   border: 1px solid #ddd ;
 }
 
-/* md-card {
+/* mat-card {
   margin-left: 1px;
   margin-right: 1px;
   margin-top: 20px;
@@ -13,7 +13,7 @@
 } */
 
 
-md-card.mat-card{
+mat-card.mat-card{
   box-shadow: none;
   }
 

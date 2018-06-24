@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Filter } from '../model/filter';
 import { FilterService } from '../services/search.service';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { KIND_LINK, KIND_NOTE, KIND_TODO } from './../model/bookmark';
 import { BookmarkService } from '../services/bookmark.service';
 
@@ -17,7 +17,7 @@ export class BookmarkFilterComponent implements OnInit {
   public KIND_NOTE: String = KIND_NOTE;
   public KIND_TODO: String = KIND_TODO;
 
-  constructor(private filterService: FilterService, public dialog: MdDialog) { }
+  constructor(private filterService: FilterService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.filter = this.filterService.get();

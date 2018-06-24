@@ -1,36 +1,36 @@
 <!--  Tool bar -->
 
-<md-menu #appMenu="mdMenu">
-    <button md-menu-item> Settings</button>
-</md-menu>
+<mat-menu #appMenu="matMenu">
+    <button mat-menu-item> Settings</button>
+</mat-menu>
 
 <div class="app-validation-content">
     <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 ">
+        <div class="col-mat-6 col-sm-6 col-xs-12 col-mat-offset-3 col-sm-offset-3 ">
 
-            <md-card>
-                <md-toolbar color="primary">
-                    <div class="md-toolbar-tools">
+            <mat-card>
+                <mat-toolbar color="primary">
+                    <div class="mat-toolbar-tools">
                         <h2><span>Registration Validation</span></h2>
                     </div>
-                </md-toolbar>
+                </mat-toolbar>
 
-                <md-card-content>
+                <mat-card-content>
 
                     <form role="form" [formGroup]="form" novalidate>
 
                         <h1>Confirm E-mail Address</h1>
                         Please confirm that e4.mul@free.fr is an e-mail address for user webdev4.
-                        <md-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
-                            {{form.controls.non_field_errors.value}}</md-hint>
-                        <md-card-actions align="center">
-                            <button md-raised-button color="primary" (click)="confirm()" [disabled]="!form.valid">Confirm</button>
-                        </md-card-actions>
+                        <mat-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+                            {{form.controls.non_field_errors.value}}</mat-hint>
+                        <mat-card-actions align="center">
+                            <button mat-raised-button color="primary" (click)="confirm()" [disabled]="!form.valid">Confirm</button>
+                        </mat-card-actions>
                     </form>
 
-                </md-card-content>
+                </mat-card-content>
 
-            </md-card>
+            </mat-card>
         </div>
     </div>
 

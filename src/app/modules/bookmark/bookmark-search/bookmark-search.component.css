@@ -1,8 +1,8 @@
 div.row1 {
   margin: 20px;
-} 
+}
 
-  
+
 
 .app-action {
   display: inline-block;
@@ -12,14 +12,14 @@ div.row1 {
 }
 
 
-md-card.mat-card{
+mat-card.mat-card{
   box-shadow: none;
   padding-top: 15px;
   padding-left: 0px;
   padding-right: 0px;
-  
+
   }
- 
+
 
 #conteneur
 {

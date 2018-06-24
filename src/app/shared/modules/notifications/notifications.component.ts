@@ -1,7 +1,8 @@
 import { Component, Injectable } from '@angular/core';
 import { NotifierService } from './notifier.service';
 import { Notification } from './notifications.model';
-import { MdSnackBar } from '@angular/material';
+import {MatSnackBar} from '@angular/material';
+
 
 @Component({
     selector: 'app-notifications',
@@ -55,7 +56,7 @@ import { MdSnackBar } from '@angular/material';
 export class NotificationsComponent {
     public notifications: Notification[];
 
-    constructor(private notifierService: NotifierService, private mdSnackBar: MdSnackBar) {
+    constructor(private notifierService: NotifierService, private mdSnackBar: MatSnackBar) {
 
         this.notifications = new Array<Notification>();
 
@@ -64,7 +65,7 @@ export class NotificationsComponent {
              if (notification.timeout >  0 ){
                  setTimeout(() => { this.hide.bind(this)(notification) }, notification.timeout);
              }*/
-           
+
             if (notification.timeout > 0) {
                 this.mdSnackBar.open(notification.message, 'Ok', { duration: notification.timeout });
             } else {

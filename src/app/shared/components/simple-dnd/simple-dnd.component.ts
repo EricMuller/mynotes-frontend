@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BookmarkService } from 'app/modules/bookmark/services/bookmark.service';
-import { MdSnackBar } from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {BookmarkService} from 'app/modules/bookmark/services/bookmark.service';
+import {MatSnackBar} from '@angular/material';
+
 
 @Component({
   selector: 'app-simple-dnd',
@@ -9,7 +10,8 @@ import { MdSnackBar } from '@angular/material';
 })
 export class SimpleDndComponent implements OnInit {
 
-  constructor(private noteService: BookmarkService,private snackBar: MdSnackBar) { }
+  constructor(private noteService: BookmarkService, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
   }
@@ -19,17 +21,18 @@ export class SimpleDndComponent implements OnInit {
   }
 
   drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData('text', ev.target.id);
   }
 
   drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
+    var data = ev.dataTransfer.getData('text');
     console.log(data);
     this.noteService.createBookmark(data).subscribe(x => {
       console.log(x)
-      this.snackBar.open('Note created with Succes', 'Ok', { duration: 3000 });
-    });;
+      this.snackBar.open('Note created with Succes', 'Ok', {duration: 3000});
+    });
+    ;
     //ev.target.appendChild(document.getElementById(data));
   }
 }

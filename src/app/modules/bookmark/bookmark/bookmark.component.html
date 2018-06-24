@@ -1,102 +1,102 @@
 <!--  Tool bar -->
 
-<md-menu #appMenuApp="mdMenu">
-  <a md-menu-item (click) ="search()"><md-icon>search</md-icon>Search</a>
-  <a md-menu-item (click) ="add()"><md-icon>edit</md-icon>New</a>
-  <!--<a md-menu-item [routerLinkActive]="['active']" [routerLink]="['/upload']">Upload</a>-->
-</md-menu>
+<mat-menu #appMenuApp="matMenu">
+  <a mat-menu-item (click) ="search()"><mat-icon>search</mat-icon>Search</a>
+  <a mat-menu-item (click) ="add()"><mat-icon>edit</mat-icon>New</a>
+  <!--<a mat-menu-item [routerLinkActive]="['active']" [routerLink]="['/upload']">Upload</a>-->
+</mat-menu>
 
-<md-menu #appMenu="mdMenu">
-  <!--<button md-menu-item> Settings </button>-->
-  
-  <md-card >
-     <md-card-content>
+<mat-menu #appMenu="matMenu">
+  <!--<button mat-menu-item> Settings </button>-->
+
+  <mat-card >
+     <mat-card-content>
        {{user.first_name}} {{user.last_name}}
        {{user.email}}
-     </md-card-content>
-     <md-card-actions>
-    <button md-button *ngIf="isAuthentified()" (click)="logout()"><md-icon>exit_to_app</md-icon> Log Out </button>
-     </md-card-actions>
-  </md-card>
-</md-menu>
+     </mat-card-content>
+     <mat-card-actions>
+    <button mat-button *ngIf="isAuthentified()" (click)="logout()"><mat-icon>exit_to_app</mat-icon> Log Out </button>
+     </mat-card-actions>
+  </mat-card>
+</mat-menu>
 
 <div class="header-toolbar">
-  <md-toolbar color="primary" role="application">
+  <mat-toolbar color="primary" role="application">
     <span>
-      <button md-icon-button [mdMenuTriggerFor]="appMenuApp">
-      <md-icon>apps</md-icon>
+      <button mat-icon-button [matMenuTriggerFor]="appMenuApp">
+      <mat-icon>apps</mat-icon>
       </button>
     </span>
 
     <span>My webmarks</span>
     <span class="fill-remaining-space"></span>
     <span>
-    <!--<app-simple-dnd></app-simple-dnd>  <button md-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites/detail/0']" placeholder="New Note">
-        <md-icon>create</md-icon> 
+    <!--<app-simple-dnd></app-simple-dnd>  <button mat-icon-button [routerLinkActive]="['active']" [routerLink]="['/favorites/detail/0']" placeholder="New Note">
+        <mat-icon>create</mat-icon>
     </button>-->
-    
+
   </span>
 
     <span>
-    
-    <button class="md-tool-fab" color="primary"  md-mini-fab [mdMenuTriggerFor]="appMenu">
+
+    <button class="mat-tool-fab" color="primary"  mat-mini-fab [matMenuTriggerFor]="appMenu">
         {{username1()}}
     </button>
   </span>
-  </md-toolbar>
+  </mat-toolbar>
 
   <!-- / Tool bar -->
-  <!-- <nav md-tab-nav-bar style="background-color: white"> 
-  <a md-tab-link  [routerLink]="['search']"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"><md-icon>search</md-icon></a>
-  <a md-tab-link  [routerLink]="['list']"  routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive"> <md-icon>view_list</md-icon></a>
-  <a md-tab-link  [routerLink]="['folders']"  routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive"> <md-icon>folder</md-icon></a>
+  <!-- <nav mat-tab-nav-bar style="background-color: white">
+  <a mat-tab-link  [routerLink]="['search']"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"><mat-icon>search</mat-icon></a>
+  <a mat-tab-link  [routerLink]="['list']"  routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive"> <mat-icon>view_list</mat-icon></a>
+  <a mat-tab-link  [routerLink]="['folders']"  routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive"> <mat-icon>folder</mat-icon></a>
 </nav>-->
 
-  <!-- <nav md-tab-nav-bar aria-label="">
-          <a md-tab-link [ngClass]="{'item-active' : activeLinkIndex == i}"
-            *ngFor=" let routeLink of routerStore.routeLinks ; let i = index" 
+  <!-- <nav mat-tab-nav-bar aria-label="">
+          <a mat-tab-link [ngClass]="{'item-active' : activeLinkIndex == i}"
+            *ngFor=" let routeLink of routerStore.routeLinks ; let i = index"
              [routerLink]="routeLink.link"
              [active]="activeLinkIndex === i"
              (click)="activeLinkIndex = i" >
-               <md-icon> {{routeLink.label}}</md-icon>
+               <mat-icon> {{routeLink.label}}</mat-icon>
          </a>
 </nav>-->
-  <!--<md-tab-group>  
-    <md-tab ng-repeat="tab in tabs"  label=TEST></md-tab>
-    
-</md-tab-group>-->
+  <!--<mat-tab-group>
+    <mat-tab ng-repeat="tab in tabs"  label=TEST></mat-tab>
+
+</mat-tab-group>-->
 <!-- dont remove background-color -->
-  <nav md-tab-nav-bar aria-label="" style="background-color: white">
-    <a md-tab-link [ngClass]="{'item-active' : tabStore.activeTabIndex == i}" *ngFor=" let tab of tabStore.tabs ; let i = index"
+  <nav mat-tab-nav-bar aria-label="" style="background-color: white">
+    <a mat-tab-link [ngClass]="{'item-active' : tabStore.activeTabIndex == i}" *ngFor=" let tab of tabStore.tabs ; let i = index"
       [active]="tabStore.activeTabIndex === i" (click)="tabStore.activeTabIndex = i"
       [routerLink]="tab.link">
-      <md-icon> {{tab.icon}}</md-icon>{{tab.label}}
+      <mat-icon> {{tab.icon}}</mat-icon>{{tab.label}}
     </a>
   </nav>
 
 </div>
 <!-- hide header in  style.css -->
 <div id="webmarkapp" style="padding-top: 110px !important">
-  <md-tab-group [(selectedIndex)]="tabStore.activeTabIndex" dynamicHeight="false" #tabGroup class="noheader">
-    
-    <md-tab>
+  <mat-tab-group [(selectedIndex)]="tabStore.activeTabIndex" dynamicHeight="false" #tabGroup class="noheader">
+
+    <mat-tab>
       <div class="container">
       <app-folder-list></app-folder-list>
       </div>
-    </md-tab>
-    
-   <!-- <md-tab>
+    </mat-tab>
+
+   <!-- <mat-tab>
       <app-bookmark-search></app-bookmark-search>
-    </md-tab>-->
+    </mat-tab>-->
 
-    <md-tab>
+    <mat-tab>
       <app-bookmark-list></app-bookmark-list>
-    </md-tab>
+    </mat-tab>
 
-    <md-tab>
+    <mat-tab>
       <router-outlet></router-outlet>
-    </md-tab>
+    </mat-tab>
 
-  </md-tab-group>
+  </mat-tab-group>
 
 </div>

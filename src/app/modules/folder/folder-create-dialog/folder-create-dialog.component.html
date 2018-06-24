@@ -1,15 +1,15 @@
-<h1 md-dialog-title>Create a new folder</h1>
+<h1 mat-dialog-title>Create a new folder</h1>
 
 <form role="form" [formGroup]="form" novalidate>
-  <md-input-container class="example-full-width">
-    <input mdInput placeholder="Name" type="text" formControlName="name" #elm required>
-    <md-hint *ngIf="form.controls.name.errors && (form.controls.name.dirty || form.controls.name.touched)" [ngStyle]="{'color': 'red'}">
-      {{form.controls.name.errors.message}}</md-hint>
-    <md-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
-      {{form.controls.non_field_errors.value}}</md-hint>
-  </md-input-container>
-  <div md-dialog-actions>
-    <button md-button (click)="createFolder()">create</button>
-    <button md-button (click)="closeDialog()">cancel</button>
+  <mat-input-container class="example-full-width">
+    <input matInput placeholder="Name" type="text" formControlName="name" #elm required>
+    <mat-hint *ngIf="form.controls.name.errors && (form.controls.name.dirty || form.controls.name.touched)" [ngStyle]="{'color': 'red'}">
+      {{form.controls.name.errors.message}}</mat-hint>
+    <mat-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+      {{form.controls.non_field_errors.value}}</mat-hint>
+  </mat-input-container>
+  <div mat-dialog-actions>
+    <button mat-button (click)="createFolder()">create</button>
+    <button mat-button (click)="closeDialog()">cancel</button>
   </div>
 </form>

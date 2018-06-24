@@ -21,7 +21,7 @@ import { Subject } from "rxjs/Subject";
 import { MdTabStore, MdTab } from 'app/modules/tab-store/tab-store.service'
 import { Router } from '@angular/router';
 import { FolderSelectDialogComponent } from 'app/modules/folder/folder-select-dialog/folder-select-dialog.component'
-import { MdDialog, MdDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 
 
@@ -51,11 +51,11 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   public bookmarks: Array<any> = [];
 
   public links: any = {};
-  
+
   public modeEdition:boolean = false;
 
   constructor(private bookmarkService: BookmarkService, private searchService: FilterService
-    , private notifier: NotifierService, private tabStore: MdTabStore, private dialog: MdDialog) {
+    , private notifier: NotifierService, private tabStore: MdTabStore, private dialog: MatDialog) {
     this.filter = this.searchService.get();
   }
 
@@ -81,8 +81,8 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
 
 
   /**
-   * Call bookmarkService search next page results 
-   * @param event 
+   * Call bookmarkService search next page results
+   * @param event
    */
   public next(event) {
     this.bookmarkService.getPaginatedResults(this.links.next, this.filter)
@@ -97,7 +97,7 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
 
   /**
    * Call BookmarkService update bookmark status  as delete
-   * @param bookmark 
+   * @param bookmark
    */
   public trash(bookmark: Bookmark) {
     this.bookmarkService.trash(bookmark).subscribe(result => {
@@ -112,7 +112,7 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
 
   /**
    * Call BookmarkService remove bookmark in db
-   * @param bookmark 
+   * @param bookmark
    */
   public delete(bookmark: Bookmark) {
     this.bookmarkService.deleteBookmark(bookmark)
@@ -130,8 +130,8 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
 
  /**
   *  Call BookmarkService archive bookmark content  in db
-  * @param evt 
-  * @param bookmark 
+  * @param evt
+  * @param bookmark
   */
   public archive(evt, bookmark: Bookmark) {
     if (bookmark) {
@@ -143,8 +143,8 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   }
 
 /**
-   * Delete bookmark in  component array 
-   * @param bookmark 
+   * Delete bookmark in  component array
+   * @param bookmark
    */
   private removeBookmark(bookmark: Bookmark) {
     for (var i = 0; this.bookmarks.length > i; i++) {
@@ -156,7 +156,7 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
 
   /**
    * Push results in component Array
-   * @param result 
+   * @param result
    */
   private pushBookmarks(result: PaginatedResult) {
     this.links.next = result.links.next;
@@ -170,10 +170,10 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
    * Open Select Dialog
    */
   public openFolderCreateDialog(id:string) {
-    let config = new MdDialogConfig();
-   
+    let config = new MatDialogConfig();
+
     config.data = { bookmarkId: id }
-   
+
 
     let dialogRef = this.dialog.open(FolderSelectDialogComponent, config);
     dialogRef.afterClosed().subscribe(result => {
