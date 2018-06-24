@@ -1,27 +1,33 @@
 {
   "/api": {
-    "target": "http://192.168.0.101:8000/",
-    "secure": false,
+    "target": "https://webmarks.net:443/",
+    "secure": true,
+    "changeOrigin": true,
     "pathRewrite_save": {"^/rets" : ""}
   },
 
   "/swagger": {
-    "target": "http://192.168.0.101:8000/",
-    "secure": false
+    "target": "https://webmarks.net:443/",
+    "secure": true,
+    "changeOrigin": true
     },
    "/rest_framework": {
-    "target": "http://192.168.0.101:8000/",
-    "secure": false
+    "target": "https://webmarks.net:443/",
+    "secure": true,
+    "changeOrigin": true
     },
     "/static": {
-    "target": "http://192.168.0.101:8000/",
-    "secure": false
+      "target": "https://webmarks.net:443/",
+      "secure": true,
+      "changeOrigin": true
     },
 
   "/ws": {
-    "target": "http://192.168.0.101:8000/",
+    "target": "https://webmarks.net:443/",
+    "secure": true,
     "changeOrigin": true,
     "ws": true,
     "logLevel": "debug"
   }
+  
 }

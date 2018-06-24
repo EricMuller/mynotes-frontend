@@ -11,4 +11,5 @@ describe('mynotes-frontend App', function() {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('app works!');
   });
+
 });

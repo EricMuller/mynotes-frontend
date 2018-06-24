@@ -135,7 +135,7 @@ export class WebmarkListComponent implements OnInit, OnDestroy {
   */
   public archive(evt, bookmark: Bookmark) {
     if (bookmark) {
-      this.bookmarkService.archiveBookmark(bookmark).subscribe(archive => {
+      this.bookmarkService.storeBookmark(bookmark).subscribe(archive => {
         bookmark.archive_id = archive.id
         this.notifier.notifyInfo('Archived with Succes');
       });
