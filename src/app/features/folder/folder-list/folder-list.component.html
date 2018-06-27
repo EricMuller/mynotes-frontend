@@ -1,0 +1,91 @@
+<!-- LIST MENU -->
+<mat-menu #folderMenu="matMenu">
+    <button mat-menu-item><mat-icon>delete</mat-icon> Delete Folder </button>
+</mat-menu>
+<!-- END LIST MENU -->
+
+
+
+<div class="row">
+    <!-- TOOLBAR-->
+    <mat-toolbar>
+        <span>{{breadcrumb()}}</span>
+        <span class="fill-remaining-space"></span>
+        <span>
+                <span *ngIf="modeEdition" >
+                    <button  mat-icon-button (click)="openFolderCreateDialog()" placeholder="Search">
+                        <mat-icon color="primary">create_new_folder</mat-icon>
+                    </button>
+               </span>
+        <mat-slide-toggle [checked]="modeEdition" [(ngModel)]="modeEdition"></mat-slide-toggle>
+        </span>
+    </mat-toolbar>
+    <!-- END TOOLBAR-->
+    <h3 mat-subheader *ngIf="current"><button mat-button (click)="browseParentFolder()"> <mat-icon color="primary">keyboard_return</mat-icon></button></h3>
+
+    <!-- LIST -->
+    <mat-nav-list>
+        <mat-list-item *ngFor="let folder of folders.data">
+            <div style="margin-right: 10px">
+                <button mat-icon-button (click)="browseFolder(folder)">
+                    <mat-icon color="primary"  mat-list-icon>folder</mat-icon>
+                </button>
+            </div>
+
+            <span *ngIf="!modeEdition || !folder.modeEdition">
+                  <!--<div [matMenuTriggerFor]="folderMenu">-->
+                      <a mat-line [routerLinkActive]="['active']"  style="max-width: 600px;overflow: hidden" matTooltip="{{folder.title}}" >
+                   {{folder.name }}
+                   </a>
+                </span>
+            <span *ngIf="modeEdition && folder.modeEdition">
+                   <mat-form-field>
+                        <input matInput type="text" [value]="folder.name" [(ngModel)]="folder.name"  name="name" #name="ngModel" >
+                   </mat-form-field>
+                </span>
+            <span class="fill-remaining-space"></span>
+            <button *ngIf="modeEdition" mat-icon-button placeholder="Rename" color="primary" class="hide-sm" (click)="folder.modeEdition=!folder.modeEdition">
+                    <mat-icon *ngIf="folder.modeEdition" >undo</mat-icon>
+                    <mat-icon *ngIf="!folder.modeEdition" >edit</mat-icon>
+                </button>
+            <button *ngIf="modeEdition && folder.modeEdition" mat-icon-button placeholder="save" color="primary" class="hide-sm" (click)="updateFolder(folder)">
+                    <mat-icon *ngIf="folder.modeEdition"  >save</mat-icon>
+                </button>
+
+            <button *ngIf="modeEdition" mat-icon-button (click)="deleteFolder(folder)" placeholder="Delete forever" color="primary" class="hide-sm">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+
+        </mat-list-item>
+
+        <mat-divider *ngIf="folders.links.next"></mat-divider>
+        <mat-list-item *ngIf="folders.links.next" (click)="next()">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </mat-list-item>
+
+    </mat-nav-list>
+    <mat-nav-list>
+
+        <mat-list-item *ngFor="let bookmark of bookmarks.data">
+            <div style="margin-right: 10px;">
+
+                    <a mat-icon-button href="{{bookmark.url}}" target="_blank" style="max-width: 600px;overflow: hidden" matTooltip="{{bookmark.url}}"><i class="fa fa-globe" aria-hidden="true"></i></a>
+
+            </div>
+
+            <div (click)="detail(bookmark)"> {{ bookmark.title }} </div>
+            <!--<div *ngFor="let tag of bookmark.tags" class="tag-cloud-list"> {{tag.name}}</div>-->
+            <span class="fill-remaining-space"></span>
+            <div style="display: flex;justify-content: center;align-items: center;" class="hide-sm">
+                <button *ngIf="modeEdition" mat-icon-button (click)="removeFolderToBookmark(bookmark)" matTooltip="Remove from folder" color="primary" class="hide-sm">
+                <mat-icon>delete_forever</mat-icon>
+                </button>
+            </div>
+
+        </mat-list-item>
+    </mat-nav-list>
+    <!-- END LIST-->
+
+    <!--<div *ngIf="folders.data.length==0">No result</div>-->
+
+</div>

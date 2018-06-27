@@ -1,0 +1,86 @@
+<!--  Tool bar -->
+
+
+
+<mat-menu #appMenu="matMenu">
+    <button mat-menu-item> Settings</button>
+</mat-menu>
+
+<div class="app-login-content">
+
+    <div class="row">
+        <div class="col-mat-6 col-sm-6 col-xs-12 col-mat-offset-3 col-sm-offset-3 ">
+            <mat-card>
+                <mat-toolbar color="primary">
+                    <div style="text-align: center;width: 100%">
+                        <h2>Sign in to your Account</h2>
+                    </div>
+                </mat-toolbar>
+
+                <mat-card-content>
+                    <form role="form" [formGroup]="form" novalidate>
+                        <mat-form-field class="full-width">
+                            <mat-icon mat-prefix>perm_identity</mat-icon>
+                            <input matInput placeholder="Username" formControlName="username" required>
+                            <mat-hint *ngIf="form.controls.password.errors && (form.controls.username.dirty || form.controls.username.touched)" [ngStyle]="{'color': 'red'}">
+                                {{form.controls.username.errors.message}}</mat-hint>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                            <mat-icon mat-prefix>lock</mat-icon>
+                            <input matInput placeholder="Password" type="password" formControlName="password" #elm required>
+                            <mat-hint *ngIf="form.controls.password.errors && (form.controls.password.dirty || form.controls.password.touched)" [ngStyle]="{'color': 'red'}">
+                                {{form.controls.password.errors.message}}</mat-hint>
+                        </mat-form-field>
+
+                        <mat-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+                            {{form.controls.non_field_errors.value}}</mat-hint>
+
+                        <button mat-raised-button color="primary" (click)="login()" [disabled]="!form.valid">SIGN IN</button>
+
+                    </form>
+                </mat-card-content>
+                <div class="form__orDivider">have an account ? <a [routerLink]="['/register']">Register a new account</a></div>
+                <div class="form__orDivider">– OR –</div>
+                <div>
+
+                </div>
+                <!--<button mat-raised-button color="primary" (click)="signOut()" [disabled]="!form.valid">SIGN OUT</button>-->
+
+            </mat-card>
+            <!--<mat-card>
+                <div class="g-signin2" data-onsuccess="onGoogleLoad">button</div>
+            </mat-card>
+            -->
+
+            <!--<mat-card class="example-card">
+                <button mat-raised-button color="primary" (click)="liAuth()">SIGN IN with linkedin</button>
+            </mat-card>
+            -->
+           <!-- <mat-card *ngFor="let account of socialAccounts">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                     <mat-card-title>{{account.firstName}} </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{account.firstName}} </mat-card-title>
+                    <mat-card-subtitle>{{account.lastName}} </mat-card-subtitle>
+                    <mat-card-subtitle>{{account.email}} </mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>-->
+            <mat-card>
+                <app-login-google (signInChange)="onGoogle($event)" clientId="28025127281-bc876va0d6rvv0ltt6iflt8j4qrg033k.apps.googleusercontent.com"></app-login-google>
+            </mat-card>
+            <mat-card>
+                <app-login-linked-in (signInChange)="onLinkedIn($event)" clientId="77jyupgk7s70w1"></app-login-linked-in>
+            </mat-card>
+
+        </div>
+
+    </div>
+
+</div>
+
+<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+/>

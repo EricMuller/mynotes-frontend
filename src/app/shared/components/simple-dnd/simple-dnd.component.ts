@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BookmarkService} from 'app/modules/bookmark/services/bookmark.service';
-import {MatSnackBar} from '@angular/material';
 
+import {MatSnackBar} from '@angular/material';
+import {BookmarkService} from '../../../features/bookmark/services/bookmark.service';
 
 @Component({
   selector: 'app-simple-dnd',
@@ -26,13 +26,12 @@ export class SimpleDndComponent implements OnInit {
 
   drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData('text');
+    const data = ev.dataTransfer.getData('text');
     console.log(data);
     this.noteService.createBookmark(data).subscribe(x => {
-      console.log(x)
+      console.log(x);
       this.snackBar.open('Note created with Succes', 'Ok', {duration: 3000});
     });
-    ;
-    //ev.target.appendChild(document.getElementById(data));
+    // ev.target.appendChild(document.getElementById(data));
   }
 }

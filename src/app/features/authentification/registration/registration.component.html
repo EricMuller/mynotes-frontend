@@ -1,0 +1,74 @@
+<!--<mat-menu #appMenuAppNew="matMenu">
+  <a mat-menu-item [routerLinkActive]="['active']" [routerLink]="['//']">Home</a>
+</mat-menu>
+
+
+<mat-toolbar color="primary">
+  <span>
+    <button mat-icon-button><mat-icon>apps</mat-icon> </button>
+  </span>
+  <span>01Notes!</span>
+  <span class="fill-remaining-space"></span>
+</mat-toolbar>-->
+<!-- Signup form -->
+<div class="app-login-content">
+  <div class="row">
+    <div class="col-mat-6 col-sm-6 col-xs-12 col-mat-offset-3 col-sm-offset-3 ">
+      <mat-card>
+        <mat-toolbar color="primary">
+          <div class="mat-toolbar-tools">
+            <h2><span>Register a new account</span></h2>
+          </div>
+        </mat-toolbar>
+
+        <form role="form" [formGroup]="form" novalidate>
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <mat-icon mat-prefix>email</mat-icon>
+              <input matInput placeholder="Email" type="email" formControlName="email" required>
+              <mat-hint *ngIf="form.controls.email.errors && (form.controls.email.dirty || form.controls.email.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.email.errors.message}}</mat-hint>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <mat-icon mat-prefix>perm_identity</mat-icon>
+              <input matInput placeholder="Username" formControlName="username" required>
+
+              <mat-hint *ngIf="form.controls.username.errors && (form.controls.username.dirty || form.controls.username.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.username.errors.message}} </mat-hint>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <mat-icon mat-prefix>lock</mat-icon>
+              <input matInput placeholder="Password" type="password" formControlName="password1" required>
+              <mat-hint *ngIf="form.controls.password1.errors && (form.controls.password1.dirty || form.controls.password1.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.password1.errors.messsage}}</mat-hint>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <mat-icon mat-prefix>lock</mat-icon>
+              <input matInput type="password" formControlName="password2" required color="primary">
+              <mat-placeholder>Repeat password</mat-placeholder>
+              <mat-hint *ngIf="form.controls.password2.errors && (form.controls.password2.dirty || form.controls.password2.touched)" [ngStyle]="{'color': 'red'}">
+              {{form.controls.password2.errors.message}}</mat-hint>
+
+            </mat-form-field>
+             <mat-hint *ngIf="form.controls.non_field_errors.value" [ngStyle]="{'color': 'red'}">
+              {{form.controls.non_field_errors.value}}</mat-hint>
+          </mat-card-content>
+
+          <mat-card-actions align="center">
+            <button mat-raised-button color="primary" (click)="register()" placeholder="Sign up" [disabled]="!form.valid">SIGN UP</button>
+            <a [routerLink]="['/login']">cancel</a>
+          </mat-card-actions>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

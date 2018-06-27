@@ -1,0 +1,71 @@
+<!-- search -->
+
+
+  <!--<div class="container">-->
+
+  <!--<div class="row">-->
+  <!--
+    <mat-toolbar>
+     <span>Search</span>
+    <span class="fill-remaining-space"></span>
+    <span>
+      <button mat-icon-button (click)="search()" placeholder="Search">
+          <mat-icon>youtube_searched_for</mat-icon>
+      </button>
+    </span>
+    </mat-toolbar>
+  -->
+  <mat-toolbar>
+    <span>Update Search Filter  </span>
+    <span class="fill-remaining-space"></span>
+    <span>
+
+       <button mat-icon-button  matTooltip="save" (click)="update()">
+            <mat-icon>save</mat-icon>
+       </button>
+
+        <a mat-icon-button routerLink="/bookmark/list" matTooltip="Search">
+            <mat-icon>search</mat-icon>
+       </a>
+
+      </span>
+  </mat-toolbar>
+
+
+    <mat-card>
+      <mat-card-content>
+        <mat-button-toggle-group #type="matButtonToggleGroup" [(ngModel)]="filter.kind">
+          <mat-button-toggle value="{{KIND_LINK}}">
+            <mat-icon>link</mat-icon>
+            Link
+          </mat-button-toggle>
+          <mat-button-toggle value="{{KIND_NOTE}}">
+            <mat-icon>note</mat-icon>
+            Note
+          </mat-button-toggle>
+          <mat-button-toggle value="{{KIND_TODO}}">
+            <mat-icon>schedule</mat-icon>
+            Todo
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <!-- <button mat-raised-button color="primary" [routerLink]="['../list']" placeholder="Search">Search Webmark(s)</button>-->
+    </mat-card>
+
+
+  <mat-card>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Title contains">
+    </mat-form-field>
+  </mat-card>
+
+
+
+<app-tag-select-card [(tagSelected)]="filter.tags" (tagAdded)="tagAdded($event)" (tagRemoved)="tagRemoved($event)"
+                       readonly="true"></app-tag-select-card>
+
+
+<!--</div>-->
+<!--</div>-->

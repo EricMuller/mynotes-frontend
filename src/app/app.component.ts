@@ -1,7 +1,8 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {WsClientService} from './shared/modules/ws/ws-client.service';
-import {Subscription} from 'rxjs';
-import {AuthgardService} from './shared/modules/authentification/authgard.service'
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {WsClientService} from './core/ws/ws-client.service';
+import {Subscription} from 'rxjs/Subscription';
+import {AuthgardService} from './features/authentification/authgard.service';
+
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,9 @@ import {AuthgardService} from './shared/modules/authentification/authgard.servic
 
 })
 
-export class AppComponent {
-  title: string = 'app works!';
-  user: string = 'eric';
+export class AppComponent implements OnInit, OnDestroy {
+  title = 'app works!';
+  user = 'eric';
 
   private tick: string;
   private timer: Subscription;
