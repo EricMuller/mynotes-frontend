@@ -24,26 +24,26 @@ html, body{
 
 
 
-.primary-color {
-    color: #3F51B5!important;
-  }
+/*.primary-color {*/
+    /*color: #3F51B5!important;*/
+  /*}*/
 .accent-color {
     color: #FF4081!important;
   }
-.background-primary-color {
-    background-color: #3F51B5!important;
-  }
-.background-accent-color {
-    background-color: #FF4081!important;
-  }
+/*.background-primary-color {*/
+    /*background-color: #3F51B5!important;*/
+  /*}*/
+/*.background-accent-color {*/
+    /*background-color: #FF4081!important;*/
+  /*}*/
 .white-text {
     color: #FFF!important;
 }
 
 
-mat-chip.mat-chip.mat-chip-selected.mat-current{
-  background-color: #FF4081!important;
-}
+/*mat-chip.mat-chip.mat-chip-selected.mat-current{*/
+  /*background-color: #FF4081!important;*/
+/*}*/
 
 
 

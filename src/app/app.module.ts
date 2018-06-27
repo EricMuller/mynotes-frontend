@@ -5,72 +5,82 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {HttpModule} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-/* router */
-import {RouterModule} from '@angular/router';
-import {ROUTES_CONFIG} from 'app/config/app.routes.config';
-/* http error */
-import {HTTP_PROVIDER} from 'app/shared/modules/http/custom.http.provider';
 
-import {NotifierService} from 'app/shared/modules/notifications/notifier.service'
-import {ApiService} from 'app/shared/modules/api/api.service';
-import {AUTHENTIFICATION_ENDPOINT, MYWEBMARK_ENPOINT} from 'app/config/app.api.config';
-/* utils */
-import {EscapeHtmlPipe} from 'app/shared/pipes/escape-html.pipe';
-import {ToArrayPipe} from 'app/shared/pipes/to-array.pipe';
-/* components */
+
+
+
+
+
 import {AppComponent} from './app.component';
-import {NavHeaderComponent} from 'app/shared/components/nav-header/nav-header.component';
+
 // note
-import {NoteComponents} from 'app/modules/bookmark/components';
-import {BookmarkService} from 'app/modules/bookmark/services/bookmark.service';
-import {FilterService} from 'app/modules/bookmark/services/search.service';
-import {ResponseService} from 'app/shared/modules/api/response.service';
 
-import {NotificationsComponent} from 'app/shared/modules/notifications/notifications.component';
-import {LoginComponent} from './shared/modules/authentification/login/login.component';
-import {AuthentificationService} from './shared/modules/authentification/authentification.service';
-import {AuthgardService} from './shared/modules/authentification/authgard.service';
-import {HomeComponent} from './modules/home/home/home.component';
-import {TagCountComponent} from './modules/tags/tag-count/tag-count.component';
-import {TagService} from './modules/tags/services/tag.service';
-import {TagSelectComponent} from './modules/tags/tag-select/tag-select.component';
 
-import {TagCreateDialogComponent} from 'app/modules/tags/tag-create-dialog/tag-create-dialog.component';
 
-import {TagListComponent} from './modules/tags/tag-list/tag-list.component';
-import {ObservableService} from 'app/shared/modules/observable/observable.service';
-import {FavoriteUploadComponent} from './modules/favorite/favorite-upload/favorite-upload.component';
-import {FavoriteListComponent} from './modules/favorite/favorite-list/favorite-list.component';
-import {FavoriteDetailComponent} from './modules/favorite/favorite-detail/favorite-detail.component';
-import {DashboardComponent} from './modules/dashboard/dashboard.component'
-import {TinyEditorComponent} from './shared/components/tiny-editor/tiny-editor.component'
-import {RatingComponent} from './shared/components/rating/rating.component'
-import {SimpleDndComponent} from './shared/components/simple-dnd/simple-dnd.component'
-import {BackupListComponent} from './modules/backup/backup-list/backup-list.component'
+import {TinyEditorComponent} from './shared/components/tiny-editor/tiny-editor.component';
+import {RatingComponent} from './shared/components/rating/rating.component';
+import {SimpleDndComponent} from './shared/components/simple-dnd/simple-dnd.component';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RegistrationComponent} from './shared/modules/authentification/registration/registration.component';
+
 import {InputValidationComponent} from './shared/components/input-validation/input-validation.component';
-import {FilterPipe} from './shared/pipes/filter.pipe';
-import {KeysPipe} from './shared/pipes/keys.pipe';
-import {CallbackPipe} from './shared/pipes/callback.pipe';
+import {FilterPipe} from './features/shared/pipes/filter.pipe';
+import {KeysPipe} from './features/shared/pipes/keys.pipe';
+import {CallbackPipe} from './features/shared/pipes/callback.pipe';
 
-import {WsClientService} from './shared/modules/ws/ws-client.service';
-import {WebsocketService} from './shared/modules/ws/websocket.service';
-import {FolderListComponent} from './modules/folder/folder-list/folder-list.component';
-import {FolderService} from './modules/folder/services/folder.service';
-import {FolderCreateDialogComponent} from './modules/folder/folder-create-dialog/folder-create-dialog.component';
+import {WsClientService} from './core/ws/ws-client.service';
+import {WebsocketService} from './core/ws/websocket.service';
 
-import {MdTabStore} from 'app/modules/tab-store/tab-store.service';
-import {ConfirmComponent} from './shared/modules/authentification/confirm/confirm.component';
-import {PolicyComponent} from './modules/policy/policy.component'
 
-import {LoginGoogleComponent} from './shared/modules/authentification/login/login-google/login-google.component';
-import {LoginLinkedInComponent} from './shared/modules/authentification/login/login-linked-in/login-linked-in.component';
-import {FolderSelectDialogComponent} from './modules/folder/folder-select-dialog/folder-select-dialog.component';
-
-import {BackupBookmarkComponent} from 'app/modules/backup/backup-bookmark/backup-bookmark.component';
-import {SafePipe} from 'app/shared/pipes/safe.pipe';
 import {MaterialModule} from './shared/material/material.module';
+import {AppRoutingModule} from './app.routes.config';
+import {NavHeaderComponent} from './shared/components/nav-header/nav-header.component';
+
+import {EscapeHtmlPipe} from './features/shared/pipes/escape-html.pipe';
+import {ToArrayPipe} from './features/shared/pipes/to-array.pipe';
+import {NotificationsComponent} from './core/notifications/notifications.component';
+import {SafePipe} from './features/shared/pipes/safe.pipe';
+import {HttpService} from './api/http.service';
+
+import {ResponseService} from './api/response.service';
+import {ObservableService} from './core/observable/observable.service';
+
+import {HTTP_PROVIDER} from './core/http/custom.http.provider';
+import {NotifierService} from './core/notifications/notifier.service';
+import {AUTHENTIFICATION_ENDPOINT} from './api/auth/api-auth.config';
+import {LoginComponent} from './features/authentification/login/login.component';
+import {HomeComponent} from './home/home.component';
+import {TagCountComponent} from './features/tags/tag-count/tag-count.component';
+import {TagSelectComponent} from './features/tags/tag-select/tag-select.component';
+import {TagListComponent} from './features/tags/tag-list/tag-list.component';
+import {FavoriteUploadComponent} from './features/favorite/favorite-upload/favorite-upload.component';
+import {FavoriteListComponent} from './features/favorite/favorite-list/favorite-list.component';
+import {FavoriteDetailComponent} from './features/favorite/favorite-detail/favorite-detail.component';
+import {DashboardComponent} from './features/dashboard/dashboard.component';
+import {TagCreateDialogComponent} from './features/tags/tag-create-dialog/tag-create-dialog.component';
+import {BackupListComponent} from './features/backup/backup-list/backup-list.component';
+import {RegistrationComponent} from './features/authentification/registration/registration.component';
+import {FolderCreateDialogComponent} from './features/folder/folder-create-dialog/folder-create-dialog.component';
+import {FolderListComponent} from './features/folder/folder-list/folder-list.component';
+import {ConfirmComponent} from './features/authentification/confirm/confirm.component';
+import {PolicyComponent} from './features/policy/policy.component';
+import {LoginGoogleComponent} from './features/authentification/login/login-google/login-google.component';
+import {LoginLinkedInComponent} from './features/authentification/login/login-linked-in/login-linked-in.component';
+import {FolderSelectDialogComponent} from './features/folder/folder-select-dialog/folder-select-dialog.component';
+import {BackupBookmarkComponent} from './features/backup/backup-bookmark/backup-bookmark.component';
+import {NoteComponents} from './features/bookmark/components';
+import {BookmarkService} from './features/bookmark/services/bookmark.service';
+import {FilterService} from './features/bookmark/services/search.service';
+import {AuthentificationService} from './features/authentification/authentification.service';
+import {MYWEBMARK_ENPOINT} from './api/webmarks/api-webmarks.config';
+import {AuthgardService} from './features/authentification/authgard.service';
+import {FolderService} from './features/folder/services/folder.service';
+import {TagService} from './features/tags/services/tag.service';
+import {MatTabStore} from './features/shared/tab-store/tab-store.service';
+import { BookmarkAppComponent } from './features/bookmark/bookmark-app/bookmark-app.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
+import { BookmarkDashComponent } from './features/bookmark/bookmark-dash/bookmark-dash.component';
 /** api */
 
 // import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
@@ -119,27 +129,38 @@ import {MaterialModule} from './shared/material/material.module';
     LoginLinkedInComponent,
     FolderSelectDialogComponent,
     BackupBookmarkComponent,
-    SafePipe
+    SafePipe,
+    BookmarkAppComponent,
+    BookmarkDashComponent
 
   ],
   imports: [
     MaterialModule,
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES_CONFIG),
     BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
   ],
   entryComponents: [
     FolderCreateDialogComponent, FolderSelectDialogComponent
   ],
-  providers: [BookmarkService, FilterService, ApiService, AuthentificationService,
+  providers: [BookmarkService, FilterService, HttpService, AuthentificationService,
     {provide: 'mywebmark.endpoint', useValue: MYWEBMARK_ENPOINT},
     {provide: 'authentification.endpoint', useValue: AUTHENTIFICATION_ENDPOINT},
     NotifierService, HTTP_PROVIDER, AuthgardService, ResponseService, TagService, ObservableService,
-    WsClientService, WebsocketService, FolderService, MdTabStore
+    WsClientService, WebsocketService, FolderService, MatTabStore
   ],
 
   bootstrap: [AppComponent]
