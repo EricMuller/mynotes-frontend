@@ -37,7 +37,7 @@
     "rxjs": "6.2.1",
     "rxjs-compat": "^6.2.1",
     "rxjs-tslint": "^0.1.5",
-    "tinymce": "^4.7.13",
+    "tinymce": "4.7.4",
     "ts-helpers": "^1.1.2",
     "zone.js": "~0.8.26"
   },
